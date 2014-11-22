@@ -1,0 +1,29 @@
+<head>
+	<title>Sign Up</title>
+	
+	<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+		api_key: 75mqr7t01d6v4p
+		authorize: true
+	</script>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	
+	<script type="text/javascript">	
+		function onLinkedInAuth() {
+  			IN.API.Profile("me")
+    		  .result( function(me) {
+      			var id = me.values[0].id;
+      			// AJAX call to pass back id to your server
+    		});
+   	}
+	</script>
+	<link type="text/css" rel="stylesheet" href="/stylesheets/login.css" />
+</head>
+
+<body>
+	<div class="mid">
+		<a href="createAcc.jsp">
+			Create an Account
+		</a>
+	</div>
+	
+</body>
