@@ -7,6 +7,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.jdo.PersistenceManager;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -15,6 +16,8 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import myTest.services.PMF;
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -30,10 +33,27 @@ public class ConfirmServlet extends HttpServlet {
 			.getName());
 
 	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String msg = req.getParameter("id");
-		_log.log(Level.WARNING, msg);
+		String confirmationCode = req.getParameter("id");
+		String email = req.getParameter("email");
+		_log.log(Level.WARNING, email);
+		_log.log(Level.WARNING, confirmationCode);
+		PersistenceManager pm = PMF.get().getPersistenceManager();
+		Key key;
+		Entity result;
+		boolean found;
+		try{
+			key = KeyFactory.createKey(Entity.class.getSimpleName(), email);
+			result = pm.getObjectById(Entity.class, key);
+			_log.log(Level.WARNING, (String) result.getProperty("confirmationKey"));
+			found = true;
 		}
-	
+		catch(Exception e){
+			found = false;
+		}
+		finally{
+			pm.close();
+		}
+	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		processRequest(req,resp);

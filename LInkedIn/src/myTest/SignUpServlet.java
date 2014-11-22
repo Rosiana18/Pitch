@@ -39,7 +39,31 @@ public class SignUpServlet extends HttpServlet {
 		String lastName = req.getParameter("lastName");
 		String password1 = req.getParameter("password1");
 		String password2 = req.getParameter("password2");
+		String confirmationKey = "";
 
+		try{
+			String generatedEmail;
+            // Create MessageDigest instance for MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            //Add password bytes to digest
+            md.update(email.getBytes());
+            //Get the hash's bytes
+            byte[] bytes = md.digest();
+            //This bytes[] has bytes in decimal format;
+            //Convert it to hexadecimal format
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++)
+            {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            //Get complete hashed password in hex format
+            generatedEmail = sb.toString();
+            confirmationKey = generatedEmail;
+		// edit the confirmation link and the notValid link
+		
+		}catch(Exception e){
+			
+		}
 		Date date = new Date();
 
 		// also check if email exist
@@ -62,12 +86,13 @@ public class SignUpServlet extends HttpServlet {
 			userInfo.setProperty("lastname", lastName);
 			userInfo.setProperty("password", password1);
 			userInfo.setProperty("email", email);
+			userInfo.setProperty("confirmationKey",confirmationKey);
 			DatastoreService datastore = DatastoreServiceFactory
 					.getDatastoreService();
 			datastore.put(userInfo);
 
 			// send email for confirmation
-			sendConfirmation(firstName, lastName, email);
+			sendConfirmation(firstName, lastName, email, confirmationKey);
 
 			resp.sendRedirect("/signUp.jsp" + "?name=" + firstName + lastName);
 		} else {
@@ -81,32 +106,14 @@ public class SignUpServlet extends HttpServlet {
 	}
 
 	private void sendConfirmation(String firstName, String lastName,
-			String email) {
+			String email, String confirmationKey) {
 		Properties props = new Properties();
 		Session session = Session.getDefaultInstance(props, null);
 		try {
-			String generatedEmail;
-	            // Create MessageDigest instance for MD5
-	            MessageDigest md = MessageDigest.getInstance("MD5");
-	            //Add password bytes to digest
-	            md.update(email.getBytes());
-	            //Get the hash's bytes
-	            byte[] bytes = md.digest();
-	            //This bytes[] has bytes in decimal format;
-	            //Convert it to hexadecimal format
-	            StringBuilder sb = new StringBuilder();
-	            for(int i=0; i< bytes.length ;i++)
-	            {
-	                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-	            }
-	            //Get complete hashed password in hex format
-	            generatedEmail = sb.toString();
-	        System.out.println(generatedEmail);
-			// edit the confirmation link and the notValid link
 			String confirmLink = "www.pitch461lproject.appspot.com/confirm"
-					+ "?id=" +  generatedEmail;
+					+ "?email="+ email + "&id=" +  confirmationKey;
 			String notValid = "www.pitch461lproject.appspot.com/delete"
-					+ "?id=" + generatedEmail;
+					+ "?email="+ email + "&id=" + confirmationKey;
 			String strEmailBody = "Hey "
 					+ firstName
 					+ "!"
@@ -123,7 +130,7 @@ public class SignUpServlet extends HttpServlet {
 			outMessage.setSubject("Pitch Account Confirmation");
 			outMessage.setText(strEmailBody);
 			Transport.send(outMessage);
-		} catch (MessagingException | NoSuchAlgorithmException e) {
+		} catch (MessagingException e) {
 			_log.info("ERROR: Could not send out Email Results response : "
 					+ e.getMessage());
 		}
@@ -131,7 +138,7 @@ public class SignUpServlet extends HttpServlet {
 	}
 
 	private boolean validPass(String password1, String password2) {
-		if (password1.equals(password2)&&password1!=null&&password1.length()>=8&&password1.length()<=12) {
+		if (password1.equals(password2)&&password1!=null&&password1.length()>=6&&password1.length()<=12) {
 			return true;
 		} else
 			return false;
