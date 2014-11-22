@@ -1,5 +1,6 @@
 import java.util.List;
 
+
 import com.google.appengine.api.search.Query;
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
@@ -57,9 +58,11 @@ public class BasicSearch extends DBSearcher {
 		// are tags, which are categories, etc.
 		// search based on that
 		
-		// this is just blindly searching for the one token you give it
-		// and assumes you only care about the first one
-		return ofy().load().filterKey("", tokens[0]).list();
+		// this is just assuming you give it an email as an id
+		
+		
+		return ofy().load().type(User.class).filter("id",query).list();
 	}
+	
 
 }

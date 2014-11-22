@@ -1,9 +1,15 @@
 import java.util.List;
+
+import ryanwork.shared.Ent;
+
 import com.google.appengine.api.datastore.Entity;
+import com.googlecode.objectify.ObjectifyService;
 
 
 public class DBManager {
-	
+	static {
+		ObjectifyService.register(Ent.class);
+	}
 	DBSearcher searcher;
 	DBadder adder;
 	DBsubtracter remover;
@@ -20,7 +26,7 @@ public class DBManager {
 	private DBManager()
 	{
 		searcher = new BasicSearch();
-		adder = null;
+		adder = new BasicAdd();
 		remover = null;
 	}
 	
@@ -29,12 +35,12 @@ public class DBManager {
 	{
 		adder.add(addUnits);
 	}
-	public void add(Entity e)
+	public void add(Ent e)
 	{
 		adder.add(e);
 	}
 	
-	public Entity remove(SearchUnit...searchUnits)
+	public Ent remove(SearchUnit...searchUnits)
 	{
 		return remover.remove(searchUnits);
 	}
@@ -42,6 +48,11 @@ public class DBManager {
 	public List filterBy(SearchUnit...searchUnits)
 	{
 		return searcher.filterBy(searchUnits);
+	}
+	
+	public List filterBy(String query)
+	{
+		return searcher.filterBy(query);
 	}
 	
 }
