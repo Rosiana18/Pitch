@@ -1,0 +1,3 @@
+# Module linkedin
+# RPC service class, partial path of RPC policy file
+myTest.client.GreetingService, 65613D1AE01170A234997E7703001B28.gwt.rpc
