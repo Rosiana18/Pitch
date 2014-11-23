@@ -1,18 +1,11 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-
-//import myTest.services.PMF;import BaseClasses.Ent;
-import BaseClasses.Ent;
 import BaseClasses.User;
 import DB.DBManager;
 
@@ -23,11 +16,15 @@ public class ConfirmServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String confirmationCode = req.getParameter("id");
 		String email = req.getParameter("email");
-		_log.log(Level.WARNING, email);
-		_log.log(Level.WARNING, confirmationCode);
-		//PersistenceManager pm = PMF.get().getPersistenceManager();
-		List<User> list = (List<User>)DBManager.getInstance().filterBy(email);
-		_log.log(Level.WARNING,list.get(0).getKey());
+		User user = (User)DBManager.getInstance().getById(email);
+		if(user.getKey().equals(confirmationCode)){
+			user.setKey("0");
+			DBManager.getInstance().add(user);
+			resp.sendRedirect("/confirm.jsp");
+		}
+		else{
+			resp.sendRedirect("/error.jsp?msg=" + "Confirmation Error!");
+		}
 	}
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {

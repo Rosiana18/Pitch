@@ -1,8 +1,13 @@
 package DB;
 import java.util.List;
 
+import BaseClasses.Ent;
 import BaseClasses.User;
+
+import com.google.appengine.api.datastore.Key;
+import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.search.Query;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 public class BasicSearch extends DBSearcher {
@@ -61,9 +66,12 @@ public class BasicSearch extends DBSearcher {
 		
 		// this is just assuming you give it an email as an id
 		
-		
-		return ofy().load().type(User.class).filter("id",query).list();
+		return ofy().load().type(User.class).filterKey("",query).list();
 	}
 	
+	@Override
+	Ent getById(String id){
+		return ofy().load().type(User.class).id(id).now();
+	}
 
 }

@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import BaseClasses.Ent;
 import BaseClasses.User;
 import DB.DBManager;
 
@@ -26,8 +27,19 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
+import com.googlecode.objectify.ObjectifyService;
 
 public class SignUpServlet extends HttpServlet {
+	
+	static {
+		try{
+		ObjectifyService.register(User.class);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public static final Logger _log = Logger.getLogger(SignUpServlet.class
 			.getName());
 
