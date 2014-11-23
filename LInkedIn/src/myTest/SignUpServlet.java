@@ -111,9 +111,9 @@ public class SignUpServlet extends HttpServlet {
 		Session session = Session.getDefaultInstance(props, null);
 		try {
 			String confirmLink = "www.pitch461lproject.appspot.com/confirm"
-					+ "?email="+ email + "&id=" +  confirmationKey;
+					+ "?email="+ email + "&key=" +  confirmationKey;
 			String notValid = "www.pitch461lproject.appspot.com/delete"
-					+ "?email="+ email + "&id=" + confirmationKey;
+					+ "?email="+ email + "&key=" + confirmationKey;
 			String strEmailBody = "Hey "
 					+ firstName
 					+ "!"

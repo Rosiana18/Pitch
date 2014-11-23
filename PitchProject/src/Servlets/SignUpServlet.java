@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.mail.MessagingException;
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import BaseClasses.User;
+import DB.DBManager;
+
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
-import com.google.appengine.api.users.User;
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 
 public class SignUpServlet extends HttpServlet {
 	public static final Logger _log = Logger.getLogger(SignUpServlet.class
@@ -79,18 +80,10 @@ public class SignUpServlet extends HttpServlet {
 
 		if (validPass(password1, password2)) {
 			// save first time sign up info in the datastore
-			Entity userInfo = new Entity("UserInfo", emailKey);
-			userInfo.setProperty("linkedIn", linkedin);
-			userInfo.setProperty("date", date);
-			userInfo.setProperty("firstname", firstName);
-			userInfo.setProperty("lastname", lastName);
-			userInfo.setProperty("password", password1);
-			userInfo.setProperty("email", email);
-			userInfo.setProperty("confirmationKey",confirmationKey);
-			DatastoreService datastore = DatastoreServiceFactory
-					.getDatastoreService();
-			datastore.put(userInfo);
-
+			User newUser = new User(email, firstName, lastName,  password1, confirmationKey);
+			_log.log(Level.WARNING,"Before DBManager");
+			DBManager.getInstance().add(newUser);
+			_log.log(Level.WARNING,"After");
 			// send email for confirmation
 			sendConfirmation(firstName, lastName, email, confirmationKey);
 
