@@ -4,7 +4,7 @@ import com.googlecode.objectify.annotation.*;
 @Entity
 public class Ent
 {
-	@Id Object id;
+	@Id String id;
     
     
 	//personality tags
@@ -66,7 +66,7 @@ public class Ent
 	{
 		
 	}
-    Ent(Object o)
+    Ent(String o)
     {
     	id = o;
     }

@@ -1,6 +1,7 @@
 package DB;
 
 import java.util.List;
+
 import BaseClasses.Ent;
 
 import com.googlecode.objectify.ObjectifyService;
@@ -59,5 +60,11 @@ public class DBManager {
 	{
 		return searcher.filterBy(query);
 	}
+	
+	public Ent getById(String id){
+		return searcher.getById(id);
+	}
+	
+	
 	
 }
