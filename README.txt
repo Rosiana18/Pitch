@@ -1,3 +1,2 @@
-BaseClasses only has Ent and User, need other ones.
-DB has extra stuff, but you can use DBManager.add(Ent e) DBmanager.filterBy(String email) to add entities and get users
-
+I suggest making a folder for common APIs, etc. once we have them.
+I can think of a need a design patterns library, but suggestions are welcome.
