@@ -1,10 +1,20 @@
 package BaseClasses;
 public class User extends Ent{
-	String name;
+	String firstName;
+	String lastName;
+	String password;
+	String linkedIn;
+	String confirmationKey;
 	
-	User(String email, String _name)
+	public User(String email, String _firstName, String _lastName, String _password, String _confirmationKey)
 	{
 		id = email;
-		name = _name;
+		firstName = _firstName;
+		lastName = _lastName;
+		password = _password;
+		confirmationKey = _confirmationKey;
+	}
+	public String getKey(){
+		return confirmationKey;
 	}
 }

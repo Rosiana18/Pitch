@@ -33,22 +33,21 @@ public class ConfirmServlet extends HttpServlet {
 			.getName());
 
 	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String confirmationCode = req.getParameter("id");
+		String confirmationCode = req.getParameter("key");
 		String email = req.getParameter("email");
 		_log.log(Level.WARNING, email);
 		_log.log(Level.WARNING, confirmationCode);
 		PersistenceManager pm = PMF.get().getPersistenceManager();
 		Key key;
 		Entity result;
-		boolean found;
 		try{
-			key = KeyFactory.createKey(Entity.class.getSimpleName(), email);
+			key = KeyFactory.createKey("email", email);
 			result = pm.getObjectById(Entity.class, key);
-			_log.log(Level.WARNING, (String) result.getProperty("confirmationKey"));
-			found = true;
+			_log.log(Level.WARNING, (String)result.getProperty("confirmationKey"));
+			_log.log(Level.WARNING, "TRY");
 		}
 		catch(Exception e){
-			found = false;
+			_log.log(Level.WARNING, "EXCEPTION");
 		}
 		finally{
 			pm.close();

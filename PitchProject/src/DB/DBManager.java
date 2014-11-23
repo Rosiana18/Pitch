@@ -3,20 +3,24 @@ package DB;
 import java.util.List;
 import BaseClasses.Ent;
 
-import com.google.appengine.api.datastore.Entity;
 import com.googlecode.objectify.ObjectifyService;
 
 
 public class DBManager {
 	static {
+		try{
 		ObjectifyService.register(Ent.class);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	DBSearcher searcher;
 	DBadder adder;
 	DBsubtracter remover;
 	
-	DBManager instance = null;
-	public DBManager getInstance()
+	static DBManager instance = null;
+	public static DBManager getInstance()
 	{
 		if (instance == null)
 		{
