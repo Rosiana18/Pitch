@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import BaseClasses.Ent;
+import BaseClasses.Pitch;
 import BaseClasses.User;
 import DB.DBManager;
 
@@ -33,7 +34,9 @@ public class SignUpServlet extends HttpServlet {
 	
 	static {
 		try{
+		ObjectifyService.register(Ent.class);
 		ObjectifyService.register(User.class);
+		ObjectifyService.register(Pitch.class);
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -95,6 +98,9 @@ public class SignUpServlet extends HttpServlet {
 			User newUser = new User(email, firstName, lastName,  password1, confirmationKey);
 			_log.log(Level.WARNING,"Before DBManager");
 			DBManager.getInstance().add(newUser);
+			Pitch pitch = new Pitch("My Project", "This is my first project.");
+			pitch.addUser(newUser.getId());
+			DBManager.getInstance().add(pitch);
 			_log.log(Level.WARNING,"After");
 			// send email for confirmation
 			sendConfirmation(firstName, lastName, email, confirmationKey);

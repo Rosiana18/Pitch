@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+	var firstName = "TestName";
+	var lastName = "TestName2";
+	var email = "TestEmail";
+	function fill() {
+	}
+</script>
+<script type="text/javascript" src="http://platform.linkedin.com/in.js">
+		api_key: 75mqr7t01d6v4p
+		authorize: true
+	</script>
+<script type="text/javascript">
+
+    function onLinkedInLoad() {
+        IN.UI.Authorize().place();      
+        IN.Event.on(IN, "auth", function () { onLogin(); });
+        IN.Event.on(IN, "logout", function () { onLogout(); });
+    }
+
+    function onLogin() {
+            IN.API.Profile("me").result(displayResult);
+    }  
+    function displayResult(profiles) {
+        member = profiles.values[0];
+        document.getElementById("firstname").value=member.firstName;
+		document.getElementById("lastname").value=member.lastName;
+		document.getElementById("email").value="";
+    }  
+    
+</script>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '779834495411292', // App ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse XFBML
+      version	 : 'v2.1'
+      });
+
+
+    FB.Event.subscribe('auth.authResponseChange', function(response) 
+    {
+     if (response.status === 'connected') 
+    {
+        //SUCCESS
+    }    
+    else if (response.status === 'not_authorized') 
+    {
+        document.getElementById("message").innerHTML +=  "<br>Failed to Connect";
+
+        //FAILED
+    } else 
+    {
+        document.getElementById("message").innerHTML +=  "<br>Logged Out";
+
+        //UNKNOWN ERROR
+    }
+    }); 
+
+    };
+
+    function LoginFB()
+    {
+
+        FB.login(function(response) {
+           if (response.authResponse) 
+           {
+                getUserInfo();
+            } else 
+            {
+            }
+         },{scope: 'public_profile,email', return_scopes: true, auth_type: 'rerequest'});
+    }
+
+  function getUserInfo() {
+      FB.api('/me', function(response) {
+		document.getElementById("firstname").value=response.first_name;
+		document.getElementById("lastname").value=response.last_name;
+		document.getElementById("email").value=response.email;
+    });
+            }
+  
+  // Load the SDK asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+   
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword"
+	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+<title>Pitch</title>
+
+<!-- Bootstrap core CSS -->
+<link href="assets/css/bootstrap.css" rel="stylesheet">
+<!--external css-->
+<link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+<link href="assets/css/style.css" rel="stylesheet">
+<link href="assets/css/style-responsive.css" rel="stylesheet">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+	<!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+
+	<div id="login-page">
+		<div class="container">
+
+			<form class="form-login" action="/register" method="post">
+				<h2 class="form-login-heading">sign up now</h2>
+				<div class="login-wrap">
+					<input type="text" class="form-control" id="firstname"
+						placeholder="First Name" name="firstName"> <input
+						type="text" class="form-control" id="lastname"
+						placeholder="Last Name" name="lastName"> <input
+						type="text" class="form-control" id="email" placeholder="Email"
+						name="email"> <br> <input type="password"
+						class="form-control" id="password1" placeholder="Password"
+						name="password1"> <input type="password"
+						class="form-control" id="password2" placeholder="Re-Enter"
+						name="password2">
+					<button class="btn btn-theme btn-block" href="index.html"
+						type="submit">
+						<i class="fa fa-lock"></i> SIGN UP
+					</button>
+					<hr>
+
+					<div class="login-social-link centered">
+						<p>or you fill in the form via your social network</p>
+						<button class="btn btn-facebook" onclick="LoginFB()" >
+							 Facebook
+						</button>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+
+	<!--BACKSTRETCH-->
+	<!-- You can use an image of whatever size. This script will stretch to fit in any screen size.-->
+	<script type="text/javascript"
+		src="assets/js/jquery.backstretch.min.js"></script>
+	<script>
+		$.backstretch("assets/img/login-bg.jpg", {
+			speed : 500
+		});
+	</script>
+
+
+</body>
+</html>

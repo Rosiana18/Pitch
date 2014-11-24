@@ -70,7 +70,10 @@ public class Ent
     {
     	id = o;
     }
-
+    
+    public String getId(){
+    	return id;
+    }
 
 
 }
