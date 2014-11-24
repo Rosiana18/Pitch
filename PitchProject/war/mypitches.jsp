@@ -138,14 +138,10 @@
 							%>
 							<li><a href="index.jsp#"> <span class="photo"><img
 										alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
-									class="time"><%=msg.getDate().toGMTString()%></span> <span
 									class="subject"> <span class="from"><%=msg.getFrom()%></span>
+										<span class="time"><%=msg.getDate().toGMTString()%></span>
 								</span> <span class="message"> <%=msg.getBody()%>
 								</span>
-									<button type="button" class="btn btn-info btn-primary btn-xs"
-										data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button" class="btn btn-warning btn-primary btn-xs">dismiss</button>
-
 							</a></li>
 							<%
 								}
@@ -161,7 +157,6 @@
 					<li><a class="logout" href="login.jsp">Logout</a></li>
 				</ul>
 			</div>
-
 		</header>
 		<!--header end-->
 
@@ -181,11 +176,11 @@
 					<h5 class="centered">
 						<%=((BaseClasses.User)session.getAttribute("user")).getName()%></h5>
 
-					<li class="mt"><a class="active" href="index.jsp"> <i
+					<li class="mt"><a href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu"><a href="mypitches.jsp"> <i
-							class="fa fa-book"></i> <span>My Pitches</span>
+					<li class="sub-menu"><a class="active" href="mypitches.jsp">
+							<i class="fa fa-book"></i> <span>My Pitches</span>
 					</a></li>
 					<li class="sub-menu"><a href="profile.jsp"> <i
 							class="fa fa-cogs"></i> <span>My Profile</span>
@@ -203,314 +198,51 @@
       *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
-			<! -- MODALS -->
-			<!-- Modal -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-				aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-hidden="true">&times;</button>
-							<h4 class="modal-title" id="myModalLabel">Send Message</h4>
-						</div>
-						<div class="modal-body">
-							<form class="form-horizontal style-form" method="get">
-								<div class="col-sm-10">
-									<input type="text" class="form-control">
-								</div>
-									<button type="button" class="btn btn-primary">Send</button>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-
 			<section class="wrapper">
+				<h3>
+					<i class="fa fa-angle-right"></i> My Pitches
+				</h3>
 
 				<div class="row">
-					<div class="col-lg-9 main-chart">
-
-						<div class="row mtbox">
-							<div class="col-md-2 col-sm-2 col-md-offset-1 box0">
-								<div class="box1">
-									<span class="li_heart"></span>
-									<h3>933</h3>
-								</div>
-								<p>933 People liked your page the last 24hs. Whoohoo!</p>
-							</div>
-							<div class="col-md-2 col-sm-2 box0">
-								<div class="box1">
-									<span class="li_cloud"></span>
-									<h3>+48</h3>
-								</div>
-								<p>48 New files were added in your cloud storage.</p>
-							</div>
-							<div class="col-md-2 col-sm-2 box0">
-								<div class="box1">
-									<span class="li_stack"></span>
-									<h3>23</h3>
-								</div>
-								<p>You have 23 unread messages in your inbox.</p>
-							</div>
-							<div class="col-md-2 col-sm-2 box0">
-								<div class="box1">
-									<span class="li_news"></span>
-									<h3>+10</h3>
-								</div>
-								<p>More than 10 news were added in your reader.</p>
-							</div>
-							<div class="col-md-2 col-sm-2 box0">
-								<div class="box1">
-									<span class="li_data"></span>
-									<h3>OK!</h3>
-								</div>
-								<p>Your server is working perfectly. Relax & enjoy.</p>
-							</div>
-
-						</div>
-						<!-- /row mt -->
-
-
+					<section class="wrapper site-min-height">
 						<div class="row mt">
-							<!-- SERVER STATUS PANELS -->
-							<div class="col-md-4 col-sm-4 mb">
-								<div class="white-panel pn donut-chart">
-									<div class="white-header">
-										<h5>SERVER LOAD</h5>
-									</div>
-									<div class="row">
-										<div class="col-sm-6 col-xs-6 goleft">
-											<p>
-												<i class="fa fa-database"></i> 70%
-											</p>
+
+							<div class="col-lg-12">
+								<! -- 1st ROW OF PANELS -->
+								<div class="row">
+									<div class="col-lg-4 col-md-4 col-sm-4 mb">
+										<div class="product-panel-2 pn">
+											<div class="badge badge-hot">Pinned</div>
+											<img src="assets/img/product.jpg" width="200" alt="">
+											<h5 class="mt">Make your dreams come true :D</h5>
+											<button class="btn btn-small btn-theme04">Create New
+												Pitch</button>
 										</div>
 									</div>
-									<canvas id="serverstatus01" height="120" width="120"></canvas>
-									<script>
-										var doughnutData = [ {
-											value : 70,
-											color : "#68dff0"
-										}, {
-											value : 30,
-											color : "#fdfdfd"
-										} ];
-										var myDoughnut = new Chart(document
-												.getElementById(
-														"serverstatus01")
-												.getContext("2d"))
-												.Doughnut(doughnutData);
-									</script>
+									<! --/col-md-4 --> <%
+ 	for(String pitch: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getPitches()){ 
+            	int i =0;
+ %> <!-- TWITTER PANEL --> <a
+										href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getTitle()%>">
+										<div class="col-lg-4 col-md-4 col-sm-4 mb">
+											<div class="content-panel pn">
+												<div id="blog-bg">
+													<div class="blog-title"><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getTitle()%></div>
+												</div>
+												<div class="blog-text">
+													<p><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getDescription()%></p>
+												</div>
+											</div>
+										</div> <!-- /col-md-4-->
 								</div>
-								<! --/grey-panel -->
+								<! --/END 1ST ROW OF PANELS -->
 							</div>
-							<!-- /col-md-4-->
-
-
-							<div class="col-md-4 col-sm-4 mb">
-								<div class="white-panel pn">
-									<div class="white-header">
-										<h5>TOP PRODUCT</h5>
-									</div>
-									<div class="row">
-										<div class="col-sm-6 col-xs-6 goleft">
-											<p>
-												<i class="fa fa-heart"></i> 122
-											</p>
-										</div>
-										<div class="col-sm-6 col-xs-6"></div>
-									</div>
-									<div class="centered">
-										<img src="assets/img/product.png" width="120">
-									</div>
-								</div>
-							</div>
-							<!-- /col-md-4 -->
-
-							<div class="col-md-4 mb">
-								<!-- WHITE PANEL - TOP USER -->
-								<div class="white-panel pn">
-									<div class="white-header">
-										<h5>TOP USER</h5>
-									</div>
-									<p>
-										<img src="assets/img/ui-zac.jpg" class="img-circle" width="80">
-									</p>
-									<p>
-										<b>Zac Snider</b>
-									</p>
-									<div class="row">
-										<div class="col-md-6">
-											<p class="small mt">MEMBER SINCE</p>
-											<p>2012</p>
-										</div>
-										<div class="col-md-6">
-											<p class="small mt">TOTAL SPEND</p>
-											<p>$ 47,60</p>
-										</div>
-									</div>
-								</div>
-							</div>
-							<!-- /col-md-4 -->
-
-
+							<%
+								}
+							%>
 						</div>
-						<!-- /row -->
-
-
-						<div class="row">
-							<!-- TWITTER PANEL -->
-							<div class="col-md-4 mb">
-								<div class="darkblue-panel pn">
-									<div class="darkblue-header">
-										<h5>DROPBOX STATICS</h5>
-									</div>
-									<canvas id="serverstatus02" height="120" width="120"></canvas>
-									<script>
-										var doughnutData = [ {
-											value : 60,
-											color : "#68dff0"
-										}, {
-											value : 40,
-											color : "#444c57"
-										} ];
-										var myDoughnut = new Chart(document
-												.getElementById(
-														"serverstatus02")
-												.getContext("2d"))
-												.Doughnut(doughnutData);
-									</script>
-									<p>April 17, 2014</p>
-									<footer>
-										<div class="pull-left">
-											<h5>
-												<i class="fa fa-hdd-o"></i> 17 GB
-											</h5>
-										</div>
-										<div class="pull-right">
-											<h5>60% Used</h5>
-										</div>
-									</footer>
-								</div>
-								<! -- /darkblue panel -->
-							</div>
-							<!-- /col-md-4 -->
-
-
-							<div class="col-md-4 mb">
-								<!-- INSTAGRAM PANEL -->
-								<div class="instagram-panel pn">
-									<i class="fa fa-instagram fa-4x"></i>
-									<p>
-										@THISISYOU<br /> 5 min. ago
-									</p>
-									<p>
-										<i class="fa fa-comment"></i> 18 | <i class="fa fa-heart"></i>
-										49
-									</p>
-								</div>
-							</div>
-							<!-- /col-md-4 -->
-
-							<div class="col-md-4 col-sm-4 mb">
-								<!-- REVENUE PANEL -->
-								<div class="darkblue-panel pn">
-									<div class="darkblue-header">
-										<h5>REVENUE</h5>
-									</div>
-									<div class="chart mt">
-										<div class="sparkline" data-type="line" data-resize="true"
-											data-height="75" data-width="90%" data-line-width="1"
-											data-line-color="#fff" data-spot-color="#fff"
-											data-fill-color="" data-highlight-line-color="#fff"
-											data-spot-radius="4"
-											data-data="[200,135,667,333,526,996,564,123,890,464,655]"></div>
-									</div>
-									<p class="mt">
-										<b>$ 17,980</b><br />Month Income
-									</p>
-								</div>
-							</div>
-							<!-- /col-md-4 -->
-
-						</div>
-						<!-- /row -->
-
-						<div class="row mt">
-							<!--CUSTOM CHART START -->
-						</div>
-						<!-- /row -->
-
-					</div>
-					<!-- /col-lg-9 END SECTION MIDDLE -->
-
-
-					<!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->
-
-					<div class="col-lg-3 ds">
-						<!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>NOTIFICATIONS</h3>
-
-						<!-- First Action -->
-						<%
-							for(Message note: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getNotifications()){
-						%>
-						<div class="desc">
-							<div class="thumb">
-								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-							</div>
-							<div class="details">
-								<p>
-									<muted><%=note.getDate().toGMTString()%></muted>
-									<br />
-									<%=note.getFrom()%>:
-									<%=note.getBody()%><br />
-								</p>
-							</div>
-						</div>
-						<%
-							}
-						%>
-						<!-- USERS ONLINE SECTION -->
-						<h3>FRIENDS</h3>
-						<%
-							for(String friend: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getFriends()){
-						%>
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="assets/img/ui-divya.jpg"
-									width="35px" height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getById(friend)).getName()%></a><br />
-									<muted>Available</muted>
-								</p>
-							</div>
-						</div>
-						<%
-							}
-						%>
-						<!-- CALENDAR-->
-						<div id="calendar" class="mb">
-							<div class="panel green-panel no-margin">
-								<div class="panel-body">
-									<div id="date-popover" class="popover top"
-										style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-										<div class="arrow"></div>
-										<h3 class="popover-title" style="disadding: none;"></h3>
-										<div id="date-popover-content" class="popover-content"></div>
-									</div>
-									<div id="my-calendar"></div>
-								</div>
-							</div>
-						</div>
-						<!-- / calendar -->
-
-					</div>
-					<!-- /col-lg-3 -->
+					</section>
+					<! --/wrapper -->
 				</div>
 				<! --/row -->
 			</section>
@@ -520,7 +252,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="index.jsp#" class="go-top"> <i
+				2014 <a href="mypitches.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

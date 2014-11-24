@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import BaseClasses.Ent;
+import BaseClasses.Message;
 import BaseClasses.Pitch;
 import BaseClasses.User;
 import DB.DBManager;
@@ -100,12 +101,18 @@ public class SignUpServlet extends HttpServlet {
 			DBManager.getInstance().add(newUser);
 			Pitch pitch = new Pitch("My Project", "This is my first project.");
 			pitch.addUser(newUser.getId());
+			newUser.addPitch(pitch.getId());
+			Message msg = new Message("Pitch Admin",newUser.getFirstName(),"","Welcome to Pitch! Have fun.");
+			Message note = new Message("Test Pitch",newUser.getFirstName(),"Subject","New video has been added.");
+			newUser.addMessage(msg);
+			newUser.addNotification(note);
+			newUser.addFriend(newUser.getId());
 			DBManager.getInstance().add(pitch);
 			_log.log(Level.WARNING,"After");
 			// send email for confirmation
 			sendConfirmation(firstName, lastName, email, confirmationKey);
 
-			resp.sendRedirect("/signUp.jsp" + "?name=" + firstName + lastName);
+			resp.sendRedirect("/signUp.jsp");
 		} else {
 			resp.sendRedirect("/retry.jsp" + "?error=" + "pass");
 		}

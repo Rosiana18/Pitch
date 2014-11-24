@@ -209,7 +209,7 @@
                       </a>
                   </li>
                   <li class="sub-menu">
-                      <a href="javascript:;" >
+                      <a href="mypitches.jsp" >
                           <i class="fa fa-book"></i>
                           <span>My Pitches</span>
                       </a>
