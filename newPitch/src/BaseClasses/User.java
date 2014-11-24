@@ -15,12 +15,14 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index ArrayList<Message> notifications;
 	@Index ArrayList<String> pitches;
 	@Index ArrayList<String> friends;
+	@Index String email;
 	
 	User(){}
 	
 	public User(String email, String _firstName, String _lastName, String _password, String _confirmationKey)
 	{
 		id = email;
+		this.email = email;
 		firstName = _firstName;
 		lastName = _lastName;
 		password = _password;
@@ -49,7 +51,7 @@ import com.googlecode.objectify.annotation.Subclass;
 		return lastName;
 	}
 	public String getEmail(){
-		return id;
+		return email;
 	}
 	public void addMessage(Message message){
 		messages.add(message);

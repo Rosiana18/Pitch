@@ -185,6 +185,12 @@
 					<li class="sub-menu"><a href="profile.jsp"> <i
 							class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
+					<li class="sub-menu"><a href="search.jsp"> <i
+							class="fa fa-cogs"></i> <span>Search/Explore</span>
+					</a></li>
+					<li class="sub-menu"><a href="conversation.jsp"> <i
+							class="fa fa-cogs"></i> <span>Conversations</span>
+					</a></li>
 
 
 				</ul>
@@ -219,10 +225,13 @@
 												Pitch</button>
 										</div>
 									</div>
-									<! --/col-md-4 --> <%
- 	for(String pitch: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getPitches()){ 
-            	int i =0;
- %> <!-- TWITTER PANEL --> <a
+									<! --/col-md-4 -->
+									<%
+										for(String pitch: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getPitches()){ 
+									            	int i =0;
+									%>
+									<!-- TWITTER PANEL -->
+									<a
 										href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getTitle()%>">
 										<div class="col-lg-4 col-md-4 col-sm-4 mb">
 											<div class="content-panel pn">
@@ -285,6 +294,7 @@
 	<script type="application/javascript">
 		
 		
+		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
@@ -318,6 +328,7 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     
+	
 	
 	</script>
 

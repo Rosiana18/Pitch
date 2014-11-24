@@ -144,7 +144,8 @@
 								</span>
 									<button type="button" class="btn btn-info btn-primary btn-xs"
 										data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button" class="btn btn-warning btn-primary btn-xs">dismiss</button>
+									<button type="button"
+										class="btn btn-warning btn-primary btn-xs">dismiss</button>
 
 							</a></li>
 							<%
@@ -190,7 +191,12 @@
 					<li class="sub-menu"><a href="profile.jsp"> <i
 							class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
-
+					<li class="sub-menu"><a href="search.jsp"> <i
+							class="fa fa-cogs"></i> <span>Search/Explore</span>
+					</a></li>
+					<li class="sub-menu"><a href="conversations.jsp"> <i
+							class="fa fa-cogs"></i> <span>Conversations</span>
+					</a></li>
 
 				</ul>
 				<!-- sidebar menu end-->
@@ -219,7 +225,7 @@
 								<div class="col-sm-10">
 									<input type="text" class="form-control">
 								</div>
-									<button type="button" class="btn btn-primary">Send</button>
+								<button type="button" class="btn btn-primary">Send</button>
 							</form>
 						</div>
 					</div>
@@ -274,6 +280,9 @@
 
 						<div class="row mt">
 							<!-- SERVER STATUS PANELS -->
+							<h3>
+								<i class="fa fa-angle-right"></i>   TODAY'S RECOMMEDATIONS
+							</h3>
 							<div class="col-md-4 col-sm-4 mb">
 								<div class="white-panel pn donut-chart">
 									<div class="white-header">
@@ -553,6 +562,7 @@
 	<script type="application/javascript">
 		
 		
+		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();
@@ -586,6 +596,7 @@
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
     
+	
 	
 	</script>
 
