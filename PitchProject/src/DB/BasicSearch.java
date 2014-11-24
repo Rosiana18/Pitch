@@ -1,5 +1,4 @@
 package DB;
-import java.util.ArrayList;
 import java.util.List;
 
 import BaseClasses.Ent;
@@ -8,12 +7,10 @@ import BaseClasses.User;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.search.Query;
-import com.google.appengine.api.search.Query.Builder;
-import com.googlecode.objectify.cmd.LoadType;
 
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
-public class BasicSearch<E> extends DBSearcher {
+public class BasicSearch extends DBSearcher {
 
 	@Override
 	Query accrueQuery(SearchUnit... searchUnits) {
@@ -62,26 +59,14 @@ public class BasicSearch<E> extends DBSearcher {
 
 	@Override
 	List filterBy(String query) {
-		LoadType<User> lt = ofy().load().type(User.class);
-		com.googlecode.objectify.cmd.Query<User> ltf = null;
 		String tokens[] = query.split(" ");
-		for(String token : tokens)
-		{
-			String queryElements[] = token.split(";");
-			String first = queryElements[0];
-			String second = queryElements[1];
-			if(ltf == null)
-			{
-				ltf = lt.filter(first, second);
-			}
-			else
-			{
-				ltf = ltf.filter(first, second);
-			}
-			
-		}
+		// replace this hardcoding with some calls to Quantum to figure out which tokens
+		// are tags, which are categories, etc.
+		// search based on that
 		
-		return ltf.list();
+		// this is just assuming you give it an email as an id
+		
+		return ofy().load().type(User.class).filterKey("",query).list();
 	}
 	
 	@Override
@@ -90,4 +75,3 @@ public class BasicSearch<E> extends DBSearcher {
 	}
 
 }
-

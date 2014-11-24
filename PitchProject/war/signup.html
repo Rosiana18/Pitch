@@ -129,7 +129,7 @@
 	<div id="login-page">
 		<div class="container">
 
-			<form class="form-login" action="/register" method="post">
+			<form class="form-login" action="/register" method="post" >
 				<h2 class="form-login-heading">sign up now</h2>
 				<div class="login-wrap">
 					<input type="text" class="form-control" id="firstname"
@@ -141,7 +141,8 @@
 						class="form-control" id="password1" placeholder="Password"
 						name="password1"> <input type="password"
 						class="form-control" id="password2" placeholder="Re-Enter"
-						name="password2">
+						name="password2" onkeyup="checkPass(); return false;">
+						<span id="confirmMessage" class="confirmMessage"></span>
 					<button class="btn btn-theme btn-block" href="index.html"
 						type="submit">
 						<i class="fa fa-lock"></i> SIGN UP
@@ -149,10 +150,10 @@
 					<hr>
 
 					<div class="login-social-link centered">
-						<p>or you fill in the form via your social network</p>
-						<button class="btn btn-facebook" onclick="LoginFB()" >
-							 Facebook
-						</button>
+						<p>or you can fill in the form via your social network</p>
+						<img src="F.png" width="30" height="30"  style="cursor:pointer;" onclick="LoginFB()"/>
+						<img src="http://www.iconsplace.com/download/orange-linkedin-256.png" width="30" height="30" style="cursor:pointer;" onclick="onLinkedInLoad()"/>
+      
 					</div>
 				</div>
 			</form>
@@ -173,7 +174,37 @@
 			speed : 500
 		});
 	</script>
+		<script type="text/javascript">
+		function checkPass()
+		{
+		    //Store the password field objects into variables ...
+		    var pass1 = document.getElementById('password1');
+		    var pass2 = document.getElementById('password2');
+		    //Store the Confimation Message Object ...
+		    var message = document.getElementById('confirmMessage');
+		    //Set the colors we will be using ...
+		    var goodColor = "#66cc66";
+		    var badColor = "#ff6666";
+		    //Compare the values in the password field 
+		    //and the confirmation field
+		    if(pass1.value == pass2.value){
+		        //The passwords match. 
+		        //Set the color to the good color and inform
+		        //the user that they have entered the correct password 
+		        pass2.style.backgroundColor = goodColor;
+		        message.style.color = goodColor;
+		        message.innerHTML = "Passwords Match!"
+		    }else{
+		        //The passwords do not match.
+		        //Set the color to the bad color and
+		        //notify the user.
+		        pass2.style.backgroundColor = badColor;
+		        message.style.color = badColor;
+		        message.innerHTML = "Passwords Do Not Match!"
+		    }
+		}  
 
+		</script>
 
 </body>
 </html>

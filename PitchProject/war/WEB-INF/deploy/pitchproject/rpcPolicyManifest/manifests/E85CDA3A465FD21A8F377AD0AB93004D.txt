@@ -1,2 +1,0 @@
-serviceClass: pitch.client.GreetingService
-path: 80CE4DB335E15F0607272E6DD08F7873.gwt.rpc
