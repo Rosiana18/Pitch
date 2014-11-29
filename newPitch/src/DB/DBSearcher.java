@@ -2,15 +2,18 @@ package DB;
 
 import java.util.List;
 
+//import com.google.appengine.api.datastore.Query;
+
 import BaseClasses.Ent;
 
-import com.google.appengine.api.search.Query;
-
-public abstract class DBSearcher {
-	abstract Query accrueQuery(SearchUnit...searchUnits);
-	abstract List filterBy(SearchUnit...searchUnits);
-	abstract List filterBy(String query);
-	abstract List search(Query q);
-	abstract Ent getById(String id);
+//import com.google.appengine.api.search.Query;
+import com.googlecode.objectify.cmd.Query;
+interface DBSearcher {
+	Query accrueQuery(SearchUnit...searchUnits);
+	List filterBy(SearchUnit...searchUnits);
+	List filterBy(String query);
+	List filterBy(List<Integer> valList, List<String> strList);
+	List search(Query q);
+	Ent getUserByEmail(String id);
 }
 

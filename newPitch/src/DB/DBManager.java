@@ -62,7 +62,7 @@ public class DBManager {
 	}
 	
 	public Ent getById(String id){
-		return searcher.getById(id);
+		return searcher.getUserByEmail(id);
 	}
 	
 	
