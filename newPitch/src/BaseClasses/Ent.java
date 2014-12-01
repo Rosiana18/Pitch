@@ -82,6 +82,9 @@ public class Ent
 	@Index int doSomething=0;
 	@Index int makeSomething=0; // tangible
 	@Index int learnSomething=0;
+	@Index int projectLength=0; //1 is smallest, 5 is largest
+	@Index int projectSize=0; // 1-5 (partner, small, med, large, organization)
+	/*
 	@Index int partnerGroup=0;
 	@Index int smallGroup=0;
 	@Index int medGroup=0;
@@ -95,6 +98,7 @@ public class Ent
 	@Index int medProject=0;
 	@Index int longProject=0;
 	@Index int ongoingProject=0;
+	*/
 	
 	//what is it ~ what do you do?
 	@Index int science=0;
