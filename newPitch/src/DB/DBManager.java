@@ -61,6 +61,11 @@ public class DBManager {
 		return searcher.filterBy(query);
 	}
 	
+	public List<Ent> filterBy(List<Integer> valList, List<String> strList)
+	{
+		return searcher.filterBy(valList, strList);
+	}
+	
 	public Ent getById(String id){
 		return searcher.getUserByEmail(id);
 	}

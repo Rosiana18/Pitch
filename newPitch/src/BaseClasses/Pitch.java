@@ -9,24 +9,29 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index String title;
 	@Index ArrayList<String> users;
 	@Index ArrayList<String> bidders;
-	@Index String description;
+	ArrayList<String> descriptionTitles;
+	ArrayList<String> descriptions;
 	@Index ArrayList<Message> feedbacks;
 	@Index ArrayList<Message> notifications;
+	String owner;
 	Pitch(){};
-	public Pitch(String title, String description) {
+	public Pitch(String title, ArrayList<String> _descriptionTitles, ArrayList<String> _descriptions,
+			String _owner) {
 		id = title;
 		this.title = title;
-		this.description = description;
+		this.descriptions = _descriptions;
+		descriptionTitles = _descriptionTitles;
 		users = new ArrayList<String>();
 		bidders = new ArrayList<String>();
 		feedbacks = new ArrayList<Message>();
 		notifications = new ArrayList<Message>();
+		owner = _owner;
 	}
 	public String getTitle(){
 		return title;
 	}
 	public String getDescription(){
-		return description;
+		return descriptions.get(0);
 	}
 	public void addUser(String user){
 		users.add(user);
@@ -48,6 +53,10 @@ import com.googlecode.objectify.annotation.Subclass;
 	}
 	public ArrayList<String> getBidderList(){
 		return bidders;
+	}
+	public String getOwnerId()
+	{
+		return owner;
 	}
  
 }

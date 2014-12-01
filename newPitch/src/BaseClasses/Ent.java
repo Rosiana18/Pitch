@@ -1,4 +1,7 @@
 package BaseClasses;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.googlecode.objectify.annotation.*;
 
 @Entity
@@ -47,6 +50,7 @@ public class Ent
 	
 	
 	// ratings
+	/*
 	@Index int communityService=0;
 	@Index int social=0;
 	@Index int quirky=0;
@@ -54,8 +58,11 @@ public class Ent
 	@Index int fun=0;
 	@Index int thoughtProvoking=0;
 	@Index int important=0;
+	*/
 	
 	// personality
+	public HashMap<String,Integer> personTagValues;
+	/*
 	@Index int realist=0;
 	@Index int dreamer=0;
 	@Index int philosophical=0;
@@ -66,9 +73,12 @@ public class Ent
 	@Index int weekendy=0;
 	@Index int nightOwl=0;
 	@Index int goalOriented=0;
+	*/
 	
 	
 	//values
+	public HashMap<String,Integer> valTagValues;
+	/*
 	@Index int structure=0;
 	@Index int dynamicEnvironment=0;
 	@Index int selfReliance=0;
@@ -77,13 +87,18 @@ public class Ent
 	@Index int reliability=0;
 	@Index int impact=0;
 	@Index int enjoyment=0;
+	*/
 	
 	//categorization tags
+	public HashMap<String,Integer> catTagValues;
+	/*
 	@Index int doSomething=0;
 	@Index int makeSomething=0; // tangible
 	@Index int learnSomething=0;
 	@Index int projectLength=0; //1 is smallest, 5 is largest
 	@Index int projectSize=0; // 1-5 (partner, small, med, large, organization)
+	*/
+	
 	/*
 	@Index int partnerGroup=0;
 	@Index int smallGroup=0;
@@ -129,5 +144,6 @@ public class Ent
     	return id;
     }
 
+    
 
 }

@@ -146,7 +146,7 @@
 					<li class="sub-menu"><a href="profile.jsp"> <i
 							class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
-					<li class="sub-menu"><a href="search.jsp"> <i
+					<li class="sub-menu"><a href="search.html"> <i
 							class="fa fa-cogs"></i> <span>Search/Explore</span>
 					</a></li>
 					<li class="sub-menu"><a href="conversation.jsp"> <i
