@@ -165,7 +165,7 @@
 		</header>
 		<!--header end-->
 
-		<!-- **********************************************************************************************************************************************************
+	  <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -184,10 +184,10 @@
 					<li class="mt"><a href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu"><a class="active" href="search.jsp"> <i
+					<li class="sub-menu"><a href="search.jsp"> <i
 							class="fa fa-tasks"></i> <span>Search Pitches</span>
 					</a></li>					
-					<li class="sub-menu"><a href="createPitch.jsp"> <i
+					<li class="sub-menu"><a class="active" href="createPitch.jsp"> <i
 							class="fa fa-book"></i> <span>Create Pitch</span>
 					</a></li>
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
@@ -205,56 +205,38 @@
 	<!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
-    <!--main content start-->
-   	<form id="form" class="form-horizontal style-form" action="search" method="get">
+     <!--main content start-->
+   	<form id="form" class="form-horizontal style-form" action="/pitch" method="post">
     <section id="main-content">
       <section class="wrapper">
-      <h3><i class="fa fa-angle-right"></i> Search Form</h3>
+      <h3><i class="fa fa-angle-right"></i> Create Pitch</h3>
 
-      <!-- Keywords -->
+      <!-- Create Form -->
       <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
-        	<h4 class="mb"><i class="fa fa-angle-right"></i> Word Search</h4>
+        	<h4 class="mb"><i class="fa fa-angle-right"></i> Form</h4>
          	<div class="form-group">
-          	  <label class="col-sm-2 col-sm-2 control-label">Keywords</label>
+          	  <label class="col-sm-2 col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
-            	<input type="text" class="form-control" name="keyword">
+            	<textarea name="title" rows="1" cols="200"></textarea>
               </div>
           	</div>
+            <div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label">Description</label>
+              <div class="col-sm-10">
+              	<textarea name="description" rows="10" cols="200"></textarea>
+               </div>
+             </div>
          </div>
         </div>
       </div>
-	  
-	  <!-- Pitch Duration -->
-	  <div class="row mt">
-	  	<div class="col-lg-12">
-          <div class="form-panel">
-         	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Duration</h4>
-			<div><input type="range" name="length" min="0" max="40" value="10" onChange="pitchLength(this.value)"/>
-			  <p id="pitchLength">week(s)</p><br>
-			</div>
-          </div>
-      	</div>
-      </div>
-    	
-      <!-- Pitch Length -->
-	  <div class="row mt">
-	  	<div class="col-lg-12">
-          <div class="form-panel">
-         	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Size</h4>
-			<div><input type="range" name="size" min="0" max="40" value="10" onChange="teamSize(this.value)"/>
-			  <p id="pitchSize">3-5 members</p><br>
-			</div>
-          </div>
-      	</div>
-      </div> 
 
-      <!-- Categories -->
+      <!-- Tags -->
 	  <div class="row mt">
 		<div class="col-lg-12">
           <div class="form-panel">
-			<h4 class="mb"><i class="fa fa-angle-right"></i> Category</h4>
+			<h4 class="mb"><i class="fa fa-angle-right"></i> Select Tags</h4>
 		    <div class="checkbox">
 			  <label><input type="checkbox" name="science" value="1">science</label>
 			</div>
@@ -304,7 +286,7 @@
 	<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="search.jsp#" class="go-top"> <i
+				2014 <a href="createPitch.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
@@ -369,34 +351,6 @@
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
-    
-    	function pitchLength(val){
-			if(val<=8 ){
-				document.getElementById("pitchLength").innerHTML = "day(s)";
-			}else if(val>8&&val<=16){
-				document.getElementById("pitchLength").innerHTML = "week(s)";
-			}else if(val>16&&val<=24){
-				document.getElementById("pitchLength").innerHTML = "month(s)";
-			}else if(val>24&&val<=32){
-				document.getElementById("pitchLength").innerHTML = "1 year";
-			}else if(val>32){
-				document.getElementById("pitchLength").innerHTML = "year(s)";
-			}
-		}
-		function teamSize(val){
-			if(val<=8){
-				document.getElementById("pitchSize").innerHTML = "1-2 members";
-			}else if(val>8&&val<=16){
-				document.getElementById("pitchSize").innerHTML = "3-5 members";
-			}else if(val>16&&val<=24){
-				document.getElementById("pitchSize").innerHTML = "5-10 members";
-			}else if(val>24&&val<=32){
-				document.getElementById("pitchSize").innerHTML = "10-20 members";
-			}else if(val>32){
-				document.getElementById("pitchSize").innerHTML = ">20 members / organization";
-			} 
-		}
-	
 	</script>
 
 
