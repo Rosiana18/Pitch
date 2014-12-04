@@ -63,7 +63,7 @@ public class DBManager {
 	
 	public List<Ent> filterBy(List<Integer> valList, List<String> strList)
 	{
-		return searcher.filterBy(valList, strList);
+		return searcher.filterBy(valList, strList, null, 0, 0, 0, 0, 0, 0, null);
 	}
 	
 	public Ent getById(String id){

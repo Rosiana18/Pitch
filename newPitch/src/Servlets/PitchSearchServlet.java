@@ -12,7 +12,7 @@ import com.googlecode.objectify.annotation.Index;
 import BaseClasses.User;
 import DB.DBManager;
 
-public class SearchServlet extends HttpServlet{
+public class PitchSearchServlet extends HttpServlet{
 	private String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
 			,"conceptDesign","event","teaching","cause","diy","art","music"};
 	private DBManager dbm = DBManager.getInstance();
@@ -20,8 +20,6 @@ public class SearchServlet extends HttpServlet{
 	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
 		
-		String confirmationCode = req.getParameter("");
-		String email = req.getParameter("email");
 		
 	}
 	
@@ -38,7 +36,7 @@ public class SearchServlet extends HttpServlet{
 			
 		}
 		
-		return null;
+		return ret;
 	}
 
 }
