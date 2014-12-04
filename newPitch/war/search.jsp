@@ -39,7 +39,8 @@
 <body>
 
 	<section id="container">
-		<!-- **********************************************************************************************************************************************************
+	  
+	  <!-- **********************************************************************************************************************************************************
       TOP BAR CONTENT & NOTIFICATIONS
       *********************************************************************************************************************************************************** -->
 		<!--header start-->
@@ -62,7 +63,7 @@
 						<ul class="dropdown-menu extended tasks-bar">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">You have pending tasks</p>
+								<p class="green">You have 4 pending tasks</p>
 							</li>
 							<li><a href="index.jsp#">
 									<div class="task-info">
@@ -122,34 +123,37 @@
 					<!-- inbox dropdown start-->
 					<li id="header_inbox_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> <span class="badge bg-theme"><%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%></span>
+							<i class="fa fa-envelope-o"></i> <span class="badge bg-theme">5</span>
 					</a>
 						<ul class="dropdown-menu extended inbox">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">
-									You have
-									<%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%>
-									new messages
-								</p>
+								<p class="green">You have 5 new messages</p>
 							</li>
-							<%
-								for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
-							%>
 							<li><a href="index.jsp#"> <span class="photo"><img
 										alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
-									class="time"><%=msg.getDate().toGMTString()%></span> <span
-									class="subject"> <span class="from"><%=msg.getFrom()%></span>
-								</span> <span class="message"> <%=msg.getBody()%>
-								</span>
-									<button type="button" class="btn btn-info btn-primary btn-xs"
-										data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button" class="btn btn-warning btn-primary btn-xs">dismiss</button>
-
+									class="subject"> <span class="from">Zac Snider</span> <span
+										class="time">Just now</span>
+								</span> <span class="message"> Hi mate, how is everything? </span>
 							</a></li>
-							<%
-								}
-							%>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-divya.jpg"></span> <span
+									class="subject"> <span class="from">Divya Manian</span>
+										<span class="time">40 mins.</span>
+								</span> <span class="message"> Hi, I need your help with this. </span>
+							</a></li>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-danro.jpg"></span> <span
+									class="subject"> <span class="from">Dan Rogers</span> <span
+										class="time">2 hrs.</span>
+								</span> <span class="message"> Love your new Dashboard. </span>
+							</a></li>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-sherman.jpg"></span> <span
+									class="subject"> <span class="from">Dj Sherman</span> <span
+										class="time">4 hrs.</span>
+								</span> <span class="message"> Please, answer asap. </span>
+							</a></li>
 							<li><a href="index.jsp#">See all messages</a></li>
 						</ul></li>
 					<!-- inbox dropdown end -->
@@ -161,7 +165,6 @@
 					<li><a class="logout" href="login.jsp">Logout</a></li>
 				</ul>
 			</div>
-
 		</header>
 		<!--header end-->
 
@@ -179,23 +182,29 @@
 							class="img-circle" width="60"></a>
 					</p>
 					<h5 class="centered">
-						<%=((BaseClasses.User)session.getAttribute("user")).getName()%></h5>
+						<%=((BaseClasses.User) session.getAttribute("user"))
+					.getName()%></h5>
 
 					<li class="mt"><a href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu"><a class="active" href="search.jsp"> <i
-							class="fa fa-tasks"></i> <span>Search Pitches</span>
-					</a></li>					
-					<li class="sub-menu"><a href="createPitch.jsp"> <i
-							class="fa fa-book"></i> <span>Create Pitch</span>
-					</a></li>
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
 							class="fa fa-book"></i> <span>My Pitches</span>
 					</a></li>
-					<li class="sub-menu"><a href="profile.jsp"> <i
-							class="fa fa-cogs"></i> <span>My Profile</span>
+					<li class="sub-menu"><a href="createPitch.jsp"> <i
+							class="fa fa-book"></i> <span>Create a Pitch</span>
 					</a></li>
+					<li class="sub-menu"><a href="profile.jsp">
+							<i class="fa fa-cogs"></i> <span>My Profile</span>
+					</a></li>
+					<li class="sub-menu"><a class="active" href="search.jsp"> <i
+							class="fa fa-cogs"></i> <span>Search/Explore</span>
+					</a></li>
+					<li class="sub-menu"><a href="conversation.jsp"> <i
+							class="fa fa-cogs"></i> <span>Conversations</span>
+					</a></li>
+
+
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -224,10 +233,8 @@
           	</div>
          </div>
         </div>
-      </div>
-	  
-	  <!-- Pitch Duration -->
-	  <div class="row mt">
+     
+	  	<!-- Pitch Duration -->
 	  	<div class="col-lg-12">
           <div class="form-panel">
          	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Duration</h4>
@@ -236,10 +243,8 @@
 			</div>
           </div>
       	</div>
-      </div>
-    	
-      <!-- Pitch Length -->
-	  <div class="row mt">
+      	
+      	<!-- Pitch Length -->
 	  	<div class="col-lg-12">
           <div class="form-panel">
          	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Size</h4>
@@ -248,13 +253,11 @@
 			</div>
           </div>
       	</div>
-      </div> 
-
-      <!-- Categories -->
-	  <div class="row mt">
-		<div class="col-lg-12">
+        
+        <!-- Categories -->
+	  	<div class="col-lg-12">
           <div class="form-panel">
-			<h4 class="mb"><i class="fa fa-angle-right"></i> Category</h4>
+			<h4 class="mb"><i class="fa fa-angle-right"></i> Tags</h4>
 		    <div class="checkbox">
 			  <label><input type="checkbox" name="science" value="1">science</label>
 			</div>
@@ -293,10 +296,12 @@
 			</div>
 		  </div>
 	  	</div>
-	  </div>
 	  
-	  <!-- Submit Button -->
-      <button type="submit" class="btn btn-primary">Submit</button></section>
+	  	<!-- Submit Button -->
+      	<div class="col-lg-12"><div class="col-lg-12">
+ 	     <button type="submit" class="btn btn-theme">Submit</button>
+      	</div></div>
+      </div>
 	</section>
 	</form>
 	<!--main content end-->
@@ -304,7 +309,7 @@
 	<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="search.jsp#" class="go-top"> <i
+				Pitch Team <a href="search.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
