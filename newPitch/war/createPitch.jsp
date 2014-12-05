@@ -11,7 +11,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>Search</title>
+<title>New Pitch</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -49,7 +49,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
+			<a href="index.jsp" class="logo"><b>Pitch</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
 				<!--  notification start -->
@@ -167,7 +167,7 @@
 		</header>
 		<!--header end-->
 
-		<!-- **********************************************************************************************************************************************************
+	  <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -213,8 +213,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
      <!--main content start-->
-   	<form id="form" class="form-horizontal style-form" action="/pitch" method="post">
-    <section id="main-content">
+   	<section id="main-content">
       <section class="wrapper">
       <h3><i class="fa fa-angle-right"></i> Create Pitch</h3>
 
@@ -222,69 +221,89 @@
       <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
+      	  <form id="form" class="form-horizontal style-form" action="/pitch" method="post">
+      
         	<h4 class="mb"><i class="fa fa-angle-right"></i> Form</h4>
+         	
+         	<!-- Title -->
          	<div class="form-group">
           	  <label class="col-sm-2 col-sm-2 control-label">Title</label>
               <div class="col-sm-10">
-            	<textarea name="title" rows="1" cols="200"></textarea>
+            	<textarea name="title" rows="1" style="width:80%"></textarea>
               </div>
           	</div>
+          	
+          	<!-- Description -->
             <div class="form-group">
               <label class="col-sm-2 col-sm-2 control-label">Description</label>
               <div class="col-sm-10">
-              	<textarea name="description" rows="10" cols="200"></textarea>
+              	<textarea name="description" rows="10" style="width:80%"></textarea>
                </div>
          	</div>
-
-			<h4 class="mb"><i class="fa fa-angle-right"></i> Select Tags</h4>
-		    <div class="checkbox">
-			  <label><input type="checkbox" name="science" value="1">science</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="engineering" value="1">engineering</label>
-			</div>
-			<div class="checkbox">  
-			  <label><input type="checkbox" name="writing" value="1">writing</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="craft" value="1">craft</label>
-			</div>
-			<div class="checkbox">  
-			  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="event" value="1">event</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="teaching" value="1">teaching</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="diy" value="1">DIY</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="art" value="1">art</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="music" value="1">music</label>
+			
+		  	<!-- Dynamic Field-->
+		  	<div class="form-group">
+              <div class="col-sm-10">
+		  	  	<input type="button" class="btn btn-success" value="Add More Fields" onclick="addRow()"/>
+    		  </div>
+    		</div>
+    		<div id="content"></div>
+    		
+			<!-- Tags/Categories -->
+			<div class="form-group">
+			  <div class="col-sm-10">
+				<h4 class="mb"><i class="fa fa-angle-right"></i> Select Tags</h4>
+			    <div class="checkbox">
+				  <label><input type="checkbox" name="science" value="1">science</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="engineering" value="1">engineering</label>
+				</div>
+				<div class="checkbox">  
+				  <label><input type="checkbox" name="writing" value="1">writing</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="craft" value="1">craft</label>
+				</div>
+				<div class="checkbox">  
+				  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="event" value="1">event</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="diy" value="1">DIY</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="art" value="1">art</label>
+				</div>
+				<div class="checkbox">
+				  <label><input type="checkbox" name="music" value="1">music</label>
+				</div>
+			  </div>
 			</div>
 		 
 	  		<!-- Submit Button -->
 	  		<div class="form-group">
 	  		  <div class="col-lg-12">
 	  		  <br>
-			 	<button type="submit" class="btn btn-theme">Submit</button></section>
+			 	<button type="submit" class="btn btn-theme">Submit</button>
 		  	  </div>
 		  	</div>
+		 </form>		  	
 		 </div>
 	  	</div>
 	  </div>
-	  
+	 
 	</section>
 	</form>
 	<!--main content end-->
@@ -292,7 +311,7 @@
 	<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="createPitch.jsp#" class="go-top"> <i
+				2014 - Project Pitch <a href="createPitch.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
@@ -323,7 +342,7 @@
 	<script src="assets/js/zabuto_calendar.js"></script>
 
 	<script type="application/javascript">
-		
+		var i = 0;
 		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
@@ -357,9 +376,33 @@
             var to = $("#" + id).data("to");
             console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
         }
+       function addRow() {
+		    i+=1;
+		    var div = document.createElement('div');
+		    div.setAttribute("id","div"+i);
+		    var localId = i;
+			div.className = 'class="col-sm-10"';
+		
+		   	div.innerHTML = '<div class="form-group">\
+			   		<label class="col-sm-2 control-label col-lg-2">Field Name</label>\
+		            <div class="col-sm-10">\
+		            	<textarea name="title' + i + '" rows="1" style="width:80%"></textarea>\
+		            </div>\
+	          	</div>\
+	         	<div class="form-group">\
+	              <label class="col-sm-2 control-label col-lg-2">Field Description</label>\
+	              <div class="col-sm-10">\
+	              	<textarea name="description' + i + '" rows="5" style="width:80%"></textarea>\
+	              </div>\
+			    </div>\
+			    <input type="button" class="btn btn-danger" value="X" onclick="removeRow(this)">';
+				   
+		     document.getElementById('content').appendChild(div);
+		}
+		function removeRow(input) {
+		    document.getElementById('content').removeChild( input.parentNode );
+		}
 	</script>
-
 
 </body>
 </html>
-
