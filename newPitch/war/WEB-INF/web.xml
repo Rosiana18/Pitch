@@ -24,7 +24,23 @@
     <servlet-name>login</servlet-name>
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
-
+<servlet>
+    <servlet-name>update</servlet-name>
+    <servlet-class>Servlets.UpdateProfileServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>update</servlet-name>
+    <url-pattern>/update</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>Servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
     <servlet>
     <servlet-name>confirm</servlet-name>
     <servlet-class>Servlets.ConfirmServlet</servlet-class>

@@ -143,10 +143,15 @@
 						class="form-control" id="password2" placeholder="Re-Enter"
 						name="password2" onkeyup="checkPass(); return false;">
 						<span id="confirmMessage" class="confirmMessage"></span>
-					<button class="btn btn-theme btn-block" href="index.html"
+					<table style="width:100%;">
+					<tr>
+					<td><button class="btn btn-theme btn-block" href="index.html"
 						type="submit">
 						<i class="fa fa-lock"></i> SIGN UP
-					</button>
+					</button></td>
+					<td><button class="btn btn-theme btn-block" type="button" onclick="window.location.href='login.jsp';return false;">Go Back</button></td>
+					</tr>
+					</table>
 					<hr>
 
 					<div class="login-social-link centered">

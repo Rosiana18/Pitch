@@ -219,19 +219,19 @@
 							<h4 class="mb">
 								<i class="fa fa-angle-right"></i> Form Elements
 							</h4>
-							<form class="form-horizontal style-form" method="get">
+							<form class="form-horizontal style-form" action="/update" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">First
 										Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" name="firstName"
 											value="<%=((BaseClasses.User) session.getAttribute("user"))
 					.getFirstName()%>">
 									</div>
 									<label class="col-sm-2 col-sm-2 control-label">Last
 										Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control"
+										<input type="text" class="form-control" name="lastName"
 											value="<%=((BaseClasses.User) session.getAttribute("user"))
 					.getLastName()%>">
 									</div>
@@ -245,7 +245,9 @@
 											Profile</button>
 									</div>
 								</div>
-								<div class="form-group">
+								</form>
+								<form class="form-horizontal style-form" method="post">
+									<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">New
 										Password</label>
 									<div class="col-sm-10">

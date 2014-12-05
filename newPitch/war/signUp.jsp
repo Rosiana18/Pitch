@@ -37,7 +37,7 @@
 	<div id="login-page">
 		<div class="container">
 
-			<form class="form-login">
+			<form class="form-login" action="login.jsp">
 				<h2 class="form-login-heading">Congratulations!</h2>
 				<div class="modal-body">
 					<p>Thank you for signing up with us!</p>

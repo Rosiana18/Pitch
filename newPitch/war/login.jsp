@@ -36,7 +36,8 @@
 	  <div id="login-page">
 	  	<div class="container">
 	  	
-		      <form class="form-login" action="/login" method="post">
+		      <div><img style="align:center" src="Pitch_Title.png"/>
+		      	<form class="form-login" action="/login" method="post">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
 		            <input type="text" class="form-control" placeholder="Email" name="email" autofocus>
@@ -44,7 +45,7 @@
 		            <input type="password" class="form-control" placeholder="Password" name="password">
 		            <label class="checkbox">
 		                <span class="pull-right">
-		                    <a data-toggle="modal" href="login.html#myModal"> Forgot Password?</a>
+		                    <a data-toggle="modal" href="login.html#myModal">Forgot Password?</a>
 		
 		                </span>
 		            </label>
@@ -81,7 +82,7 @@
 		          </div>
 		          <!-- modal -->
 		
-		      </form>	  	
+		      </form></div>  	
 	  	
 	  	</div>
 	  </div>

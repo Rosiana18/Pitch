@@ -1,2 +1,3 @@
 # Module pitchproject
 # RPC service class, partial path of RPC policy file
+pitch.client.GreetingService, 80CE4DB335E15F0607272E6DD08F7873.gwt.rpc
