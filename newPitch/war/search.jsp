@@ -50,7 +50,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
+			<a href="index.jsp" class="logo"><b>Pitch</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
 				<!--  notification start -->
@@ -311,7 +311,7 @@
 	<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				Pitch Team <a href="search.jsp#" class="go-top"> <i
+				2014 - Project Pitch <a href="search.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
@@ -409,4 +409,3 @@
 
 </body>
 </html>
-

@@ -77,4 +77,9 @@ import com.googlecode.objectify.annotation.Subclass;
 	public ArrayList<String> getFriends(){
 		return friends;
 	}
+
+	public void setName(String firstName2, String lastName2) {
+		this.firstName = firstName2;
+		this.lastName = lastName2;
+	}
 }

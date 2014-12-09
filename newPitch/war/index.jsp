@@ -49,7 +49,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
+			<a href="index.jsp" class="logo"><b>Pitch</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
 				<!--  notification start -->
@@ -166,7 +166,7 @@
 		</header>
 		<!--header end-->
 
-		<!-- **********************************************************************************************************************************************************
+	  <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -180,7 +180,8 @@
 							class="img-circle" width="60"></a>
 					</p>
 					<h5 class="centered">
-						<%=((BaseClasses.User)session.getAttribute("user")).getName()%></h5>
+						<%=((BaseClasses.User) session.getAttribute("user"))
+					.getName()%></h5>
 
 					<li class="mt"><a class="active" href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -188,13 +189,16 @@
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
 							class="fa fa-book"></i> <span>My Pitches</span>
 					</a></li>
-					<li class="sub-menu"><a href="profile.jsp"> <i
-							class="fa fa-cogs"></i> <span>My Profile</span>
+					<li class="sub-menu"><a href="createPitch.jsp"> <i
+							class="fa fa-book"></i> <span>Create a Pitch</span>
+					</a></li>
+					<li class="sub-menu"><a href="profile.jsp">
+							<i class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
 					<li class="sub-menu"><a href="search.jsp"> <i
 							class="fa fa-cogs"></i> <span>Search/Explore</span>
 					</a></li>
-					<li class="sub-menu"><a href="conversations.jsp"> <i
+					<li class="sub-menu"><a href="conversation.jsp"> <i
 							class="fa fa-cogs"></i> <span>Conversations</span>
 					</a></li>
 
@@ -203,7 +207,7 @@
 			</div>
 		</aside>
 		<!--sidebar end-->
-
+		
 		<!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -529,7 +533,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="index.jsp#" class="go-top"> <i
+				2014 - Project Pitch<a href="index.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

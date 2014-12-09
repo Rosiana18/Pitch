@@ -44,7 +44,7 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
+			<a href="index.jsp" class="logo"><b>Pitch</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
 				<!--  notification start -->
@@ -162,7 +162,7 @@
 		</header>
 		<!--header end-->
 
-		<!-- **********************************************************************************************************************************************************
+	<!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -185,6 +185,9 @@
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
 							class="fa fa-book"></i> <span>My Pitches</span>
 					</a></li>
+					<li class="sub-menu"><a href="createPitch.jsp"> <i
+							class="fa fa-book"></i> <span>Create a Pitch</span>
+					</a></li>
 					<li class="sub-menu"><a class="active" href="profile.jsp">
 							<i class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
@@ -194,7 +197,6 @@
 					<li class="sub-menu"><a href="conversation.jsp"> <i
 							class="fa fa-cogs"></i> <span>Conversations</span>
 					</a></li>
-
 
 				</ul>
 				<!-- sidebar menu end-->
