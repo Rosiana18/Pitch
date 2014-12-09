@@ -16,6 +16,15 @@
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>search</servlet-name>
+    <servlet-class>Servlets.PitchSearchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>search</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
    <servlet>
     <servlet-name>login</servlet-name>
     <servlet-class>Servlets.LoginServlet</servlet-class>

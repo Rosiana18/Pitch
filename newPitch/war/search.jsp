@@ -128,7 +128,7 @@
 						<ul class="dropdown-menu extended inbox">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">You have 5 new messages</p>
+								<p class="green">haha I changed this</p>
 							</li>
 							<li><a href="index.jsp#"> <span class="photo"><img
 										alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
@@ -215,7 +215,7 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
     <!--main content start-->
-   	<form id="form" class="form-horizontal style-form" action="search" method="get">
+   	<form id="form" class="form-horizontal style-form" action="/search" method="get">
     <section id="main-content">
       <section class="wrapper">
       <h3><i class="fa fa-angle-right"></i> Search Form</h3>
@@ -238,7 +238,7 @@
 	  	<div class="col-lg-12">
           <div class="form-panel">
          	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Duration</h4>
-			<div><input type="range" name="length" min="0" max="40" value="10" onChange="pitchLength(this.value)"/>
+			<div><input type="range" name="length" min="0" max="40" step="8" value="10" onChange="pitchLength(this.value)"/>
 			  <p id="pitchLength">week(s)</p><br>
 			</div>
           </div>
@@ -248,7 +248,7 @@
 	  	<div class="col-lg-12">
           <div class="form-panel">
          	<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Size</h4>
-			<div><input type="range" name="size" min="0" max="40" value="10" onChange="teamSize(this.value)"/>
+			<div><input type="range" name="size" min="0" max="40" step="8" value="10" onChange="teamSize(this.value)"/>
 			  <p id="pitchSize">3-5 members</p><br>
 			</div>
           </div>
@@ -259,31 +259,31 @@
           <div class="form-panel">
 			<h4 class="mb"><i class="fa fa-angle-right"></i> Tags</h4>
 		    <div class="checkbox">
-			  <label><input type="checkbox" name="science" value="1">science</label>
+			  <label><input type="checkbox" name="structure" value="1">science</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="engineering" value="1">engineering</label>
+			  <label><input type="checkbox" name="dynamicEnvironment" value="1">engineering</label>
 			</div>
 			<div class="checkbox">  
-			  <label><input type="checkbox" name="writing" value="1">writing</label>
+			  <label><input type="checkbox" name="selfReliance" value="1">writing</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="craft" value="1">craft</label>
+			  <label><input type="checkbox" name="teamwork" value="1">craft</label>
 			</div>
 			<div class="checkbox">  
-			  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
+			  <label><input type="checkbox" name="creativeApproach" value="1">fixing</label>	
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
+			  <label><input type="checkbox" name="reliability" value="1">visual design</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
+			  <label><input type="checkbox" name="impact" value="1">concept design</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="event" value="1">event</label>
+			  <label><input type="checkbox" name="enjoyment" value="1">event</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+			  <label><input type="checkbox" name="goalOriented" value="1">teaching</label>
 			</div>
 			<div class="checkbox">
 			  <label><input type="checkbox" name="diy" value="1">DIY</label>
@@ -298,9 +298,11 @@
 	  	</div>
 	  
 	  	<!-- Submit Button -->
-      	<div class="col-lg-12"><div class="col-lg-12">
- 	     <button type="submit" class="btn btn-theme">Submit</button>
-      	</div></div>
+      	
+
+ 	     		<input type="submit" value="search" >SUBMIT</button>
+
+
       </div>
 	</section>
 	</form>
@@ -377,15 +379,15 @@
     
     	function pitchLength(val){
 			if(val<=8 ){
-				document.getElementById("pitchLength").innerHTML = "day(s)";
+				document.getElementById("pitchLength").innerHTML = "weekend or shorter";
 			}else if(val>8&&val<=16){
-				document.getElementById("pitchLength").innerHTML = "week(s)";
+				document.getElementById("pitchLength").innerHTML = "short - week";
 			}else if(val>16&&val<=24){
-				document.getElementById("pitchLength").innerHTML = "month(s)";
+				document.getElementById("pitchLength").innerHTML = "medium - weeks";
 			}else if(val>24&&val<=32){
-				document.getElementById("pitchLength").innerHTML = "1 year";
+				document.getElementById("pitchLength").innerHTML = "long - year";
 			}else if(val>32){
-				document.getElementById("pitchLength").innerHTML = "year(s)";
+				document.getElementById("pitchLength").innerHTML = "long haul - years and years!";
 			}
 		}
 		function teamSize(val){
