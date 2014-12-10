@@ -221,7 +221,7 @@
       <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
-      	  <form id="form" class="form-horizontal style-form" action="/pitch" method="post">
+      	  <form id="form" class="form-horizontal style-form" action="/pitch?" method="post">
       
         	<h4 class="mb"><i class="fa fa-angle-right"></i> Form</h4>
          	
@@ -248,7 +248,26 @@
     		  </div>
     		</div>
     		<div id="content"></div>
-    		
+    		<div id="dynamic"></div>
+		 
+		 	<!-- Pitch Duration -->
+	  		<div class="form-group">
+			  <div class="col-sm-10">
+				<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Duration</h4>
+			    <input type="range" name="length" min="0" max="40" value="10" onChange="pitchLength(this.value)"/>
+			  	<p id="pitchLength">week(s)</p>
+			  </div>
+           	</div>
+      	
+      		<!-- Pitch Length -->
+	  		<div class="form-group">
+	  		  <div class="col-sm-10">
+	  			<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Size</h4>
+				<input type="range" name="size" min="0" max="40" value="10" onChange="teamSize(this.value)"/>
+			  	<p id="pitchSize">3-5 members</p>
+			  </div>
+          	</div>
+          	    		
 			<!-- Tags/Categories -->
 			<div class="form-group">
 			  <div class="col-sm-10">
@@ -291,14 +310,15 @@
 				</div>
 			  </div>
 			</div>
-		 
-	  		<!-- Submit Button -->
+      	
+      		<!-- Submit Button -->
 	  		<div class="form-group">
 	  		  <div class="col-lg-12">
 	  		  <br>
 			 	<button type="submit" class="btn btn-theme">Submit</button>
 		  	  </div>
 		  	</div>
+		  	
 		 </form>		  	
 		 </div>
 	  	</div>
@@ -343,6 +363,7 @@
 
 	<script type="application/javascript">
 		var i = 0;
+		var index = 0;
 		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
@@ -378,6 +399,7 @@
         }
        function addRow() {
 		    i+=1;
+		    index+=1;
 		    var div = document.createElement('div');
 		    div.setAttribute("id","div"+i);
 		    var localId = i;
@@ -398,9 +420,39 @@
 			    <input type="button" class="btn btn-danger" value="X" onclick="removeRow(this)">';
 				   
 		     document.getElementById('content').appendChild(div);
+		     document.getElementByID('dynamic').innerHTML = '<input id="number" type="hidden" name="number" value="' + i + '"/>';
 		}
+		
 		function removeRow(input) {
+			index-=1;
 		    document.getElementById('content').removeChild( input.parentNode );
+		}
+		
+		function pitchLength(val){
+			if(val<=8 ){
+				document.getElementById("pitchLength").innerHTML = "day(s)";
+			}else if(val>8&&val<=16){
+				document.getElementById("pitchLength").innerHTML = "week(s)";
+			}else if(val>16&&val<=24){
+				document.getElementById("pitchLength").innerHTML = "month(s)";
+			}else if(val>24&&val<=32){
+				document.getElementById("pitchLength").innerHTML = "1 year";
+			}else if(val>32){
+				document.getElementById("pitchLength").innerHTML = "year(s)";
+			}
+		}
+		function teamSize(val){
+			if(val<=8){
+				document.getElementById("pitchSize").innerHTML = "1-2 members";
+			}else if(val>8&&val<=16){
+				document.getElementById("pitchSize").innerHTML = "3-5 members";
+			}else if(val>16&&val<=24){
+				document.getElementById("pitchSize").innerHTML = "5-10 members";
+			}else if(val>24&&val<=32){
+				document.getElementById("pitchSize").innerHTML = "10-20 members";
+			}else if(val>32){
+				document.getElementById("pitchSize").innerHTML = ">20 members / organization";
+			} 
 		}
 	</script>
 

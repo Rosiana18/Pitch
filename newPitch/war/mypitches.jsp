@@ -235,14 +235,14 @@
 									%>
 									<!-- TWITTER PANEL -->
 									<a
-										href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getTitle()%>">
+										href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getTitle()%>">
 										<div class="col-lg-4 col-md-4 col-sm-4 mb">
 											<div class="content-panel pn">
 												<div id="blog-bg">
-													<div class="blog-title"><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getTitle()%></div>
+													<div class="blog-title"><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getTitle()%></div>
 												</div>
 												<div class="blog-text">
-													<p><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getById(pitch)).getDescription()%></p>
+													<p><%=((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getDescription()%></p>
 												</div>
 											</div>
 										</div> <!-- /col-md-4-->

@@ -498,7 +498,7 @@
 							</div>
 							<div class="details">
 								<p>
-									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getById(friend)).getName()%></a><br />
+									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(friend)).getName()%></a><br />
 									<muted>Available</muted>
 								</p>
 							</div>

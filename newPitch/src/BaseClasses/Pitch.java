@@ -13,10 +13,12 @@ import com.googlecode.objectify.annotation.Subclass;
 	ArrayList<String> descriptions;
 	@Index ArrayList<Message> feedbacks;
 	@Index ArrayList<Message> notifications;
+	@Index int duration;
+	@Index int size;
 	String owner;
 	Pitch(){};
 	public Pitch(String title, ArrayList<String> _descriptionTitles, ArrayList<String> _descriptions,
-			String _owner) {
+			String _owner, int _duration, int _size) {
 		id = title;
 		this.title = title;
 		this.descriptions = _descriptions;
@@ -26,6 +28,8 @@ import com.googlecode.objectify.annotation.Subclass;
 		feedbacks = new ArrayList<Message>();
 		notifications = new ArrayList<Message>();
 		owner = _owner;
+		duration = _duration;
+		size = _size;
 	}
 	public String getTitle(){
 		return title;

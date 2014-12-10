@@ -7,11 +7,15 @@ import java.util.Scanner;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import BaseClasses.Pitch;
+import DB.DBManager;
 
 
 public class PitchServlet extends HttpServlet{
+	private String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+			,"conceptDesign","event","teaching","cause","diy","art","music"};
 	
 	/*
 	 * DO POST METHOD INFO
@@ -20,11 +24,9 @@ public class PitchServlet extends HttpServlet{
 	 * 				Title
 	 * 				Description
 	 * 				Extra Fields
+	 * 				Owner
+	 * 				Tags - used ryan's code from PitchSearchServlet.java
 	 * UNSUCCESSFULL
-	 * 		allocation of:
-	 * 				Owner - reason: I'm not sure how to obtain owner from the createPitch.jsp
-	 * 				Tags - reason: Pitch.java does not have tag array
-	 * 		create new Pitch into a user - reason: don't know how to grab user
 	 * 		put the new pitch in the database - reason: don't know how the database work?
 	 * 				would putting it under user automatically put it in the database
 	 * 				Again this is related to how you implement the database. Ryan fix this for me
@@ -46,28 +48,46 @@ public class PitchServlet extends HttpServlet{
 		// extra fields
 		String number = req.getParameter("number");
 		int num = 0;
-		Scanner scan = new Scanner(number);
-		if(scan.hasNextInt()){
-			num = scan.nextInt();
+		if(number != null){
+			num = Integer.valueOf(number);
+			for(int i = 0; i < num; i++){
+				int c = i+1;
+				String titleAdd = req.getParameter("title"+c);
+				String descriptionAdd = req.getParameter("description"+c);
+				if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
+					_title.add(descriptionAdd);
+					_description.add(descriptionAdd);
+				}
+			}	
 		}
-		for(int i = 0; i < num; i++){
-			String titleAdd = req.getParameter("title"+i);
-			String descriptionAdd = req.getParameter("description"+i);
-			if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
-				_title.add(descriptionAdd);
-				_description.add(descriptionAdd);
+		String title0 = req.getParameter("title0");
+		String title1 = req.getParameter("title1");
+		
+		//owner
+		HttpSession session =req.getSession(false);
+		String owner =((BaseClasses.User) session.getAttribute("user")).getEmail();
+		
+		//tags
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		for(String a : whatIsIts)
+		{
+			if(req.getParameter(a)==null){
+				ret.add(0);
+			}else{
+				ret.add(Integer.valueOf(req.getParameter(a)));
 			}
 		}
 		
-		//owner
-		String owner = req.getParameter("owner");
-		
-		//tags
+		//duration and size
+		int duration = Integer.valueOf(req.getParameter("duration"));
+		int size = Integer.valueOf(req.getParameter("size"));
 		
 		// create the Pitch
-		Pitch newPitch = new Pitch(mainTitle, _title, _description, owner);
+		Pitch newPitch = new Pitch(mainTitle, _title, _description, owner, duration, size);
 		
 		// how do i allocate this to a user's pitch list or the database itself?
+		DBManager.getInstance().add(newPitch);
+		((BaseClasses.User) session.getAttribute("user")).addPitch(newPitch.getId());
 		
 		//redirect to myPitch
 		resp.sendRedirect("/myPitches.jsp");

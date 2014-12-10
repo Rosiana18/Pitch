@@ -28,13 +28,24 @@ public class PitchSearchServlet extends HttpServlet{
 		dbm.filterBy(ckboxes,st); */
 		
 	}
-	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		
+		//get the category tags
+		ArrayList<Integer> categoryTags = loadUp(req);
+		categoryTags.add(3);
+		resp.sendRedirect("/myPitches.jsp");
+	}
 	private ArrayList<Integer> loadUp(HttpServletRequest req)
 	{
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		for(String a : whatIsIts)
 		{
-			ret.add( (Integer)req.getAttribute(a) );
+			if(req.getParameter(a)==null){
+				ret.add(0);
+			}else{
+				ret.add(Integer.valueOf(req.getParameter(a)));
+			}
 		}
 		
 		for(Integer b : ret )
