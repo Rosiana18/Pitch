@@ -224,7 +224,7 @@
 											<div class="badge badge-hot">Pinned</div>
 											<img src="assets/img/product.jpg" width="200" alt="">
 											<h5 class="mt">Make your dreams come true :D</h5>
-											<button class="btn btn-small btn-theme04">Create New
+											<button class="btn btn-small btn-theme04" onclick="window.location.href='createPitch.jsp'">Create New
 												Pitch</button>
 										</div>
 									</div>
