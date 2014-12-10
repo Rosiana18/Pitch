@@ -5,6 +5,7 @@ import java.util.List;
 //import com.google.appengine.api.datastore.Query;
 
 import BaseClasses.Ent;
+import BaseClasses.Pitch;
 import BaseClasses.User;
 
 //import com.google.appengine.api.search.Query;
@@ -18,5 +19,6 @@ interface DBSearcher {
 			int projectLength, int projectSize, String textFields[]);
 	List search(Query q);
 	Ent getUserByEmail(String id);
+	Pitch getPitchByID(String id);
 }
 

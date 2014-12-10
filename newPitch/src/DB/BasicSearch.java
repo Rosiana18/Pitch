@@ -89,7 +89,14 @@ public class BasicSearch implements DBSearcher {
 	
 	@Override
 	public User getUserByEmail(String id){
-		return ofy().load().type(User.class).id(id).now();
+		User u = ofy().load().type(User.class).id(id).now();
+		return u;
+	}
+	
+	@Override
+	public Pitch getPitchByID(String id)
+	{
+		return ofy().load().type(Pitch.class).id(id).now();
 	}
 	
 	@Override

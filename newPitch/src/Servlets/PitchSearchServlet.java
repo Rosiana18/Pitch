@@ -18,14 +18,14 @@ public class PitchSearchServlet extends HttpServlet{
 	private DBManager dbm = DBManager.getInstance();
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		
 		/*ArrayList<Integer> ckboxes = loadUp(req);
 		//ArrayList<String> st = new ArrayList<String>();
 		for(String s : whatIsIts)
 		{
 			st.add(s);
 		}
-		dbm.filterBy(ckboxes,st ); */
-		
+		dbm.filterBy(ckboxes,st); */
 		
 	}
 	

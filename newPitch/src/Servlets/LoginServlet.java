@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 			throws IOException {
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		User user = (User)DBManager.getInstance().getById(email);
+		User user = (User)DBManager.getInstance().getUserByID(email);
 		if(user.getPassword().equals(password)){
 			 HttpSession session = req.getSession();
 			 session.setAttribute("userName", email);

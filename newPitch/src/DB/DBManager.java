@@ -3,6 +3,7 @@ package DB;
 import java.util.List;
 
 import BaseClasses.Ent;
+import BaseClasses.Pitch;
 
 import com.googlecode.objectify.ObjectifyService;
 
@@ -66,8 +67,13 @@ public class DBManager {
 		return searcher.filterBy(valList, strList, null, 0, 0, 0, 0, 0, 0, null);
 	}
 	
-	public Ent getById(String id){
+	public Ent getUserByID(String id){
 		return searcher.getUserByEmail(id);
+	}
+	
+	public Pitch getPitchByID(String id)
+	{
+		return searcher.getPitchByID(id);
 	}
 	
 	

@@ -16,7 +16,7 @@ public class ConfirmServlet extends HttpServlet {
 	private void processRequest(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String confirmationCode = req.getParameter("id");
 		String email = req.getParameter("email");
-		User user = (User)DBManager.getInstance().getById(email);
+		User user = (User)DBManager.getInstance().getUserByID(email);
 		if(user.getKey().equals(confirmationCode)){
 			user.setKey("0");
 			DBManager.getInstance().add(user);
