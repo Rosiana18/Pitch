@@ -204,7 +204,7 @@
 						<!-- First Member -->
 						<%
 							String name=request.getParameter("pitch");
-						                       for(String member: ((BaseClasses.Pitch)DB.DBManager.getInstance().getById(name)).getUserList()){
+						                       for(String member: ((BaseClasses.Pitch)DB.DBManager.getInstance().getUserByID(name)).getUserList()){
 						%>
 
 						<div class="desc">
@@ -214,7 +214,7 @@
 							</div>
 							<div class="details">
 								<p>
-									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getById(member)).getName()%></a><br />
+									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></a><br />
 									<muted>Available</muted>
 								</p>
 							</div>
