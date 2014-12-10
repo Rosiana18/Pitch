@@ -234,7 +234,7 @@
 									type="submit">
 							</form>
 							<%} %>
-							<form class="form-horizontal style-form" method="get">
+							<form class="form-horizontal style-form" action="/update" method="get">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">First
 										Name</label>

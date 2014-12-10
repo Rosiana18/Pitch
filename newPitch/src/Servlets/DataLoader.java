@@ -41,6 +41,12 @@ public class DataLoader extends HttpServlet {
 										"sharon","michelle","laura","sarah","kimberly","deborah","jessica","raymond","shirley","cynthia","angela","mellisa","brenda","amy","jerry","gregory","stephanie","willie",
 										"patrick","terry","peter","christine","marie","janet","frances","catherine","henry"};
 	static final String[] title = {"Awesome Robot", "Godzilla","Deadpool","Super Computer","Christmas Tree"};
+	static final String[] descTitles = {"Awesome Robot","Godzilla","Deadpool","Super Computer","Christmas Tree"};
+	static final String[] descs = {"This will be an awesome robot, that can bring beers to you from your fridge.",
+										"This project will genetically modify a lizzard to make real godzilla.",
+										"Let's make a deadpool costume.",
+										"This will be an awesome super computer that can add 2 single digit numbers.",
+										"It is almost Christmas. Let's make our own christmas tree using toilet papers."};
 	ArrayList<String> descriptionTitles;
 	ArrayList<String> descriptions;
 	Random r = new Random();
@@ -64,8 +70,8 @@ public class DataLoader extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {	
 		users = new ArrayList<String>();
-		descriptions = new ArrayList<String>();
-		descriptionTitles = new ArrayList<String>();
+		
+
 		
 		for(int i=0;i<USER_SIZE;i++){
 			User localUser = RandomUser();
@@ -117,11 +123,16 @@ public class DataLoader extends HttpServlet {
 		return new User(email,first,last,password,"0");
 	}
 	private Pitch RandomPitch(User owner){
-		String name = title[r.nextInt(title.length-1)];
+		int randomNum = r.nextInt(descs.length-1);
+		descriptions = new ArrayList<String>();
+		descriptions.add(descs[randomNum]);
+		descriptionTitles = new ArrayList<String>();
+		descriptionTitles.add(descTitles[randomNum]);
+		String name = title[randomNum];
 		String localTitle = name;
-		while(DBManager.getInstance().getPitchByID(name) != null){
+		//while(DBManager.getInstance().getPitchByID(name) != null){
 			localTitle = name+r.nextInt(1000);
-		}
+		//}
 		return new Pitch(localTitle, descriptionTitles,descriptions,owner.getId(),10,r.nextInt(20)+1);
 	}	
 }

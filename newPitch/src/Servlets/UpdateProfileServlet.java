@@ -40,7 +40,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		String lastName = req.getParameter("lastName");
 		HttpSession session = req.getSession(true);
 		session.getAttribute("user");
-		User user = (User)DBManager.getInstance().getUserByID(( (User)session.getAttribute("user")).getId());
+		User user = (User)session.getAttribute("user");
 		System.out.println(user.getName());
 		user.setName(firstName, lastName);
 		System.out.println(user.getName());
