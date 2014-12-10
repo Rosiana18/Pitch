@@ -122,18 +122,38 @@
 					<!-- inbox dropdown start-->
 					<li id="header_inbox_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> <span class="badge bg-theme"><%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%></span>
+							<i class="fa fa-envelope-o"></i> 
+							<%
+							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
+							%>
+							<span class="badge bg-theme">
+							<%=
+							((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()).size()
+							%>
+							</span>
+							<%
+							}
+							%>
 					</a>
 						<ul class="dropdown-menu extended inbox">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
 								<p class="green">
 									You have
-									<%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%>
+									<%
+									if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) == null){
+									%>
+									no
+									<%
+									}else{
+									out.print(((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size());
+									}
+									%>
 									new messages
 								</p>
 							</li>
 							<%
+							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
 								for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
 							%>
 							<li><a href="index.jsp#"> <span class="photo"><img
@@ -150,6 +170,7 @@
 							</a></li>
 							<%
 								}
+							}
 							%>
 							<li><a href="index.jsp#">See all messages</a></li>
 						</ul></li>
@@ -468,6 +489,7 @@
 
 						<!-- First Action -->
 						<%
+							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getNotifications()) != null){
 							for(Message note: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getNotifications()){
 						%>
 						<div class="desc">
@@ -485,10 +507,12 @@
 						</div>
 						<%
 							}
+						}
 						%>
 						<!-- USERS ONLINE SECTION -->
 						<h3>FRIENDS</h3>
 						<%
+							if(((java.util.ArrayList<String>)((BaseClasses.User) session.getAttribute("user")).getFriends()) != null){
 							for(String friend: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getFriends()){
 						%>
 						<div class="desc">
@@ -505,6 +529,7 @@
 						</div>
 						<%
 							}
+						}
 						%>
 						<!-- CALENDAR-->
 						<div id="calendar" class="mb">
