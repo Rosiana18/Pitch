@@ -11,6 +11,7 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index String password;
 	@Index String linkedIn;
 	@Index String confirmationKey;
+	@Index String picture;
 	@Index ArrayList<Message> messages;
 	@Index ArrayList<Message> notifications;
 	@Index ArrayList<String> pitches;
@@ -37,6 +38,9 @@ import com.googlecode.objectify.annotation.Subclass;
 	}
 	public void setKey(String val){
 		confirmationKey = val;
+	}
+	public String getImage(){
+		return picture;
 	}
 	public String getPassword(){
 		return password;	

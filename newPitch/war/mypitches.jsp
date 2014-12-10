@@ -231,11 +231,11 @@
 									<! --/col-md-4 -->
 									<%
 										for(String pitch: (java.util.ArrayList<String>)((BaseClasses.User)session.getAttribute("user")).getPitches()){ 
-									            	int i =0;
 									%>
 									<!-- TWITTER PANEL -->
-									<a
-										href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getTitle()%>">
+									<!-- 
+									<a href="pitch.jsp?pitch=<%=((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getTitle()%>">
+									-->	
 										<div class="col-lg-4 col-md-4 col-sm-4 mb">
 											<div class="content-panel pn">
 												<div id="blog-bg">

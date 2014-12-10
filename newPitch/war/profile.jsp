@@ -162,7 +162,7 @@
 		</header>
 		<!--header end-->
 
-	<!-- **********************************************************************************************************************************************************
+		<!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -221,6 +221,19 @@
 							<h4 class="mb">
 								<i class="fa fa-angle-right"></i> Form Elements
 							</h4>
+							<%if(((BaseClasses.User) session.getAttribute("user")).getImage() == null) {%>
+							<form class="form-horizontal style-form" method="get">
+							<img alt="avatar" src="assets/img/ui-zac.jpg">
+								<input type="file" name="pic" accept="image/*"> <input
+									type="submit">
+							</form>
+							<% }else {%>
+							<form class="form-horizontal style-form" method="get">
+							<img alt="avatar" src="assets/img/ui-zac.jpg">
+								<input type="file" name="pic" accept="image/*"> <input
+									type="submit">
+							</form>
+							<%} %>
 							<form class="form-horizontal style-form" method="get">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">First
