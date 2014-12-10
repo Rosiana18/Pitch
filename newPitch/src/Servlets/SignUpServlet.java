@@ -104,7 +104,7 @@ public class SignUpServlet extends HttpServlet {
 			titles.add("title1");
 			ArrayList<String> descriptions = new ArrayList<String>();
 			descriptions.add("description1");
-			Pitch pitch = new Pitch("My Project", titles, descriptions, confirmationKey);
+			Pitch pitch = new Pitch("My Project", titles, descriptions, confirmationKey, 0, 0);
 			pitch.addUser(newUser.getId());
 			newUser.addPitch(pitch.getId());
 			Message msg = new Message("Pitch Admin",newUser.getFirstName(),"","Welcome to Pitch! Have fun.");

@@ -4,6 +4,7 @@ import java.util.List;
 
 import BaseClasses.Ent;
 import BaseClasses.Pitch;
+import BaseClasses.User;
 
 import com.googlecode.objectify.ObjectifyService;
 
@@ -62,9 +63,9 @@ public class DBManager {
 		return searcher.filterBy(query);
 	}
 	
-	public List<Ent> filterBy(List<Integer> valList, List<String> strList)
+	public List<Ent> filterBy(List<Integer> valList, List<String> strList, User u, int size, int len, String[] keyWords)
 	{
-		return searcher.filterBy(valList, strList, null, 0, 0, 0, 0, 0, 0, null);
+		return searcher.filterBy(valList, strList, u, len, size, keyWords);
 	}
 	
 	public Ent getUserByID(String id){

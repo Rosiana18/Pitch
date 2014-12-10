@@ -14,8 +14,7 @@ interface DBSearcher {
 	Query accrueQuery(SearchUnit...searchUnits);
 	List filterBy(SearchUnit...searchUnits);
 	List filterBy(String query);
-	List<Ent> filterBy(List<Integer> valList, List<String> strList, User u, 
-			int doSomething, int makeSomething, int learnSomething, int groupSize,
+	List<Ent> filterBy(List<Integer> valList, List<String> strList, User u,
 			int projectLength, int projectSize, String textFields[]);
 	List search(Query q);
 	Ent getUserByEmail(String id);

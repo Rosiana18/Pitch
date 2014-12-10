@@ -100,8 +100,7 @@ public class BasicSearch implements DBSearcher {
 	}
 	
 	@Override
-	public List<Ent> filterBy(List<Integer> valList, List<String> strList, User u, 
-			int doSomething, int makeSomething, int learnSomething, int groupSize,
+	public List<Ent> filterBy(List<Integer> valList, List<String> strList, User u,
 			int projectLength, int projectSize, String textFields[])
 	{
 		Class type = null;
@@ -142,10 +141,10 @@ public class BasicSearch implements DBSearcher {
 			}
 			if(q == null)
 			{
-				q = a.filter(att+" >=", val);
+				q = a.filter(att+" =", 1);
 				continue;
 			}
-			q = q.filter(att+" >=", val);
+			q = q.filter(att+" =", 1);
 			count.set(i, q.count());
 			
 			
@@ -155,12 +154,10 @@ public class BasicSearch implements DBSearcher {
 		if( q == null)
 		{
 			return refineSearch(a.list(), u, 
-					doSomething, makeSomething, learnSomething, groupSize,
 					projectLength, projectSize,  textFields);
 		}
 		
 		return refineSearch(q.list(), u, 
-				doSomething, makeSomething, learnSomething, groupSize,
 				projectLength, projectSize,  textFields);
 	}
 	
@@ -204,8 +201,7 @@ public class BasicSearch implements DBSearcher {
 		return sortables;
 	}
 	private List<Ent> refineSearch(List<Ent> pitches, User u, 			
-			int doSomething, int makeSomething, int learnSomething, int groupSize,
-			int projectLength, int projectSize, String textFields[])
+			int length, int size, String textFields[])
 	{
 		
 		ArrayList<SortableEnt> sortables = new ArrayList<SortableEnt>();

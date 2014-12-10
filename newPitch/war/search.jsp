@@ -259,31 +259,34 @@
           <div class="form-panel">
 			<h4 class="mb"><i class="fa fa-angle-right"></i> Tags</h4>
 		    <div class="checkbox">
-			  <label><input type="checkbox" name="structure" value="1">science</label>
+			  <label><input type="checkbox" name="science" value="1">science</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="dynamicEnvironment" value="1">engineering</label>
+			  <label><input type="checkbox" name="engineering" value="1">engineering</label>
 			</div>
 			<div class="checkbox">  
-			  <label><input type="checkbox" name="selfReliance" value="1">writing</label>
+			  <label><input type="checkbox" name="writing" value="1">writing</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="teamwork" value="1">craft</label>
+			  <label><input type="checkbox" name="craft" value="1">craft</label>
 			</div>
 			<div class="checkbox">  
-			  <label><input type="checkbox" name="creativeApproach" value="1">fixing</label>	
+			  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="reliability" value="1">visual design</label>
+			  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="impact" value="1">concept design</label>
+			  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="enjoyment" value="1">event</label>
+			  <label><input type="checkbox" name="event" value="1">event</label>
 			</div>
 			<div class="checkbox">
-			  <label><input type="checkbox" name="goalOriented" value="1">teaching</label>
+			  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="cause" value="1">cause</label>
 			</div>
 			<div class="checkbox">
 			  <label><input type="checkbox" name="diy" value="1">DIY</label>

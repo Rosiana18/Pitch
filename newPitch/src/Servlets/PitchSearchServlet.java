@@ -17,23 +17,35 @@ public class PitchSearchServlet extends HttpServlet{
 			,"conceptDesign","event","teaching","cause","diy","art","music"};
 	private DBManager dbm = DBManager.getInstance();
 	
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	/*	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		
-		/*ArrayList<Integer> ckboxes = loadUp(req);
+		ArrayList<Integer> ckboxes = loadUp(req);
 		//ArrayList<String> st = new ArrayList<String>();
 		for(String s : whatIsIts)
 		{
 			st.add(s);
 		}
-		dbm.filterBy(ckboxes,st); */
+		dbm.filterBy(ckboxes,st); 
 		
-	}
+	}*/
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		
 		//get the category tags
 		ArrayList<Integer> categoryTags = loadUp(req);
-		categoryTags.add(3);
+		ArrayList<String> strList = new ArrayList();
+		for(String z : whatIsIts)
+		{
+			strList.add(z);
+		}
+		String kw = req.getParameter("keyword");
+		String siz = req.getParameter("size");
+		String len = req.getParameter("length");
+		String u = req.getParameter("user");
+		int size = Integer.valueOf(siz)/8;
+		int length = Integer.valueOf(len)/8;
+		dbm.filterBy(categoryTags, strList, null, 0 ,0 , kw.split(" "));
+		
 		resp.sendRedirect("/myPitches.jsp");
 	}
 	private ArrayList<Integer> loadUp(HttpServletRequest req)
