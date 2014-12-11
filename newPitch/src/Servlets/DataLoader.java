@@ -106,6 +106,7 @@ public class DataLoader extends HttpServlet {
 				localPitch.addBidder(user);	
 				}
 			DBManager.getInstance().add(localPitch);
+			
 			}
 		}
 	
