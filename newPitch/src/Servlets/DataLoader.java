@@ -132,7 +132,23 @@ public class DataLoader extends HttpServlet {
 		String localTitle = name;
 		//while(DBManager.getInstance().getPitchByID(name) != null){
 			localTitle = name+r.nextInt(1000);
+
 		//}
-		return new Pitch(localTitle, descriptionTitles,descriptions,owner.getId(),10,r.nextInt(20)+1);
+		ArrayList<Integer> tagslol = new ArrayList<Integer>();
+		for(int j = 0; j<13; j++)
+		{
+			if(r.nextInt()%5 == 0)
+			{
+				tagslol.add(1);
+			}
+			else
+			{
+				tagslol.add(0);
+			}
+		}
+		return new Pitch(localTitle, descriptionTitles,descriptions,tagslol,owner.getId(),10,r.nextInt(20)+1);
+
+		//}
+		
 	}	
 }
