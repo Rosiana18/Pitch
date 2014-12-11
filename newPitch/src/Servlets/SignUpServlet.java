@@ -104,15 +104,15 @@ public class SignUpServlet extends HttpServlet {
 			titles.add("title1");
 			ArrayList<String> descriptions = new ArrayList<String>();
 			descriptions.add("description1");
-			Pitch pitch = new Pitch("My Project", titles, descriptions, null, confirmationKey, 0, 0);
-			pitch.addUser(newUser.getId());
-			newUser.addPitch(pitch.getId());
+			//Pitch pitch = new Pitch("My Project", titles, descriptions, null, confirmationKey, 0, 0);
+			//pitch.addUser(newUser.getId());
+			//newUser.addPitch(pitch.getId());
 			Message msg = new Message("Pitch Admin",newUser.getFirstName(),"","Welcome to Pitch! Have fun.");
 			Message note = new Message("Test Pitch",newUser.getFirstName(),"Subject","New video has been added.");
 			newUser.addMessage(msg);
 			newUser.addNotification(note);
 			newUser.addFriend(newUser.getId());
-			DBManager.getInstance().add(pitch);
+			//DBManager.getInstance().add(pitch);
 			_log.log(Level.WARNING,"After");
 			// send email for confirmation
 			sendConfirmation(firstName, lastName, email, confirmationKey);
