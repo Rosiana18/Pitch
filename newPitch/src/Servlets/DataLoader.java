@@ -149,6 +149,6 @@ public class DataLoader extends HttpServlet {
 		return new Pitch(localTitle, descriptionTitles,descriptions,tagslol,owner.getId(),10,r.nextInt(20)+1);
 
 		//}
-		return new Pitch(localTitle, descriptionTitles,descriptions,owner.getId(),10,r.nextInt(20)+1);
+		
 	}	
 }
