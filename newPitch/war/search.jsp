@@ -301,18 +301,11 @@
 	  	</div>
 	  
 	  	<!-- Submit Button -->
-<<<<<<< HEAD
-      	
-
- 	     		<input type="submit" value="search" >SUBMIT</button>
-
-
-=======
-      	<div class="col-lg-12"><div class="col-lg-12">
- 	     <button type="submit" class="btn btn-theme">Submit</button>
-      	</div></div>
-      	
->>>>>>> 5e14dc9f1c983f86317177c45fee9e8903b8bcdc
+		<div class="col-lg-12">
+		  <div class="col-lg-12">
+ 	     	<button type="submit" class="btn btn-theme">Submit</button>
+      	  </div>
+      	</div>
       </div>
 	</section>
 	</form>
