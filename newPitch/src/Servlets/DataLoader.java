@@ -97,11 +97,13 @@ public class DataLoader extends HttpServlet {
 			for(int k=0; k<=r.nextInt(max_collab);k++){
 				String user = users.get(r.nextInt(users.size()-1));
 				localPitch.addUser(user);
-				((User)DBManager.getInstance().getUserByID(user)).addPitch(localPitch.getId());
+				User theUser = ((User)DBManager.getInstance().getUserByID(user));
+				theUser.addPitch(localPitch.getId());
+				DBManager.getInstance().add(theUser);
 				}
 			for(int k=0; k<=r.nextInt(max_bidder);k++){
 				String user = users.get(r.nextInt(users.size()-1));
-				localPitch.addBidder(user);
+				localPitch.addBidder(user);	
 				}
 			DBManager.getInstance().add(localPitch);
 			}

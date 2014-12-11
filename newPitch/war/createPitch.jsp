@@ -420,7 +420,7 @@
 			    <input type="button" class="btn btn-danger" value="X" onclick="removeRow(this)">';
 				   
 		     document.getElementById('content').appendChild(div);
-		     document.getElementById('dynamic').innerHTML = '<input id="number" type="hidden" name="number" value="' + i + '"/>';
+		     document.getElementById("dynamic").innerHTML = '<input type="hidden" name="number" value=' + i + '>';
 		}
 		
 		function removeRow(input) {

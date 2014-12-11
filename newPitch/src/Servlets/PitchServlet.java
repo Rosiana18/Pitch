@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import BaseClasses.Pitch;
+import BaseClasses.User;
 import DB.DBManager;
 
 
@@ -49,19 +50,17 @@ public class PitchServlet extends HttpServlet{
 		String number = req.getParameter("number");
 		int num = 0;
 		if(number != null){
-			num = Integer.valueOf(number);
+			num = (int) Integer.valueOf(number);
 			for(int i = 0; i < num; i++){
 				int c = i+1;
 				String titleAdd = req.getParameter("title"+c);
 				String descriptionAdd = req.getParameter("description"+c);
 				if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
-					_title.add(descriptionAdd);
+					_title.add(titleAdd);
 					_description.add(descriptionAdd);
 				}
 			}	
 		}
-		String title0 = req.getParameter("title0");
-		String title1 = req.getParameter("title1");
 		
 		//owner
 		HttpSession session =req.getSession(false);
@@ -79,17 +78,20 @@ public class PitchServlet extends HttpServlet{
 		}
 		
 		//duration and size
-		int duration = Integer.valueOf(req.getParameter("duration"));
+		int duration = Integer.valueOf(req.getParameter("length"));
 		int size = Integer.valueOf(req.getParameter("size"));
 		
 		// create the Pitch
-		Pitch newPitch = new Pitch(mainTitle, _title, _description, new ArrayList(), owner, duration, size);
+		Pitch newPitch = new Pitch(mainTitle, _title, _description, ret, owner, duration, size);
 		
 		// how do i allocate this to a user's pitch list or the database itself?
 		DBManager.getInstance().add(newPitch);
-		((BaseClasses.User) session.getAttribute("user")).addPitch(newPitch.getId());
+		User theUser = (BaseClasses.User) session.getAttribute("user");
+		
+		theUser.addPitch(newPitch.getId());
+		DBManager.getInstance().add(theUser);
 		
 		//redirect to myPitch
-		resp.sendRedirect("/myPitches.jsp");
+		resp.sendRedirect("/mypitches.jsp");
 	}
 }
