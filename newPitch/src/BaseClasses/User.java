@@ -2,6 +2,9 @@ package BaseClasses;
 
 import java.util.ArrayList;
 
+import DB.DBManager;
+
+import com.google.gwt.dev.shell.Messages;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
@@ -12,10 +15,12 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index String linkedIn;
 	@Index String confirmationKey;
 	@Index String picture;
+	//@Index String conversation;
 	@Index ArrayList<Message> messages;
 	@Index ArrayList<Message> notifications;
 	@Index ArrayList<String> pitches;
 	@Index ArrayList<String> friends;
+	@Index ArrayList<Conversation> conversations;
 	@Index String email;
 	
 	User(){}
@@ -29,9 +34,11 @@ import com.googlecode.objectify.annotation.Subclass;
 		password = _password;
 		confirmationKey = _confirmationKey;
 		messages = new ArrayList<Message>();
+		messages.add(new Message("Pitch Admin",_firstName,"","Welcome to Pitch! Have fun."));
 		notifications = new ArrayList<Message>();
 		pitches = new ArrayList<String>();
 		friends = new ArrayList<String>();
+		conversations = new ArrayList<Conversation>();
 	}
 	public String getKey(){
 		return confirmationKey;
@@ -86,4 +93,5 @@ import com.googlecode.objectify.annotation.Subclass;
 		this.firstName = firstName2;
 		this.lastName = lastName2;
 	}
+
 }

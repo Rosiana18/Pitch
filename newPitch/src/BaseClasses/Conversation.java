@@ -35,4 +35,7 @@ import com.googlecode.objectify.annotation.Subclass;
 		}
 		return unread;
 	}
+	public void addMessage(Message msg){
+		messages.add(msg);
+	}
 }

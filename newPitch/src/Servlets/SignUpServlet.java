@@ -108,9 +108,7 @@ public class SignUpServlet extends HttpServlet {
 			//pitch.addUser(newUser.getId());
 			//newUser.addPitch(pitch.getId());
 			Message msg = new Message("Pitch Admin",newUser.getFirstName(),"","Welcome to Pitch! Have fun.");
-			Message note = new Message("Test Pitch",newUser.getFirstName(),"Subject","New video has been added.");
 			newUser.addMessage(msg);
-			newUser.addNotification(note);
 			newUser.addFriend(newUser.getId());
 			//DBManager.getInstance().add(pitch);
 			_log.log(Level.WARNING,"After");
