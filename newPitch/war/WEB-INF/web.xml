@@ -5,7 +5,7 @@
          version="2.5"
          xmlns="http://java.sun.com/xml/ns/javaee">
 
-  <!-- Servlets -->
+  <!-- Servlets OK -->
 
   <servlet>
     <servlet-name>register</servlet-name>
@@ -14,6 +14,15 @@
   <servlet-mapping>
     <servlet-name>register</servlet-name>
     <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>sendmessage</servlet-name>
+    <servlet-class>Servlets.SendMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sendmessage</servlet-name>
+    <url-pattern>/sendmessage</url-pattern>
   </servlet-mapping>
 
   <servlet>
