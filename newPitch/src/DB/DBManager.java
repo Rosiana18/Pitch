@@ -1,6 +1,9 @@
 package DB;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import BaseClasses.Ent;
 import BaseClasses.Pitch;
@@ -30,6 +33,22 @@ public class DBManager {
 			instance = new DBManager();
 		}
 		return instance;
+	}
+	public static ArrayList<Integer> loadUp(HttpServletRequest req)
+	{
+		String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+				,"conceptDesign","event","teaching","cause","diy","art","music"};
+		
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		for(String a : whatIsIts)
+		{
+			if(req.getParameter(a)==null){
+				ret.add(0);
+			}else{
+				ret.add(Integer.valueOf(req.getParameter(a)));
+			}
+		}
+		return ret;
 	}
 	private DBManager()
 	{

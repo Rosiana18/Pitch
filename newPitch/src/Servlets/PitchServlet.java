@@ -83,7 +83,7 @@ public class PitchServlet extends HttpServlet{
 		int size = Integer.valueOf(req.getParameter("size"));
 		
 		// create the Pitch
-		Pitch newPitch = new Pitch(mainTitle, _title, _description, owner, duration, size);
+		Pitch newPitch = new Pitch(mainTitle, _title, _description, new ArrayList(), owner, duration, size);
 		
 		// how do i allocate this to a user's pitch list or the database itself?
 		DBManager.getInstance().add(newPitch);

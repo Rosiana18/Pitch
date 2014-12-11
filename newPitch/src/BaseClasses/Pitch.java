@@ -16,9 +16,11 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index int duration;
 	@Index int size;
 	String owner;
+	private String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+			,"conceptDesign","event","teaching","cause","diy","art","music"};
 	Pitch(){};
-	public Pitch(String title, ArrayList<String> _descriptionTitles, ArrayList<String> _descriptions,
-			String _owner, int _duration, int _size) {
+	public Pitch(String title, ArrayList<String> _descriptionTitles, ArrayList<String> _descriptions, 
+			ArrayList<Integer> tags, String _owner, int _duration, int _size) {
 		id = title;
 		this.title = title;
 		this.descriptions = _descriptions;
@@ -30,6 +32,21 @@ import com.googlecode.objectify.annotation.Subclass;
 		owner = _owner;
 		duration = _duration;
 		size = _size;
+		
+		science = tags.get(0);
+		engineering = tags.get(1);
+		writing = tags.get(2);
+		craft = tags.get(3);
+		fixing = tags.get(4);
+		visualDesign = tags.get(5);
+		conceptDesign = tags.get(6);
+		event = tags.get(7);
+		teaching = tags.get(8);
+		cause = tags.get(9);
+		diy = tags.get(10);
+		art = tags.get(11);
+		music = tags.get(12);
+
 	}
 	public String getTitle(){
 		return title;

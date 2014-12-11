@@ -50,6 +50,9 @@ public class PitchSearchServlet extends HttpServlet{
 	}
 	private ArrayList<Integer> loadUp(HttpServletRequest req)
 	{
+		String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+				,"conceptDesign","event","teaching","cause","diy","art","music"};
+		
 		ArrayList<Integer> ret = new ArrayList<Integer>();
 		for(String a : whatIsIts)
 		{
@@ -60,10 +63,6 @@ public class PitchSearchServlet extends HttpServlet{
 			}
 		}
 		
-		for(Integer b : ret )
-		{
-			
-		}
 		
 		return ret;
 	}
