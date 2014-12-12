@@ -30,15 +30,15 @@ public class FeedbackServlet extends HttpServlet{
 			 */
 			//create new feedback
 			Message feedback = new Message(currentUser.getId(),null, subject ,body);
+			currentPitch.addFeedback(feedback);
 			// *********************needs to be set********************
 			
 			//create new notification
 			String message = currentUser.getId() + " left a \"" + subject + "\" on " + currentPitch.getTitle() + ".";
 			for(String user: ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getUserList()){
 				Message notification = new Message(currentUser.getId(), user , "new feedback", message);
-				String hi = "";
 			}
-			// *********************needs to be set********************
+			// **************needs to be added and set******************
 			
 		}
 		// redirect or refresh the page i guess?

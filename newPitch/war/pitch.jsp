@@ -177,115 +177,112 @@
       	<%=request.getParameter("pitch")%>
       </h3>
 
-
-     <div class="row mt">
-      	<div class="col-lg-12">
-      	  <div class="form-panel">
-      	  <form class="form-horizontal style-form" action="/bid" method="post">
-      	  	
-      	  	<!-- Description -->
-      	    <% 
-			String pitch = request.getParameter("pitch");
-			Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
-			ArrayList<String> titles = currentPitch.getAllTitles();
-			ArrayList<String> descriptions = currentPitch.getAllDescriptions();
-			for( int i = 0; i < titles.size(); i++){ 
-			%>
-			<h4 class="mb"><i class="fa fa-angle-right"></i> <%=titles.get(i)%></h4>	
-			<div class="form-group">
-			  <div class="col-sm-10">
-			    <p><%=descriptions.get(i)%></p>
-			  </div>
-           	</div>
-          	
-          	<!--Project Duration and Team Size-->
-          	<%
-          		}
-          		int length = currentPitch.getDuration();
-          		String duration = "";
-          		if(length<=8 ){
-					duration = "day(s)";
-				}else if(length>8&&length<=16){
-					duration = "week(s)";
-				}else if(length>16&&length<=24){
-					duration = "month(s)";
-				}else if(length>24&&length<=32){
-					duration = "1 year";
-				}else if(length>32){
-					duration = "year(s)";
-				}
-				int big = currentPitch.getSize();
-				String size = "";
-				if(big<=8){
-					size = "1-2 members";
-				}else if(big>8&&big<=16){
-					size = "3-5 members";
-				}else if(big>16&&big<=24){
-					size = "5-10 members";
-				}else if(big>24&&big<=32){
-					size = "10-20 members";
-				}else if(big>32){
-					size = "> 20 members (organization)";
-				} 
-          	%>
-          	<div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label"> Duration</label>
-              <div class="col-sm-10">
-				<%=duration%>
-               </div>
-         	</div>
-          	<div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label"> Size</label>
-              <div class="col-sm-10">
-				<%=size%>
-               </div>
-         	</div>
-    
-    		<!--Categories-->
-          	<div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label"> Categories</label>
-         	  <div class="col-sm-10">       	
-	 		  <%
-         		for(String categories: currentPitch.getCategoryTags()){
-         		%>
-	              <%=categories%>&nbsp;  
- 			  	<%
- 				}
- 			  %>
- 			  </div>
- 			</div>
- 			<div>
- 				<input type="hidden" name="pitch" value="<%=pitch%>" />
- 				<button type="submit" class="btn btn-round btn-success">Bid</button>
- 			</div>
- 			</form>        		
-          </div>
-        </div>
-     
-      	<!--Feedback Form-->
-      	<div class="col-lg-12">
-      	  <div class="form-panel">
-      	    <form id="form" class="form-horizontal style-form" action="/feed" method="post">
-      	    <input type="hidden" name="pitch" value="<%=pitch%>" />
-      	  	<h4 class="mb"><i class="fa fa-angle-right"></i> Leave a Feedback</h4>
-			<div class="form-group">
-			  <div class="col-sm-10">
-			  	<label class="col-sm-2 col-sm-2 control-label">Subject: </label> 
-			  	<input type="text" name="subject" class="form-control round-form">
-				<label class="col-sm-2 col-sm-2 control-label">Feedback:</label>
-			 	<input type="text" name="body" class="form-control round-form">
-			  </div>
-   			</div>
-			<div>
-			  <button type="submit" class="btn btn-round btn-warning">Submit</button>
+	<div class="row">
+		<div class="col-lg-9 main-chart">					
+		<div class="row mt">
+			<div class="form-panel">
+				<form class="form-horizontal style-form" action="/bid" method="post">
+					
+					<!-- Description -->
+					<% 
+					String pitch = request.getParameter("pitch");
+					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
+					ArrayList<String> titles = currentPitch.getAllTitles();
+					ArrayList<String> descriptions = currentPitch.getAllDescriptions();
+					for( int i = 0; i < titles.size(); i++){ 
+					%>
+					<h4 class="mb"><i class="fa fa-angle-right"></i> <%=titles.get(i)%></h4>	
+					<div class="form-group">
+					  <div class="col-sm-10">
+						<p><%=descriptions.get(i)%></p>
+					  </div>
+					</div>
+					
+					<!--Project Duration and Team Size-->
+					<%
+						}
+						int length = currentPitch.getDuration();
+						String duration = "";
+						if(length<=8 ){
+							duration = "day(s)";
+						}else if(length>8&&length<=16){
+							duration = "week(s)";
+						}else if(length>16&&length<=24){
+							duration = "month(s)";
+						}else if(length>24&&length<=32){
+							duration = "1 year";
+						}else if(length>32){
+							duration = "year(s)";
+						}
+						int big = currentPitch.getSize();
+						String size = "";
+						if(big<=8){
+							size = "1-2 members";
+						}else if(big>8&&big<=16){
+							size = "3-5 members";
+						}else if(big>16&&big<=24){
+							size = "5-10 members";
+						}else if(big>24&&big<=32){
+							size = "10-20 members";
+						}else if(big>32){
+							size = "> 20 members (organization)";
+						} 
+					%>
+					<div class="form-group">
+					  <label class="col-sm-2 col-sm-2 control-label"> Duration</label>
+					  <div class="col-sm-10">
+						<%=duration%>
+					   </div>
+					</div>
+					<div class="form-group">
+					  <label class="col-sm-2 col-sm-2 control-label"> Size</label>
+					  <div class="col-sm-10">
+						<%=size%>
+					   </div>
+					</div>
+			
+					<!--Categories-->
+					<div class="form-group">
+					  <label class="col-sm-2 col-sm-2 control-label"> Categories</label>
+					  <div class="col-sm-10">       	
+					  <%
+						for(String categories: currentPitch.getCategoryTags()){
+						%>
+						  <%=categories%>&nbsp;  
+						<%
+						}
+					  %>
+					  </div>
+					</div>
+					<div>
+					<input type="hidden" name="pitch" value="<%=pitch%>" />
+					<button type="submit" class="btn btn-round btn-success">Bid</button>
+				</div>
+				</form>        		
 			</div>
 			
-			</form>	
-          </div>
-       	</div>
-       	
-       	<!--List of Feedbacks-->
-       	<div class="col-lg-12">
+		 
+			<!--Feedback Form-->			
+			<div class="form-panel">
+				<form id="form" class="form-horizontal style-form" action="/feed" method="post">
+					<input type="hidden" name="pitch" value="<%=pitch%>" />
+					<h4 class="mb"><i class="fa fa-angle-right"></i> Leave a Feedback</h4>
+					<div class="form-group">
+						<div class="col-sm-10">
+							<label class="col-sm-2 col-sm-2 control-label">Subject: </label> 
+							<input type="text" name="subject" class="form-control round-form">
+							<label class="col-sm-2 col-sm-2 control-label">Feedback:</label>
+							<input type="text" name="body" class="form-control round-form">
+						</div>
+					</div>
+					<div>
+						<button type="submit" class="btn btn-round btn-warning">Submit</button>
+					</div>
+				</form>	
+			</div>
+			
+			
+			<!--List of Feedbacks-->	   
        	  <div class="form-panel">
        	  	<form class="form-horizontal style-form">
        	  	<h4 class="mb"><i class="fa fa-angle-right"></i> Feedbacks</h4>	
@@ -310,9 +307,77 @@
           	}
           	%>
        	  	</form>
+       	  
        	  </div>
        	</div>
-      </div>
+		</div>
+		
+       	<!--RIGHT SIDE BAR-->
+       	<div class="col-lg-3 ds">
+		<!--COMPLETED ACTIONS DONUTS CHART-->
+
+			<!-- MEMBER LIST SECTION -->
+			<h3>TEAM MEMBERS</h3>
+			<%
+				if(currentPitch.getUserList() != null){
+				for(String member: currentPitch.getUserList()){
+			%>
+			<div class="desc">
+				<div class="thumb">
+					<img class="img-circle" src="assets/img/ui-divya.jpg"
+						width="35px" height="35px" align="">
+				</div>
+				<div class="details">
+					<p>
+						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></a><br />
+						<muted>Available</muted>
+					</p>
+				</div>
+			</div>
+			<%
+				}
+			}
+			//*******MEMBER LIST SECTION**********
+			
+			//**** BIDDER LIST SECTION ***********
+			int bidNum;
+			if(currentPitch.getBidderList() == null){
+				bidNum =0;
+			}else{
+				bidNum = currentPitch.getBidderList().size();
+			}
+			%>
+			<h3><%=bidNum%> BIDDERS</h3>
+			<%
+				if(bidNum>0){
+				for(int i = 0; i < 5 ; i++){
+					if(i<bidNum){
+						String bidder= currentPitch.getBidderList().get(i);
+			%>
+			<div class="desc">
+				<div class="thumb">
+					<img class="img-circle" src="assets/img/ui-divya.jpg"
+						width="35px" height="35px" align="">
+				</div>
+				<div class="details">
+					<p>
+						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%></a><br />
+						<muted>Available</muted>
+					</p>
+				</div>
+			</div>
+			<%
+					}
+				}
+			}
+			%>
+			<!--bidders-->
+			
+
+		</div>
+       	
+       	
+     </div>
 	  <!-- end of feedback -->        
               
 	</section>

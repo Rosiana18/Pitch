@@ -67,7 +67,7 @@ import com.googlecode.objectify.annotation.Subclass;
 		bidders.add(user);
 	}
 	public void addFeedback(Message feedback){
-		feedbacks.add(feedback);
+		feedbacks.add(0,feedback);
 	}
 	public ArrayList<Message> getFeedbacks(){
 		return feedbacks;
@@ -91,5 +91,5 @@ import com.googlecode.objectify.annotation.Subclass;
 	public int getSize(){
 		return size;
 	}
- 
+	
 }
