@@ -259,15 +259,17 @@
 					<div>
 					<input type="hidden" name="pitch" value="<%=pitch%>" />
 					<%
-					if(!currentPitch.getOwnerId().equals(currentUser.getEmail())
-						&&!currentPitch.getUserList().contains(currentUser.getEmail())){
-					%>
-					<button type="submit" name="button" ="btn btn-round btn-success" value="add">Bid</button>
-					<%
-					}else if(currentPitch.getBidderList().contains(currentUser.getEmail())){
-					%>
-					<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
-					<%
+					if(currentPitch.getUserList()!=null&&currentPitch.getBidderList()!=null){
+						if(!currentPitch.getOwnerId().equals(currentUser.getEmail())
+							&&!currentPitch.getUserList().contains(currentUser.getEmail())){
+						%>
+						<button type="submit" name="button" class="btn btn-round btn-success" value="add">Bid</button>
+						<%
+						}else if(currentPitch.getBidderList().contains(currentUser.getEmail())){
+						%>
+						<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
+						<%
+						}
 					}
 					%>
 				</div>
@@ -350,7 +352,13 @@
 			<a href="memberList.jsp?pitch=<%=pitch%>">
 			<h3>TEAM MEMBERS</h3></a>
 			<%
-				if(currentPitch.getUserList() != null){
+			int memNum;
+			if(currentPitch.getUserList() == null){
+				memNum = 0;
+			}else{
+				memNum = currentPitch.getUserList().size();
+			}
+			if(memNum>0){
 				for(String member: currentPitch.getUserList()){
 			%>
 			<div class="desc">
@@ -365,12 +373,26 @@
 					</p>
 				</div>
 			</div>
-			<%
+				<%
 				}
+			}else{
+			%>
+				<div class="desc">
+					<div class="thumb">
+						&nbsp;
+					</div>
+					<div class="details">
+						<p>
+						No Member</p>	
+					</div>
+				</div>
+			<%
 			}
+			
 			//*******END OF MEMBER LIST SECTION**********
 			
 			//**** BIDDER LIST SECTION ***********
+			
 			int bidNum;
 			if(currentPitch.getBidderList() == null){
 				bidNum =0;
@@ -381,26 +403,38 @@
 			<a href="bidList.jsp?pitch=<%=pitch%>">
 			<h3><%=bidNum%> BIDDERS</h3></a>
 			<%
-				if(bidNum>0){
+			if(bidNum>0){
 				for(int i = 0; i < 5 ; i++){
 					if(i<bidNum){
 						String bidder= currentPitch.getBidderList().get(i);
-			%>
-			<div class="desc">
-				<div class="thumb">
-					<img class="img-circle" src="assets/img/ui-divya.jpg"
-						width="35px" height="35px" align="">
+				%>
+				<div class="desc">
+					<div class="thumb">
+						<img class="img-circle" src="assets/img/ui-divya.jpg"
+							width="35px" height="35px" align="">
+					</div>
+					<div class="details">
+						<p>
+							<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%></a><br />
+							<muted>Available</muted>
+						</p>
+					</div>
 				</div>
-				<div class="details">
-					<p>
-						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%></a><br />
-						<muted>Available</muted>
-					</p>
-				</div>
-			</div>
-			<%
+				<%
 					}
 				}
+			}else{
+			%>
+				<div class="desc">
+					<div class="thumb">
+						&nbsp;
+					</div>
+					<div class="details">
+						<p>
+						No Bidder</p>	
+					</div>
+				</div>
+			<%
 			}
 			%>
 			<!--end of bidders-->

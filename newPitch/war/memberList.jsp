@@ -186,7 +186,7 @@
 					}
 					User currentUser = (User)session.getAttribute("user");
 					//if viewer is a member/owner
-					if(currentPitch.getUserList().contains(currentUser.getId())){
+					if(memNum>0&&currentPitch.getUserList().contains(currentUser.getId())){
 						for(int j=0; j < memNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->

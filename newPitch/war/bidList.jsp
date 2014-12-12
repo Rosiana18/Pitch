@@ -186,8 +186,8 @@
 					}
 					User currentUser = (User)session.getAttribute("user");
 					//if viewer is a member
-					if(currentPitch.getUserList().contains(currentUser.getId())
-						||currentPitch.getOwnerId().equals(currentUser.getId())){
+					if(bidNum>0&&(currentPitch.getUserList().contains(currentUser.getId())
+						||currentPitch.getOwnerId().equals(currentUser.getId()))){
 						for(int j=0; j < bidNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->
