@@ -91,5 +91,11 @@ import com.googlecode.objectify.annotation.Subclass;
 	public int getSize(){
 		return size;
 	}
+	public void removeBidder(String user){
+		bidders.remove(user);
+	}
+	public void removeUser(String user){
+		users.remove(user);
+	}
 	
 }

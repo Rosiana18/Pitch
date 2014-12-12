@@ -1,4 +1,5 @@
 <%@page import="BaseClasses.Message"%>
+<%@page import="BaseClasses.User"%>
 <%@page import="BaseClasses.Pitch"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
@@ -187,6 +188,7 @@
 					<% 
 					String pitch = request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
+					User currentUser = (User)session.getAttribute("user");
 					ArrayList<String> titles = currentPitch.getAllTitles();
 					ArrayList<String> descriptions = currentPitch.getAllDescriptions();
 					for( int i = 0; i < titles.size(); i++){ 
@@ -256,7 +258,18 @@
 					</div>
 					<div>
 					<input type="hidden" name="pitch" value="<%=pitch%>" />
-					<button type="submit" class="btn btn-round btn-success">Bid</button>
+					<%
+					if(!currentPitch.getOwnerId().equals(currentUser.getEmail())
+						&&!currentPitch.getUserList().contains(currentUser.getEmail())){
+					%>
+					<button type="submit" name="button" ="btn btn-round btn-success" value="add">Bid</button>
+					<%
+					}else if(currentPitch.getBidderList().contains(currentUser.getEmail())){
+					%>
+					<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
+					<%
+					}
+					%>
 				</div>
 				</form>        		
 			</div>
@@ -316,8 +329,26 @@
        	<div class="col-lg-3 ds">
 		<!--COMPLETED ACTIONS DONUTS CHART-->
 
+			<!-- Owner SECTION -->
+			<h3>OWNER</h3>
+			
+			<div class="desc">
+				<div class="thumb">
+					<img class="img-circle" src="assets/img/ui-divya.jpg"
+						width="35px" height="35px" align="">
+				</div>
+				<div class="details">
+					<p>
+						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%></a><br />
+						<muted>Available</muted>
+					</p>
+				</div>
+			</div>
+			<!--END OF MEMBER LIST SECTION-->
+
 			<!-- MEMBER LIST SECTION -->
-			<h3>TEAM MEMBERS</h3>
+			<a href="memberList.jsp?pitch=<%=pitch%>">
+			<h3>TEAM MEMBERS</h3></a>
 			<%
 				if(currentPitch.getUserList() != null){
 				for(String member: currentPitch.getUserList()){
@@ -337,7 +368,7 @@
 			<%
 				}
 			}
-			//*******MEMBER LIST SECTION**********
+			//*******END OF MEMBER LIST SECTION**********
 			
 			//**** BIDDER LIST SECTION ***********
 			int bidNum;
@@ -347,7 +378,8 @@
 				bidNum = currentPitch.getBidderList().size();
 			}
 			%>
-			<h3><%=bidNum%> BIDDERS</h3>
+			<a href="bidList.jsp?pitch=<%=pitch%>">
+			<h3><%=bidNum%> BIDDERS</h3></a>
 			<%
 				if(bidNum>0){
 				for(int i = 0; i < 5 ; i++){
@@ -371,7 +403,7 @@
 				}
 			}
 			%>
-			<!--bidders-->
+			<!--end of bidders-->
 			
 
 		</div>
