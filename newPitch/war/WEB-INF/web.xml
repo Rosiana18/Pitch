@@ -87,13 +87,22 @@
     <url-pattern>/confirm</url-pattern>
   </servlet-mapping>
 
-  <servlet-name>feed</servlet-name>
+  <servlet>
+    <servlet-name>feed</servlet-name>
     <servlet-class>Servlets.FeedbackServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>feed</servlet-name>
-  <url-pattern>/feed</url-pattern>
-  
+    <url-pattern>/feed</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>bid</servlet-name>
+    <servlet-class>Servlets.BidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bid</servlet-name>
+    <url-pattern>/bid</url-pattern>
+  </servlet-mapping>  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>

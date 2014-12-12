@@ -181,7 +181,7 @@
      <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
-      	  <form class="form-horizontal style-form">
+      	  <form class="form-horizontal style-form" action="/bid" method="post">
       	  	
       	  	<!-- Description -->
       	    <% 
@@ -254,6 +254,10 @@
  			  %>
  			  </div>
  			</div>
+ 			<div>
+ 				<input type="hidden" name="pitch" value="<%=pitch%>" />
+ 				<button type="submit" class="btn btn-round btn-success">Bid</button>
+ 			</div>
  			</form>        		
           </div>
         </div>
@@ -262,6 +266,7 @@
       	<div class="col-lg-12">
       	  <div class="form-panel">
       	    <form id="form" class="form-horizontal style-form" action="/feed" method="post">
+      	    <input type="hidden" name="pitch" value="<%=pitch%>" />
       	  	<h4 class="mb"><i class="fa fa-angle-right"></i> Leave a Feedback</h4>
 			<div class="form-group">
 			  <div class="col-sm-10">
@@ -272,7 +277,7 @@
 			  </div>
    			</div>
 			<div>
-			  <button type="submit" class="btn btn-round btn-default">Send</button>
+			  <button type="submit" class="btn btn-round btn-warning">Submit</button>
 			</div>
 			
 			</form>	
@@ -299,11 +304,7 @@
           	  }
           	}else{
           	  	%>
-          	  	<div class="form-group">
-          	  	  <div class="col-sm-10">
-					<b>There is no feedback</b>
-				  </div>
-	          	</div>
+          	  	<div><b>There is no feedback</b></div>
           	  
           	  	<%
           	}
