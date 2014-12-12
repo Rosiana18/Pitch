@@ -40,6 +40,7 @@ public class LoginServlet extends HttpServlet {
 		User user = (User)DBManager.getInstance().getUserByID(email);
 		if(user.getPassword().equals(password)){
 			 HttpSession session = req.getSession();
+			 session.removeAttribute("user");
 			 session.setAttribute("userName", email);
 			 session.setAttribute("user", user);
 			resp.sendRedirect("index.jsp");

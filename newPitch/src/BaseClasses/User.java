@@ -71,6 +71,10 @@ import com.googlecode.objectify.annotation.Subclass;
 		notifications.add(message);
 	}
 	public void addPitch(String id){
+		if(pitches==null)
+		{
+			pitches = new ArrayList<String>();
+		}
 		pitches.add(id);
 	}
 	public void addFriend(String id){
