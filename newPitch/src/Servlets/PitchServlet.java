@@ -82,15 +82,15 @@ public class PitchServlet extends HttpServlet{
 		
 		// create the Pitch
 		Pitch newPitch = new Pitch(mainTitle, _title, _description, ret, owner, duration, size);
-		
-		// how do i allocate this to a user's pitch list or the database itself?
 		DBManager.getInstance().add(newPitch);
-		User theUser = (BaseClasses.User) session.getAttribute("user");
-		//User anotherUser = (BaseClasses.User) DBManager.getInstance().getUserByID(theUser.getId());
-		theUser.addPitch(newPitch.getId());
 		
-		DBManager.getInstance().add(theUser);
-		session.setAttribute("user", theUser);
+		// set user
+		User UserOnSession = (BaseClasses.User) session.getAttribute("user");
+		User UserOnDB = (BaseClasses.User) DBManager.getInstance().getUserByID(UserOnSession.getId());
+		UserOnDB.addPitch(newPitch.getId());
+		
+		DBManager.getInstance().add(UserOnDB);
+		session.setAttribute("user", UserOnDB);
 		
 		//redirect to myPitch
 		resp.sendRedirect("/mypitches.jsp");

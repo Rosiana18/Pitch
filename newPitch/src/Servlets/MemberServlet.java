@@ -52,7 +52,7 @@ public class MemberServlet extends HttpServlet{
 		DBManager.getInstance().add(removeUser);
 		DBManager.getInstance().add(currentUser);
 		DBManager.getInstance().add(currentPitch);
-		session.setAttribute("user", currentUser.getId());
+		session.setAttribute("user", currentUser);
 	
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
 	}

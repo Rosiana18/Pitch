@@ -189,6 +189,7 @@
 					String pitch = request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
 					User currentUser = (User)session.getAttribute("user");
+					currentUser = (BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentUser.getEmail());
 					ArrayList<String> titles = currentPitch.getAllTitles();
 					ArrayList<String> descriptions = currentPitch.getAllDescriptions();
 					for( int i = 0; i < titles.size(); i++){ 
@@ -358,7 +359,19 @@
 				</div>
 				<div class="details">
 					<p>
-						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%></a><br />
+						<%
+						if(currentPitch.getUserList().contains(currentUser.getEmail())){
+						%>
+							<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getEmail()%>">
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%>
+							</a><br />
+						<%
+						}else{
+						%>
+							<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%></a><br />
+						<%
+						}
+						%>
 						<muted>Available</muted>
 					</p>
 				</div>
@@ -385,7 +398,20 @@
 				</div>
 				<div class="details">
 					<p>
-						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></a><br />
+						<%
+						if(currentPitch.getUserList().contains(currentUser.getEmail())||currentPitch.getOwnerId().equals(currentUser.getEmail())){
+						%>
+							<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%>">
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%>
+							</a><br />
+						<%
+						}else{
+						%>
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%>
+							</a><br />
+						<%
+						}
+						%>
 						<muted>Available</muted>
 					</p>
 				</div>
@@ -429,8 +455,20 @@
 							width="35px" height="35px" align="">
 					</div>
 					<div class="details">
-						<p>
-							<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%></a><br />
+							<%
+							if(currentPitch.getUserList().contains(currentUser.getEmail())||currentPitch.getOwnerId().equals(currentUser.getEmail())){
+							%>
+								<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getEmail()%>">
+								<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%>
+								</a><br />
+							<%
+							}else{
+							%>
+								<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%>
+								</a><br />
+							<%
+							}
+							%>
 							<muted>Available</muted>
 						</p>
 					</div>

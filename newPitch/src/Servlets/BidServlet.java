@@ -51,6 +51,7 @@ public class BidServlet extends HttpServlet {
 				
 				//*************************set notification!!!****************************
 				DBManager.getInstance().add(currentUser);
+				DBManager.getInstance().add(currentPitch);
 				session.setAttribute("user", currentUser);
 			}			
 		// remove yourself from the bid list
@@ -72,6 +73,7 @@ public class BidServlet extends HttpServlet {
 		}else if(button.equals("update")){
 			resp.sendRedirect("updatePitch.jsp?pitch="+pitch+"?userId="+currentUser.getId());
 		}
+		System.out.println(DBManager.getInstance().getPitchByID(pitch).getBidderList().get(0));
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
 	}
 	
