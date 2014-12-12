@@ -158,8 +158,6 @@
 					<li class="sub-menu"><a href="conversation.jsp"> <i
 							class="fa fa-cogs"></i> <span>Conversations</span>
 					</a></li>
-
-
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -224,9 +222,7 @@
 								}
 							}
 						%>
-						
 					</div>
-					
 					<%	
 						}
 					}else{
@@ -264,13 +260,11 @@
 					<%
 						}
 					}
-					%>
-					
+					%>	
           		</div>
           	</div>
-			
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+		</section><!--/wrapper-->
+      </section><!--/MAIN CONTENT-->
 	
 		<!--footer start-->
 		<footer class="site-footer">

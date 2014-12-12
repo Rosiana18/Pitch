@@ -1,11 +1,12 @@
 package BaseClasses;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
-@Subclass public class Pitch extends Ent{
+@Subclass public class Pitch extends Ent implements Serializable{
 	@Index String title;
 	@Index ArrayList<String> users;
 	@Index ArrayList<String> bidders;
@@ -61,24 +62,51 @@ import com.googlecode.objectify.annotation.Subclass;
 		return descriptionTitles;
 	}
 	public void addUser(String user){
+		if(users==null){
+			users = new ArrayList<String>();
+		}
 		users.add(user);
 	}
 	public void addBidder(String user){
+		if(bidders==null){
+			bidders = new ArrayList<String>();
+		}
 		bidders.add(user);
 	}
 	public void addFeedback(Message feedback){
+		if(feedbacks==null){
+			feedbacks = new ArrayList<Message>();
+		}
 		feedbacks.add(0,feedback);
 	}
+	public void addNotification(Message notification){
+		if(notifications==null){
+			notifications = new ArrayList<Message>();
+		}
+		notifications.add(notification);
+	}
 	public ArrayList<Message> getFeedbacks(){
+		if(feedbacks==null){
+			feedbacks = new ArrayList<Message>();
+		}
 		return feedbacks;
 	}
 	public ArrayList<Message> getNotifications(){
+		if(notifications==null){
+			notifications = new ArrayList<Message>();
+		}
 		return notifications;
 	}
 	public ArrayList<String> getUserList(){
+		if(users==null){
+			users = new ArrayList<String>();
+		}
 		return users;
 	}
 	public ArrayList<String> getBidderList(){
+		if(bidders==null){
+			bidders = new ArrayList<String>();
+		}
 		return bidders;
 	}
 	public String getOwnerId()
@@ -92,10 +120,14 @@ import com.googlecode.objectify.annotation.Subclass;
 		return size;
 	}
 	public void removeBidder(String user){
-		bidders.remove(user);
+		if(bidders!=null){
+			bidders.remove(user);				
+		}
 	}
 	public void removeUser(String user){
-		users.remove(user);
+		if(users!=null){
+			users.remove(user);			
+		}
 	}
 	
 }

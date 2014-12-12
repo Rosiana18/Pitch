@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.googlecode.objectify.annotation.Index;
-
-import BaseClasses.User;
 import DB.DBManager;
 
 public class PitchSearchServlet extends HttpServlet{

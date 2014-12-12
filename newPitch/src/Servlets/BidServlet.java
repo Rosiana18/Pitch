@@ -1,7 +1,6 @@
 package Servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import BaseClasses.Message;
 import BaseClasses.Pitch;
 import BaseClasses.User;
+import DB.DBManager;
 
 public class BidServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -32,28 +32,32 @@ public class BidServlet extends HttpServlet {
 			if(!currentUser.getId().equals(currentPitch.getOwnerId())
 					&&!currentPitch.getBidderList().contains(currentUser.getId())
 					&&!currentPitch.getUserList().contains(currentUser.getId())){
-				currentPitch.addBidder(currentUser.getId());
 				//notify user
 				Message note = new Message(currentUser.getEmail(), currentUser.getEmail(), "Your bid",
 						"You bid "+pitch+ " pitch.");
 				currentUser.addNotification(note);
+				currentPitch.addBidder(currentUser.getId());
+				
 				//*************************set notification!!!****************************
-			}
-			//*******************************************************
-			//anything else to add (sessions/instance) IDK how to set/update?
-			//*******************************************************
+				DBManager.getInstance().add(currentUser);
+				session.setAttribute("user", currentUser);
+			}			
 		}else if(button.equals("remove")){
 			if(currentPitch.getBidderList().contains(currentUser.getEmail())){
-				currentPitch.removeBidder(currentUser.getEmail());
 				//notify user
 				Message note = new Message(currentUser.getEmail(), currentUser.getEmail(), "Your bid",
 						"You unbid "+pitch+ " pitch.");
 				currentUser.addNotification(note);
+				currentPitch.removeBidder(currentUser.getEmail());
+				
 				//*************************set notification!!!****************************
+				DBManager.getInstance().add(currentPitch);
+				DBManager.getInstance().add(currentUser);
+				session.setAttribute(currentPitch.getId(), currentPitch);
+				session.setAttribute("user",currentUser);
 			}
-			//*******************************************************
-			//anything else to add (sessions/instance) IDK how to set/update?
-			//*******************************************************
+		}else if(button.equals("update")){
+			resp.sendRedirect("updatePitch.jsp?pitch="+pitch+"?userId="+currentUser.getId());
 		}
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
 	}
@@ -87,12 +91,14 @@ public class BidServlet extends HttpServlet {
 				Message note = new Message(currentUser.getEmail(), currentUser.getEmail(), "Member acceptance",
 						"You have accepted "+ bidder + " as a member of " +pitch+ " pitch.");
 				currentUser.addNotification(note);
+				currentUser.addPitch(pitch);
 				//*************************set notification!!!****************************
+				DBManager.getInstance().add(currentUser);
+				DBManager.getInstance().add(currentPitch);
+				session.setAttribute("user",currentUser);
+				session.setAttribute(currentPitch.getId(), currentPitch);
 			}
 		}
-		//*******************************************************
-		//anything else to add (sessions/instance) IDK how to set/update?
-		//*******************************************************
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
 	}
 }

@@ -11,6 +11,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 import com.googlecode.objectify.ObjectifyService;
 
 public class Upload extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9035504686093405461L;
 	static {
 		ObjectifyService.register(BaseClasses.Ent.class);
 	}

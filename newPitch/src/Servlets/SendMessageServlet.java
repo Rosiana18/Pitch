@@ -14,7 +14,6 @@ import BaseClasses.User;
 import BaseClasses.Message;
 import DB.DBManager;
 
-import com.google.gwt.dev.ModuleTabPanel.Session;
 import com.googlecode.objectify.ObjectifyService;
 
 public class SendMessageServlet extends HttpServlet {

@@ -1,9 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-import java.net.URL;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -25,9 +23,6 @@ import BaseClasses.Pitch;
 import BaseClasses.User;
 import DB.DBManager;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.googlecode.objectify.ObjectifyService;

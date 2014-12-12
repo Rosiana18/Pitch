@@ -259,19 +259,36 @@
 					<div>
 					<input type="hidden" name="pitch" value="<%=pitch%>" />
 					<%
-					if(currentPitch.getUserList()!=null&&currentPitch.getBidderList()!=null){
-						if(!currentPitch.getOwnerId().equals(currentUser.getEmail())
-							&&!currentPitch.getUserList().contains(currentUser.getEmail())){
+					boolean check=true;
+					if(currentPitch.getOwnerId().equals(currentUser.getId())){
+					%>
+						<button type="submit" name="button" class="btn btn-round btn-success" value="update">Update</button>					
+					<%
+					}else{
+						if(currentPitch.getBidderList()!=null){
+							if(currentPitch.getBidderList().contains(currentUser.getId())){
 						%>
-						<button type="submit" name="button" class="btn btn-round btn-success" value="add">Bid</button>
+								<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
 						<%
-						}else if(currentPitch.getBidderList().contains(currentUser.getEmail())){
+							check = false;
+							}
+						}
+						if(currentPitch.getUserList()!=null&&check){
+							if(currentPitch.getUserList().contains(currentUser.getId())){
 						%>
-						<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
+								<button type="submit" name="button" class="btn btn-round btn-success" value="update">Update</button>
+						<%	
+							check = false;
+							}
+						}
+						if(check){
+						%>
+							<button type="submit" name="button" class="btn btn-round btn-success" value="add">Bid</button>
 						<%
 						}
 					}
 					%>
+			
 				</div>
 				</form>        		
 			</div>
@@ -306,11 +323,11 @@
       	  	  for(Message feedback: currentPitch.getFeedbacks()){
 	      	    %>
 	      		<div class="form-group">
-	       	  	  <label class="col-sm-2 col-sm-2 control-label"> <%=feedback.getSubject()%></label>
-	          	  <div class="col-sm-10">
-					<%=feedback.getFrom()%>, on&nbsp;<%=feedback.getDate()%>,
-					<%=feedback.getBody()%>
-	          	  </div>
+					<div class="col-sm-10">
+						<h4 class="mb"><strong><%=feedback.getSubject()%></strong></h4>
+						<p><%=feedback.getBody()%></p>
+						<p align="right"><i>-<%=feedback.getFrom()%>, on&nbsp;<%=feedback.getDate()%></i></p>
+					</div>
 	          	</div>
 	          	<%
           	  }
@@ -387,12 +404,10 @@
 					</div>
 				</div>
 			<%
-			}
-			
+			}		
 			//*******END OF MEMBER LIST SECTION**********
 			
-			//**** BIDDER LIST SECTION ***********
-			
+			//**** BIDDER LIST SECTION ***********		
 			int bidNum;
 			if(currentPitch.getBidderList() == null){
 				bidNum =0;

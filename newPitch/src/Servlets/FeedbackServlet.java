@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import BaseClasses.Message;
 import BaseClasses.Pitch;
 import BaseClasses.User;
+import DB.DBManager;
 
 public class FeedbackServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
@@ -25,21 +26,24 @@ public class FeedbackServlet extends HttpServlet{
 		User currentUser = (User)session.getAttribute("user");
 		
 		if(!subject.isEmpty() && !body.isEmpty()){
-			/*
-			 * This part needs to be completed
-			 */
 			//create new feedback
 			Message feedback = new Message(currentUser.getId(),null, subject ,body);
 			currentPitch.addFeedback(feedback);
+			
 			// *********************needs to be set********************
+			DBManager.getInstance().add(currentPitch);
+			session.setAttribute(currentPitch.getId(),currentPitch);
 			
 			//create new notification
 			String message = currentUser.getId() + " left a \"" + subject + "\" on " + currentPitch.getTitle() + ".";
 			for(String user: ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch)).getUserList()){
-				Message notification = new Message(currentUser.getId(), user , "new feedback", message);
+				Message notification = new Message(currentUser.getId(), user , "New Feedback", message);
+				User otherUser = (BaseClasses.User)DB.DBManager.getInstance().getUserByID(user);
+				otherUser.addNotification(notification);
+				
+				// **************needs to be added and set******************
+				DBManager.getInstance().add(otherUser);
 			}
-			// **************needs to be added and set******************
-			
 		}
 		// redirect or refresh the page i guess?
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
