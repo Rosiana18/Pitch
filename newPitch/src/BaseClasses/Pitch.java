@@ -54,6 +54,12 @@ import com.googlecode.objectify.annotation.Subclass;
 	public String getDescription(){
 		return descriptions.get(0);
 	}
+	public ArrayList<String> getAllDescriptions(){
+		return descriptions;
+	}
+	public ArrayList<String> getAllTitles(){
+		return descriptionTitles;
+	}
 	public void addUser(String user){
 		users.add(user);
 	}
@@ -78,6 +84,12 @@ import com.googlecode.objectify.annotation.Subclass;
 	public String getOwnerId()
 	{
 		return owner;
+	}
+	public int getDuration(){
+		return duration;
+	}
+	public int getSize(){
+		return size;
 	}
  
 }

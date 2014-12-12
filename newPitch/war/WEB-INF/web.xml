@@ -86,7 +86,13 @@
     <servlet-name>confirm</servlet-name>
     <url-pattern>/confirm</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet-name>feed</servlet-name>
+    <servlet-class>Servlets.FeedbackServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>feed</servlet-name>
+  <url-pattern>/feed</url-pattern>
   
   <!-- Default page to serve -->
   <welcome-file-list>

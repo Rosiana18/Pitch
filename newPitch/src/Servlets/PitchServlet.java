@@ -2,7 +2,6 @@ package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

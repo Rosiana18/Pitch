@@ -1,4 +1,6 @@
 <%@page import="BaseClasses.Message"%>
+<%@page import="BaseClasses.Pitch"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -140,13 +142,16 @@
 					<li class="mt"><a href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
-					<li class="sub-menu"><a class="active" href="mypitches.jsp">
+					<li class="sub-menu"><a  href="mypitches.jsp">
 							<i class="fa fa-book"></i> <span>My Pitches</span>
+					</a></li>
+					<li class="sub-menu"><a  href="createPitch.jsp"> <i
+							class="fa fa-book"></i> <span>Create a Pitch</span>
 					</a></li>
 					<li class="sub-menu"><a href="profile.jsp"> <i
 							class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
-					<li class="sub-menu"><a href="search.html"> <i
+					<li class="sub-menu"><a href="search.jsp"> <i
 							class="fa fa-cogs"></i> <span>Search/Explore</span>
 					</a></li>
 					<li class="sub-menu"><a href="conversation.jsp"> <i
@@ -164,92 +169,158 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
 		<!--main content start-->
-		<section id="main-content">
-			<section class="wrapper">
+   	<section id="main-content">
+   
+      <section class="wrapper">
+      <!-- Title -->
+      <h3><i class="fa fa-angle-right"></i> 
+      	<%=request.getParameter("pitch")%>
+      </h3>
 
-				<div class="row">
 
-
-
-					<!-- **********************************************************************************************************************************************************
-      RIGHT SIDEBAR CONTENT
-      *********************************************************************************************************************************************************** -->
-
-					<div class="col-lg-3 ds">
-						<!--COMPLETED ACTIONS DONUTS CHART-->
-						<h3>LATEST CHANGES</h3>
-
-						<!-- First Action -->
-						<%
-							for(Message note: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getNotifications()){
-						%>
-						<div class="desc">
-							<div class="thumb">
-								<span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-							</div>
-							<div class="details">
-								<p>
-									<muted><%=note.getDate().toGMTString()%></muted>
-									<br />
-									<%=note.getFrom()%>:
-									<%=note.getBody()%><br />
-								</p>
-							</div>
-						</div>
-						<%
-							}
-						%>
-						<!-- USERS ONLINE SECTION -->
-						<h3>MEMBERS</h3>
-						<!-- First Member -->
-						<%
-							String name=request.getParameter("pitch");
-						                       for(String member: ((BaseClasses.Pitch)DB.DBManager.getInstance().getUserByID(name)).getUserList()){
-						%>
-
-						<div class="desc">
-							<div class="thumb">
-								<img class="img-circle" src="assets/img/ui-divya.jpg"
-									width="35px" height="35px" align="">
-							</div>
-							<div class="details">
-								<p>
-									<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></a><br />
-									<muted>Available</muted>
-								</p>
-							</div>
-						</div>
-						<%
-							}
-						%>
-						<!-- CALENDAR-->
-						<div id="calendar" class="mb">
-							<div class="panel green-panel no-margin">
-								<div class="panel-body">
-									<div id="date-popover" class="popover top"
-										style="cursor: pointer; disadding: block; margin-left: 33%; margin-top: -50px; width: 175px;">
-										<div class="arrow"></div>
-										<h3 class="popover-title" style="disadding: none;"></h3>
-										<div id="date-popover-content" class="popover-content"></div>
-									</div>
-									<div id="my-calendar"></div>
-								</div>
-							</div>
-						</div>
-						<!-- / calendar -->
-
-					</div>
-					<!-- /col-lg-3 -->
-				</div>
-				<! --/row -->
-			</section>
-		</section>
-
-		<!--main content end-->
+     <div class="row mt">
+      	<div class="col-lg-12">
+      	  <div class="form-panel">
+      	  <form class="form-horizontal style-form">
+      	  	
+      	  	<!-- Description -->
+      	    <% 
+			String pitch = request.getParameter("pitch");
+			Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
+			ArrayList<String> titles = currentPitch.getAllTitles();
+			ArrayList<String> descriptions = currentPitch.getAllDescriptions();
+			for( int i = 0; i < titles.size(); i++){ 
+			%>
+			<h4 class="mb"><i class="fa fa-angle-right"></i> <%=titles.get(i)%></h4>	
+			<div class="form-group">
+			  <div class="col-sm-10">
+			    <p><%=descriptions.get(i)%></p>
+			  </div>
+           	</div>
+          	
+          	<!--Project Duration and Team Size-->
+          	<%
+          		}
+          		int length = currentPitch.getDuration();
+          		String duration = "";
+          		if(length<=8 ){
+					duration = "day(s)";
+				}else if(length>8&&length<=16){
+					duration = "week(s)";
+				}else if(length>16&&length<=24){
+					duration = "month(s)";
+				}else if(length>24&&length<=32){
+					duration = "1 year";
+				}else if(length>32){
+					duration = "year(s)";
+				}
+				int big = currentPitch.getSize();
+				String size = "";
+				if(big<=8){
+					size = "1-2 members";
+				}else if(big>8&&big<=16){
+					size = "3-5 members";
+				}else if(big>16&&big<=24){
+					size = "5-10 members";
+				}else if(big>24&&big<=32){
+					size = "10-20 members";
+				}else if(big>32){
+					size = "> 20 members (organization)";
+				} 
+          	%>
+          	<div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label"> Duration</label>
+              <div class="col-sm-10">
+				<%=duration%>
+               </div>
+         	</div>
+          	<div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label"> Size</label>
+              <div class="col-sm-10">
+				<%=size%>
+               </div>
+         	</div>
+    
+    		<!--Categories-->
+          	<div class="form-group">
+              <label class="col-sm-2 col-sm-2 control-label"> Categories</label>
+         	  <div class="col-sm-10">       	
+	 		  <%
+         		for(String categories: currentPitch.getCategoryTags()){
+         		%>
+	              <%=categories%>&nbsp;  
+ 			  	<%
+ 				}
+ 			  %>
+ 			  </div>
+ 			</div>
+ 			</form>        		
+          </div>
+        </div>
+     
+      	<!--Feedback Form-->
+      	<div class="col-lg-12">
+      	  <div class="form-panel">
+      	    <form id="form" class="form-horizontal style-form" action="/feed" method="post">
+      	  	<h4 class="mb"><i class="fa fa-angle-right"></i> Leave a Feedback</h4>
+			<div class="form-group">
+			  <div class="col-sm-10">
+			  	<label class="col-sm-2 col-sm-2 control-label">Subject: </label> 
+			  	<input type="text" name="subject" class="form-control round-form">
+				<label class="col-sm-2 col-sm-2 control-label">Feedback:</label>
+			 	<input type="text" name="body" class="form-control round-form">
+			  </div>
+   			</div>
+			<div>
+			  <button type="submit" class="btn btn-round btn-default">Send</button>
+			</div>
+			
+			</form>	
+          </div>
+       	</div>
+       	
+       	<!--List of Feedbacks-->
+       	<div class="col-lg-12">
+       	  <div class="form-panel">
+       	  	<form class="form-horizontal style-form">
+       	  	<h4 class="mb"><i class="fa fa-angle-right"></i> Feedbacks</h4>	
+      	  	<%
+      	  	if(currentPitch.getFeedbacks()!= null){
+      	  	  for(Message feedback: currentPitch.getFeedbacks()){
+	      	    %>
+	      		<div class="form-group">
+	       	  	  <label class="col-sm-2 col-sm-2 control-label"> <%=feedback.getSubject()%></label>
+	          	  <div class="col-sm-10">
+					<%=feedback.getFrom()%>, on&nbsp;<%=feedback.getDate()%>,
+					<%=feedback.getBody()%>
+	          	  </div>
+	          	</div>
+	          	<%
+          	  }
+          	}else{
+          	  	%>
+          	  	<div class="form-group">
+          	  	  <div class="col-sm-10">
+					<b>There is no feedback</b>
+				  </div>
+	          	</div>
+          	  
+          	  	<%
+          	}
+          	%>
+       	  	</form>
+       	  </div>
+       	</div>
+      </div>
+	  <!-- end of feedback -->        
+              
+	</section>
+	<!--main content end-->
+	
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="index.jsp#" class="go-top"> <i
+				2014 <a href="pitch.jsp?pitch=<%=pitch%>" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

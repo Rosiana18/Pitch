@@ -221,7 +221,7 @@
       <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
-      	  <form id="form" class="form-horizontal style-form" action="/pitch?" method="post">
+      	  <form id="form" class="form-horizontal style-form" action="/pitch" method="post">
       
         	<h4 class="mb"><i class="fa fa-angle-right"></i> Form</h4>
          	

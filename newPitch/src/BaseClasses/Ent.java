@@ -143,6 +143,49 @@ public class Ent
     public String getId(){
     	return id;
     }
+    public ArrayList<String> getCategoryTags(){
+    	ArrayList<String> tags = new ArrayList<String>();
+    	if(science ==1){
+    		tags.add("science");
+    	}
+    	if(engineering ==1){
+    		tags.add("engineering");
+    	}
+    	if(writing ==1){
+    		tags.add("writing");
+    	}
+    	if(craft ==1){
+    		tags.add("craft");
+    	}
+    	if(fixing ==1){
+    		tags.add("fixing");
+    	}
+    	if(visualDesign ==1){
+    		tags.add("visualDesign");
+    	}
+    	if(conceptDesign ==1){
+    		tags.add("conceptDesign");
+    	}
+    	if(event ==1){
+    		tags.add("event");
+    	}
+    	if(teaching ==1){
+    		tags.add("teaching");
+    	}
+    	if(cause ==1){
+    		tags.add("cause");
+    	}
+    	if(diy ==1){
+    		tags.add("diy");
+    	}
+    	if(art ==1){
+    		tags.add("art");
+    	}
+    	if(music ==1){
+    		tags.add("music");
+    	}
+    	return tags;
+    }
 
     
 
