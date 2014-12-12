@@ -13,6 +13,10 @@ import BaseClasses.User;
 import DB.DBManager;
 
 public class FeedbackServlet extends HttpServlet{
+	/*
+	 * 	/feed post
+	 * 	add post
+	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		String pitch = req.getParameter("pitch");

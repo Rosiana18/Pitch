@@ -65,13 +65,17 @@ import com.googlecode.objectify.annotation.Subclass;
 		if(users==null){
 			users = new ArrayList<String>();
 		}
-		users.add(user);
+		if(!users.contains(user)){
+			users.add(user);			
+		}
 	}
 	public void addBidder(String user){
 		if(bidders==null){
 			bidders = new ArrayList<String>();
 		}
-		bidders.add(user);
+		if(!bidders.contains(user)){
+			bidders.add(user);			
+		}
 	}
 	public void addFeedback(Message feedback){
 		if(feedbacks==null){
