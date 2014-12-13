@@ -1,6 +1,7 @@
 <%@page import="BaseClasses.Message"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -17,25 +18,22 @@
 <!--external css-->
 <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 <link rel="stylesheet" type="text/css"
-	href="assets/js/bootstrap-datepicker/css/datepicker.css" />
+	href="assets/css/zabuto_calendar.css">
 <link rel="stylesheet" type="text/css"
-	href="assets/js/bootstrap-daterangepicker/daterangepicker.css" />
+	href="assets/js/gritter/css/jquery.gritter.css" />
+<link rel="stylesheet" type="text/css" href="assets/lineicons/style.css">
 
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link href="assets/css/style-responsive.css" rel="stylesheet">
+
+<script src="assets/js/chart-master/Chart.js"></script>
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <%
-    if((String)session.getAttribute("userName")==null||(BaseClasses.User)session.getAttribute("user")==null)
-    {
-		response.sendRedirect("login.jsp");
-	}
-    %>
 </head>
 
 <body>
@@ -121,15 +119,22 @@
 							<li class="external"><a href="#">See All Tasks</a></li>
 						</ul></li>
 					<!-- settings end -->
+					
 					<!-- inbox dropdown start-->
 					<li id="header_inbox_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> <%
- 	if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
- %> <span class="badge bg-theme"> <%=((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()).size()%>
-						</span> <%
- 	}
- %>
+							<i class="fa fa-envelope-o"></i> 
+							<%
+							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
+							%>
+							<span class="badge bg-theme">
+							<%=
+							((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()).size()
+							%>
+							</span>
+							<%
+							}
+							%>
 					</a>
 						<ul class="dropdown-menu extended inbox">
 							<div class="notify-arrow notify-arrow-green"></div>
@@ -138,18 +143,18 @@
 									You have
 									<%
 									if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) == null){
-								%>
+									%>
 									no
 									<%
 									}else{
 									out.print(((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size());
-																																																			}
-								%>
+									}
+									%>
 									new messages
 								</p>
 							</li>
 							<%
-								if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
+							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
 								for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
 							%>
 							<li><a href="index.jsp#"> <span class="photo"><img
@@ -166,7 +171,7 @@
 							</a></li>
 							<%
 								}
-																																										}
+							}
 							%>
 							<li><a href="index.jsp#">See all messages</a></li>
 						</ul></li>
@@ -183,7 +188,7 @@
 		</header>
 		<!--header end-->
 
-		<!-- **********************************************************************************************************************************************************
+	  <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
       *********************************************************************************************************************************************************** -->
 		<!--sidebar start-->
@@ -200,7 +205,7 @@
 						<%=((BaseClasses.User) session.getAttribute("user"))
 					.getName()%></h5>
 
-					<li class="mt"><a href="index.jsp"> <i
+					<li class="mt"><a class="active" href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
@@ -209,7 +214,7 @@
 					<li class="sub-menu"><a href="createPitch.jsp"> <i
 							class="fa fa-book"></i> <span>Create a Pitch</span>
 					</a></li>
-					<li class="sub-menu"><a class="active" href="profile.jsp">
+					<li class="sub-menu"><a href="profile.jsp">
 							<i class="fa fa-cogs"></i> <span>My Profile</span>
 					</a></li>
 					<li class="sub-menu"><a href="search.jsp"> <i
@@ -224,7 +229,7 @@
 			</div>
 		</aside>
 		<!--sidebar end-->
-
+		
 		<!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -232,132 +237,86 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i> Profile
+					<i class="fa fa-angle-right"></i>   <%=((BaseClasses.User) session.getAttribute("user"))
+					.getName()%>
 				</h3>
 
-				<!-- BASIC FORM ELELEMNTS -->
-				<div class="row mt">
-					<div class="col-lg-12">
-						<div class="form-panel">
-							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Form Elements
-							</h4>
-							<%if(((BaseClasses.User) session.getAttribute("user")).getImage() == null) {%>
-							<form class="form-horizontal style-form" method="get">
-								<div class="form-group">
-									<div class="col-sm-10">
-										<img alt="avatar" src="assets/img/ui-zac.jpg" />
-										<input type="file" name="pic" accept="image/*" /> 
-										<input type="submit" />
-									</div>
-								</div>
-							</form>
-							<% }else {%>
-							<form class="form-horizontal style-form" method="get">
-								<div class="form-group">
-									<div class="col-sm-10">
-										<img alt="avatar" src="assets/img/ui-zac.jpg" />
-										<input type="file" name="pic" accept="image/*" /> 
-										<input type="submit" />
-									</div>
-								</div>
-							</form>
-							<%} %>
-							<form class="form-horizontal style-form" action="/update" method="post">
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">First Name</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="firstName" value="<%=((BaseClasses.User) session.getAttribute("user")).getFirstName()%>">
-									</div>
-									<label class="col-sm-2 col-sm-2 control-label">Last Name</label>
-									<div class="col-sm-10">
-										<input type="text" class="form-control" name="lastName" value="<%=((BaseClasses.User) session.getAttribute("user")).getLastName()%>">
-									</div>
-									<label class="col-lg-2 col-sm-2 control-label">Email</label>
-									<div class="col-lg-10">
-										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user")).getEmail()%></p>
-									</div>
-								</div>	
-								
-								<!-- Description -->
-            					<div class="form-group">
-              					<label class="col-sm-2 col-sm-2 control-label">About Me</label>
-             					 <div class="col-sm-10">
-              					<textarea name="description" rows="10" style="width:80%"><%=((((BaseClasses.User)session.getAttribute("user")).getDescription() == null) ? "I am still working on updating my profile... Check back soon!" : ((BaseClasses.User)session.getAttribute("user")).getDescription())%></textarea>
-               					</div>
-         						</div>
+				<a>	
+					<div class="col-lg-12" style="text-align:center">
+						<div>
+							<img alt="avatar" src="assets/img/ui-zac.jpg">
+						</div>
+					</div> <!-- /col-md-4-->
+									</a>
 
-								<div class="form-group">
-									<div class="col-sm-10">
-										<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="structure" value="1">Structure</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="dynamicEnvironment" value="1">Dynamic Environment</label>										
-										</div>
-										<div class="checkbox"> 
-											<label><input type="checkbox" name="selfReliance" value="1">Self Reliance</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="teamwork" value="1">Teamwork</label>
-										</div>
-										<div class="checkbox">  
-										  <label><input type="checkbox" name="creativeApproach" value="1">Creative</label>	
-										</div>
-										<div class="checkbox">
-											  <label><input type="checkbox" name="reliability" value="1">Reliability</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="impact" value="1">Impact</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="enjoyment" value="1">Enjoyment</label>
-										</div>
-	
-									</div>
+				
+			<div class="col-lg-12" style="text-align:center">
+				<div class="form-panel">
+				<form class="form-horizontal style-form" action="/bid" method="post">
+					
+					<!-- Description -->
+					
+					<h4 class="mb"><i class="fa fa-angle-right"></i> About Me</h4>	
+					<div class="form-group">
+					  <div class="col-sm-10">
+					  	<%
+					  	if (((BaseClasses.User)session.getAttribute("user")).getDescription() == null) {	
+					  	%>
+						<p>I am still working on updating my profile... Check back soon!</p>
+						<%
+						}else{
+						%>
+						<p>
+						<% 
+						out.print(((BaseClasses.User)session.getAttribute("user")).getDescription());
+						%>
+						</p>
+						<%
+						}
+						%>
+						</p>
+					  </div>
+					</div>
+					</form>
+				</div>     		
+			</div>
+
+
+			<! -- MODALS -->
+			<!-- Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal"
+								aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">Send Message</h4>
+						</div>
+						<div class="modal-body">
+							<form class="form-horizontal style-form" method="get">
+								<div class="col-sm-10">
+									<input type="text" class="form-control">
 								</div>
-								<div class="form-group">
-									<div class="col-sm-10">
-										<button type="submit" class="btn btn-theme">Update Profile</button>
-									</div>
-								</div>
-							</form>
-							<form class="form-horizontal style-form" action="/update" method="post">
-								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">New
-										Password</label>
-									<div class="col-sm-10">
-										<input type="password" class="form-control" placeholder="">
-									</div>
-									<label class="col-sm-2 col-sm-2 control-label">Re-enter
-										New Password</label>
-									<div class="col-sm-10">
-										<input type="password" class="form-control" placeholder="">
-									</div>
-								</div>
-								<div>
-									<button type="submit" class="btn btn-theme">Change
-											Password</button>
-								</div>
+								<button type="button" class="btn btn-primary">Send</button>
 							</form>
 						</div>
 					</div>
 				</div>
-					<!-- col-lg-12-->
-				</div>
-				<!-- /row -->
+			</div>
 
+			<section class="wrapper">
+
+				
+				<! --/row -->
 			</section>
-			<! --/wrapper -->
 		</section>
-		<!-- /MAIN CONTENT -->
 
 		<!--main content end-->
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 - Project Pitch <a href="profile.jsp#" class="go-top"> <i
+				2014 - Project Pitch<a href="index.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
@@ -367,48 +326,67 @@
 
 	<!-- js placed at the end of the document so the pages load faster -->
 	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/jquery-1.8.3.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script class="include" type="text/javascript"
 		src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-<script src="<c:url value="assets/js/jquery.scrollTo.min.js"/>"></script>
-<script src="<c:url value="assets/js/jquery.nicescroll.js"/>"></script>
+	<script src="<c:url value="assets/js/jquery.scrollTo.min.js"/>"></script>
+	<script src="<c:url value="assets/js/jquery.nicescroll.js"/>"></script>
+	<script src="assets/js/jquery.sparkline.js"></script>
 
 
 	<!--common script for all pages-->
 	<script src="assets/js/common-scripts.js"></script>
 
+	<script type="text/javascript"
+		src="assets/js/gritter/js/jquery.gritter.js"></script>
+	<script type="text/javascript" src="assets/js/gritter-conf.js"></script>
+
 	<!--script for this page-->
-	<script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+	<script src="assets/js/sparkline-chart.js"></script>
+	<script src="assets/js/zabuto_calendar.js"></script>
 
-	<!--custom switch-->
-	<script src="assets/js/bootstrap-switch.js"></script>
-
-	<!--custom tagsinput-->
-	<script src="assets/js/jquery.tagsinput.js"></script>
-
-	<!--custom checkbox & radio-->
-
-	<script type="text/javascript"
-		src="assets/js/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-	<script type="text/javascript"
-		src="assets/js/bootstrap-daterangepicker/date.js"></script>
-	<script type="text/javascript"
-		src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-
-	<script type="text/javascript"
-		src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
-
-
-	<script src="assets/js/form-component.js"></script>
-
-
-	<script>
-		//custom select box
-
-		$(function() {
-			$('select.styled').customSelect();
-		});
+	<script type="application/javascript">
+		
+		
+		
+        $(document).ready(function () {
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+        
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
+        });
+        
+        
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    
+	
+	
 	</script>
+
 
 </body>
 </html>

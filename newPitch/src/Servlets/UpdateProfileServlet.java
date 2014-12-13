@@ -52,8 +52,9 @@ public class UpdateProfileServlet extends HttpServlet {
 		}
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
+		String mainDescription = req.getParameter("description");
 		String redirect = "profile.jsp";
-		if(firstName.isEmpty()||lastName.isEmpty()){
+		if(firstName.isEmpty()||lastName.isEmpty()||mainDescription.isEmpty()){
 			redirect += "?error=missing";
 		}
 		System.out.println(ret.size());

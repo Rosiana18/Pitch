@@ -20,7 +20,9 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index ArrayList<String> friends;
 	@Index ArrayList<Conversation> conversations;
 	@Index String email;
+	@Index String description;
 	
+
 	User(){}
 	
 	public User(String email, String _firstName, String _lastName, String _password, String _confirmationKey)
@@ -124,4 +126,12 @@ import com.googlecode.objectify.annotation.Subclass;
 		}
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }
