@@ -276,59 +276,57 @@
 										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user"))
 					.getEmail()%></p>
 									</div>
-									
-									
-									<div class="col-lg-12">
-          <div class="form-panel">
-			<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
-		    <div class="checkbox">
-			  <label><input type="checkbox" name="science" value="1">science</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="engineering" value="1">engineering</label>
-			</div>
-			<div class="checkbox">  
-			  <label><input type="checkbox" name="writing" value="1">writing</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="craft" value="1">craft</label>
-			</div>
-			<div class="checkbox">  
-			  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="event" value="1">event</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="teaching" value="1">teaching</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="cause" value="1">cause</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="diy" value="1">DIY</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="art" value="1">art</label>
-			</div>
-			<div class="checkbox">
-			  <label><input type="checkbox" name="music" value="1">music</label>
-			</div>
-		  </div>
-	  	</div>
-									
-									
-									<div class="col-lg-10">
-										<button type="submit" class="btn btn-theme">Update
-											Profile</button>
+								</div>	
+								<div class="form-group">
+									<div class="col-sm-10">
+									<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="science" value="1">science</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="engineering" value="1">engineering</label>										
+									</div>
+									<div class="checkbox"> 
+										<label><input type="checkbox" name="writing" value="1">writing</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="craft" value="1">craft</label>
+									</div>
+									<div class="checkbox">  
+									  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
+									</div>
+									<div class="checkbox">
+										  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="event" value="1">event</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="cause" value="1">cause</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="diy" value="1">DIY</label>
+									</div>
+									<div class="checkbox">
+										<label><input type="checkbox" name="art" value="1">art</label>
+									</div>
+									<div class="checkbox">
+									  <label><input type="checkbox" name="music" value="1">music</label>
+									</div>
 									</div>
 								</div>
+								<div>
+									<button type="submit" class="btn btn-theme">Update
+										Profile</button>
+								</div>
+							</form>
+							<form class="form-horizontal style-form" action="/update" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">New
 										Password</label>
@@ -340,10 +338,11 @@
 									<div class="col-sm-10">
 										<input type="password" class="form-control" placeholder="">
 									</div>
-									<div class="col-sm-10">
-										<button type="submit" class="btn btn-theme">Change
+								</div>
+								<div>
+									<button type="submit" class="btn btn-theme">Change
 											Password</button>
-									</div>
+								</div>
 								</div>
 							</form>
 						</div>
