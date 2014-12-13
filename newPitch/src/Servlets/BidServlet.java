@@ -32,7 +32,7 @@ public class BidServlet extends HttpServlet {
 		//get current user
 		HttpSession session = req.getSession(false);
 		session.getAttribute("user");
-		User currentUser = (User)session.getAttribute("user");
+		User currentUser = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		
 		//type of request
 		String button = req.getParameter("button");
