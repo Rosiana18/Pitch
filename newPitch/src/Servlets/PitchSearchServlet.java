@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gwt.dev.cfg.Properties;
 import com.googlecode.objectify.annotation.Index;
-
 import BaseClasses.Ent;
 import BaseClasses.User;
 
