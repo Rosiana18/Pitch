@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -36,16 +37,35 @@ public class UpdateProfileServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
+		String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+				,"conceptDesign","event","teaching","cause","diy","art","music"};
+		
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		for(String a : whatIsIts)
+		{
+			if(req.getParameter(a)==null){
+				ret.add(0);
+			}else{
+				ret.add(Integer.valueOf(req.getParameter(a)));
+			}
+		}
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
+		String redirect = "profile.jsp";
+		if(firstName.isEmpty()||lastName.isEmpty()){
+			redirect += "?error=missing";
+		}
+		System.out.println(ret.size());
 		HttpSession session = req.getSession(true);
 		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
-		System.out.println(user.getName());
 		user.setName(firstName, lastName);
-		System.out.println(user.getName());
+		for(Integer b: ret){
+			System.out.println(b);
+		}
+		
 		DBManager.getInstance().add(user);
 		session.removeAttribute("user");
 		session.setAttribute("user", user);
-		resp.sendRedirect("profile.jsp");
+		resp.sendRedirect(redirect);
 		}
 }

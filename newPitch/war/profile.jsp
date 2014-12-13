@@ -244,37 +244,38 @@
 							</h4>
 							<%if(((BaseClasses.User) session.getAttribute("user")).getImage() == null) {%>
 							<form class="form-horizontal style-form" method="get">
-							<img alt="avatar" src="assets/img/ui-zac.jpg">
-								<input type="file" name="pic" accept="image/*"> <input
-									type="submit">
+								<div class="form-group">
+									<div class="col-sm-10">
+										<img alt="avatar" src="assets/img/ui-zac.jpg" />
+										<input type="file" name="pic" accept="image/*" /> 
+										<input type="submit" />
+									</div>
+								</div>
 							</form>
 							<% }else {%>
 							<form class="form-horizontal style-form" method="get">
-							<img alt="avatar" src="assets/img/ui-zac.jpg">
-								<input type="file" name="pic" accept="image/*"> <input
-									type="submit">
+								<div class="form-group">
+									<div class="col-sm-10">
+										<img alt="avatar" src="assets/img/ui-zac.jpg" />
+										<input type="file" name="pic" accept="image/*" /> 
+										<input type="submit" />
+									</div>
+								</div>
 							</form>
 							<%} %>
 							<form class="form-horizontal style-form" action="/update" method="post">
 								<div class="form-group">
-									<label class="col-sm-2 col-sm-2 control-label">First
-										Name</label>
+									<label class="col-sm-2 col-sm-2 control-label">First Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="firstName"
-											value="<%=((BaseClasses.User) session.getAttribute("user"))
-					.getFirstName()%>">
+										<input type="text" class="form-control" name="firstName" value="<%=((BaseClasses.User) session.getAttribute("user")).getFirstName()%>">
 									</div>
-									<label class="col-sm-2 col-sm-2 control-label">Last
-										Name</label>
+									<label class="col-sm-2 col-sm-2 control-label">Last Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="lastName"
-											value="<%=((BaseClasses.User) session.getAttribute("user"))
-					.getLastName()%>">
+										<input type="text" class="form-control" name="lastName" value="<%=((BaseClasses.User) session.getAttribute("user")).getLastName()%>">
 									</div>
 									<label class="col-lg-2 col-sm-2 control-label">Email</label>
 									<div class="col-lg-10">
-										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user"))
-					.getEmail()%></p>
+										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user")).getEmail()%></p>
 									</div>
 								</div>	
 								<div class="form-group">
@@ -321,9 +322,10 @@
 										</div>
 									</div>
 								</div>
-								<div>
-									<button type="submit" class="btn btn-theme">Update
-										Profile</button>
+								<div class="form-group">
+									<div class="col-sm-10">
+										<button type="submit" class="btn btn-theme">Update Profile</button>
+									</div>
 								</div>
 							</form>
 							<form class="form-horizontal style-form" action="/update" method="post">
