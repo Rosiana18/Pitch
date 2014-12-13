@@ -436,18 +436,20 @@
 	<script src="assets/js/sparkline-chart.js"></script>
 	<script src="assets/js/zabuto_calendar.js"></script>
 
+	<%
+	String error = (String) request.getParameter("error");
+	if(error!=null){
+		if(error.equals("missing")){
+	%>
+	<script>
+		alert("Both field must be filled.");
+	</script>
+	<%
+		}
+	}
+	%>
+
 	<script type="application/javascript">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
         $(document).ready(function () {
             $("#date-popover").popover({html: true, trigger: "manual"});
             $("#date-popover").hide();

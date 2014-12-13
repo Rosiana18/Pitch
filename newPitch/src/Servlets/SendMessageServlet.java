@@ -36,9 +36,12 @@ public class SendMessageServlet extends HttpServlet {
 		
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		System.out.println("asdasdas");
 		String msg = req.getParameter("Message");
 		String to = req.getParameter("to");
+		if(msg.isEmpty()||to.isEmpty()){
+			resp.sendRedirect("conversation.jsp?error=missing");
+			return;
+		}
 		HttpSession session = req.getSession(false);
 		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		User toUser = (User)DBManager.getInstance().getUserByID(to); 
