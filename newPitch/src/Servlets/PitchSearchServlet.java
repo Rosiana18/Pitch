@@ -3,12 +3,15 @@ package Servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gwt.dev.cfg.Properties;
 import com.googlecode.objectify.annotation.Index;
 
+import BaseClasses.Ent;
 import BaseClasses.User;
 import DB.DBManager;
 
@@ -44,9 +47,9 @@ public class PitchSearchServlet extends HttpServlet{
 		String u = req.getParameter("user");
 		int size = Integer.valueOf(siz)/8;
 		int length = Integer.valueOf(len)/8;
-		dbm.filterBy(categoryTags, strList, null, 0 ,0 , kw.split(" "));
-		
-		resp.sendRedirect("/myPitches.jsp");
+		ArrayList<Ent> results = (ArrayList<Ent>) dbm.filterBy(categoryTags, strList, null, 0 ,0 , kw.split(" "));
+		req.getSession().setAttribute("searchResults", results);
+		resp.sendRedirect("/PitchSearchResults.jsp");
 	}
 	private ArrayList<Integer> loadUp(HttpServletRequest req)
 	{
