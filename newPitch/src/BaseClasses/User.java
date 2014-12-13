@@ -78,18 +78,33 @@ import com.googlecode.objectify.annotation.Subclass;
 		pitches.add(id);
 	}
 	public void addFriend(String id){
+		if(friends==null){
+			friends = new ArrayList<String>();
+		}
 		friends.add(id);
 	}
 	public ArrayList<Message> getMessages(){
+		if(messages==null){
+			messages = new ArrayList<Message>();
+		}
 		return messages;
 	}
 	public ArrayList<String> getPitches(){
+		if(pitches==null){
+			pitches = new ArrayList<String>();
+		}
 		return pitches;
 	}
 	public ArrayList<Message> getNotifications(){
+		if(notifications==null){
+			notifications = new ArrayList<Message>();
+		}
 		return notifications;
 	}
 	public ArrayList<String> getFriends(){
+		if(friends==null){
+			friends = new ArrayList<String>();
+		}
 		return friends;
 	}
 

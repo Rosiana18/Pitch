@@ -14,7 +14,7 @@
 <script>
 	var convID = "";
 </script>
-<title>Pitch</title>
+<title>Conversations</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -400,7 +400,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 - Project Pitch<a href="index.jsp#" class="go-top"> <i
+				2014 - Project Pitch<a href="conversations.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

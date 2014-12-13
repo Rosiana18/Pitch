@@ -15,7 +15,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>Pitch</title>
+<title>Result</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -294,7 +294,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 - Project Pitch<a href="mypitches.jsp#" class="go-top"> <i
+				2014 - Project Pitch<a href="PitchSearchResult.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

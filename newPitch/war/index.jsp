@@ -119,6 +119,7 @@
 							<li class="external"><a href="#">See All Tasks</a></li>
 						</ul></li>
 					<!-- settings end -->
+					
 					<!-- inbox dropdown start-->
 					<li id="header_inbox_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
