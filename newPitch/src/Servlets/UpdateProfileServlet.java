@@ -51,14 +51,16 @@ public class UpdateProfileServlet extends HttpServlet {
 		}
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
+		String mainDescription = req.getParameter("description");
 		String redirect = "profile.jsp";
-		if(firstName.isEmpty()||lastName.isEmpty()){
+		if(firstName.isEmpty()||lastName.isEmpty()||mainDescription.isEmpty()){
 			redirect += "?error=missing";
 		}
 		System.out.println(ret.size());
 		HttpSession session = req.getSession(true);
 		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		user.setName(firstName, lastName);
+		user.setDescription(mainDescription);
 		for(Integer b: ret){
 			System.out.println(b);
 		}
