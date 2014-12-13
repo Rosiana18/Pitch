@@ -174,7 +174,7 @@
           	<div class="row mt">
           		<div class="col-lg-12">
 					<% 
-					String pitch = request.getParameter("pitch");
+					String pitch = (String) request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
 					int bidNum;
 					if(currentPitch.getBidderList() == null){

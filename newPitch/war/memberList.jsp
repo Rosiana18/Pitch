@@ -178,7 +178,7 @@
 					<% 
 					String pitch = request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
-					String userName = session.getAttribute("userName");
+					String userName = (String) session.getAttribute("userName");
 					int memNum;
 					if(currentPitch.getUserList() == null){
 						memNum =0;
