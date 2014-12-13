@@ -67,28 +67,7 @@
 				<!--  notification start -->
 				<ul class="nav top-menu">
 					<!-- settings start -->
-					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="index.jsp#"> <i
-							class="fa fa-tasks"></i> <span class="badge bg-theme">4</span>
-					</a>
-						<ul class="dropdown-menu extended tasks-bar">
-							<div class="notify-arrow notify-arrow-green"></div>
-							<li>
-								<p class="green">You have pending tasks</p>
-							</li>
-							<li><a href="index.jsp#">
-									<div class="task-info">
-										<div class="desc">DashGum Admin Panel</div>
-										<div class="percent">40%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="40" aria-valuemin="0"
-											aria-valuemax="100" style="width: 40%">
-											<span class="sr-only">40% Complete (success)</span>
-										</div>
-									</div>
-							</a></li>
+					
 							<!-- settings end -->
 							<!-- inbox dropdown start-->
 							<li id="header_inbox_bar" class="dropdown"><a

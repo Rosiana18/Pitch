@@ -64,87 +64,41 @@
 			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
-				
 				<!--  notification start -->
 				<ul class="nav top-menu">
 					<!-- settings start -->
-					<li class="dropdown"><a data-toggle="dropdown"
-						class="dropdown-toggle" href="index.jsp#"> <i
-							class="fa fa-tasks"></i> <span class="badge bg-theme">4</span>
-					</a>
-						<ul class="dropdown-menu extended tasks-bar">
-							<div class="notify-arrow notify-arrow-green"></div>
-							<li>
-								<p class="green">You have <%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID((String)session.getAttribute("userName"))).getNotifications().size()%> notifications</p>
-							</li>
-							<li><a href="index.jsp#">
-									<div class="task-info">
-										<div class="desc">DashGum Admin Panel</div>
-										<div class="percent">40%</div>
-									</div>
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="40" aria-valuemin="0"
-											aria-valuemax="100" style="width: 40%">
-											<span class="sr-only">40% Complete (success)</span>
-										</div>
-									</div>
-							</a></li>
+					
 							<!-- settings end -->
-							
-							
 							<!-- inbox dropdown start-->
-					<li id="header_inbox_bar" class="dropdown">
-						<a data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> 
-							<%
-							String name=(String) session.getAttribute("userName");
-							ArrayList<Message> notifications = ((BaseClasses.User) DB.DBManager.getInstance().getUserByID(name)).getNotifications();
-							%>
-							<span class="badge bg-theme">
-								<%=notifications.size()%>
-							</span>
-						</a>
-						<ul class="dropdown-menu extended inbox">
-							<div class="notify-arrow notify-arrow-green"></div>
-							<li>
-								<p class="green">
-									You have
+							<li id="header_inbox_bar" class="dropdown"><a
+								data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
+									<i class="fa fa-envelope-o"></i> <span class="badge bg-theme"><%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%></span>
+							</a>
+								<ul class="dropdown-menu extended inbox">
+									<div class="notify-arrow notify-arrow-green"></div>
+									<li>
+										<p class="green">
+											You have
+											<%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%>
+											new messages
+										</p>
+									</li>
 									<%
-									if(notifications.size()==0){
+										for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
 									%>
-									no
+									<li><a href="index.jsp#"> <span class="photo"><img
+												alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
+											class="subject"> <span class="from"><%=msg.getFrom()%></span>
+												<span class="time"><%=msg.getDate().toGMTString()%></span>
+										</span> <span class="message"> <%=msg.getBody()%>
+										</span>
+									</a></li>
 									<%
-									}else{
-									out.print(notifications.size());
-									}
+										}
 									%>
-									new notifications
-								</p>
-							</li>
-							<%
-							if(notifications.size()>0){
-								for(Message notification: notifications){
-							%>
-							<li>
-								<a href="index.jsp#"> <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span> 
-									<span class="time"><%=notification.getDate().toGMTString()%></span> 
-									<span class="subject"> 
-										<span class="from"><%=notification.getFrom()%></span>
-									</span> 
-									<span class="message"> <%=notification.getBody()%></span>
-									<button type="button" class="btn btn-info btn-primary btn-xs" data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button" class="btn btn-warning btn-primary btn-xs">dismiss</button>
-								</a>
-							</li>
-							<%
-								}
-							}
-							%>
-							<li><a href="index.jsp#">See all notifications</a></li>
-						</ul>
-					</li>
-					<!-- inbox dropdown end -->
+									<li><a href="index.jsp#">See all messages</a></li>
+								</ul></li>
+							<!-- inbox dropdown end -->
 						</ul> <!--  notification end -->
 			</div>
 			<div class="top-menu">

@@ -57,77 +57,51 @@
 					data-original-title="Toggle Navigation"></div>
 			</div>
 			<!--logo start-->
-			<a href="index.jsp" class="logo"><b>Pitch</b></a>
+			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
-				
-					<!-- settings end -->
+				<!--  notification start -->
+				<ul class="nav top-menu">
+					<!-- settings start -->
 					
-					<!-- inbox dropdown start-->
-					<li id="header_inbox_bar" class="dropdown"><a
-						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> 
-							<%
-							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
-							%>
-							<span class="badge bg-theme">
-							<%=
-							((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()).size()
-							%>
-							</span>
-							<%
-							}
-							%>
-					</a>
-						<ul class="dropdown-menu extended inbox">
-							<div class="notify-arrow notify-arrow-green"></div>
-							<li>
-								<p class="green">
-									You have
+							<!-- settings end -->
+							<!-- inbox dropdown start-->
+							<li id="header_inbox_bar" class="dropdown"><a
+								data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
+									<i class="fa fa-envelope-o"></i> <span class="badge bg-theme"><%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%></span>
+							</a>
+								<ul class="dropdown-menu extended inbox">
+									<div class="notify-arrow notify-arrow-green"></div>
+									<li>
+										<p class="green">
+											You have
+											<%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%>
+											new messages
+										</p>
+									</li>
 									<%
-									if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) == null){
+										for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
 									%>
-									no
+									<li><a href="index.jsp#"> <span class="photo"><img
+												alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
+											class="subject"> <span class="from"><%=msg.getFrom()%></span>
+												<span class="time"><%=msg.getDate().toGMTString()%></span>
+										</span> <span class="message"> <%=msg.getBody()%>
+										</span>
+									</a></li>
 									<%
-									}else{
-									out.print(((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size());
-									}
+										}
 									%>
-									new messages
-								</p>
-							</li>
-							<%
-							if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
-								for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
-							%>
-							<li><a href="index.jsp#"> <span class="photo"><img
-										alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
-									class="time"><%=msg.getDate().toGMTString()%></span> <span
-									class="subject"> <span class="from"><%=msg.getFrom()%></span>
-								</span> <span class="message"> <%=msg.getBody()%>
-								</span>
-									<button type="button" class="btn btn-info btn-primary btn-xs"
-										data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button"
-										class="btn btn-warning btn-primary btn-xs">dismiss</button>
-
-							</a></li>
-							<%
-								}
-							}
-							%>
-							<li><a href="index.jsp#">See all messages</a></li>
-						</ul></li>
-					<!-- inbox dropdown end -->
-				</ul>
-				<!--  notification end -->
+									<li><a href="index.jsp#">See all messages</a></li>
+								</ul></li>
+							<!-- inbox dropdown end -->
+						</ul> <!--  notification end -->
 			</div>
 			<div class="top-menu">
 				<ul class="nav pull-right top-menu">
 					<li><a class="logout" href="/logout">Logout</a></li>
 				</ul>
 			</div>
-
 		</header>
 		<!--header end-->
 
