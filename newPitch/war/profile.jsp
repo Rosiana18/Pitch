@@ -279,46 +279,46 @@
 								</div>	
 								<div class="form-group">
 									<div class="col-sm-10">
-									<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="science" value="1">science</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="engineering" value="1">engineering</label>										
-									</div>
-									<div class="checkbox"> 
-										<label><input type="checkbox" name="writing" value="1">writing</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="craft" value="1">craft</label>
-									</div>
-									<div class="checkbox">  
-									  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
-									</div>
-									<div class="checkbox">
-										  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="event" value="1">event</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="teaching" value="1">teaching</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="cause" value="1">cause</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="diy" value="1">DIY</label>
-									</div>
-									<div class="checkbox">
-										<label><input type="checkbox" name="art" value="1">art</label>
-									</div>
-									<div class="checkbox">
-									  <label><input type="checkbox" name="music" value="1">music</label>
-									</div>
+										<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="science" value="1">science</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="engineering" value="1">engineering</label>										
+										</div>
+										<div class="checkbox"> 
+											<label><input type="checkbox" name="writing" value="1">writing</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="craft" value="1">craft</label>
+										</div>
+										<div class="checkbox">  
+										  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
+										</div>
+										<div class="checkbox">
+											  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="event" value="1">event</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="cause" value="1">cause</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="diy" value="1">DIY</label>
+										</div>
+										<div class="checkbox">
+											<label><input type="checkbox" name="art" value="1">art</label>
+										</div>
+										<div class="checkbox">
+										  <label><input type="checkbox" name="music" value="1">music</label>
+										</div>
 									</div>
 								</div>
 								<div>
@@ -343,10 +343,10 @@
 									<button type="submit" class="btn btn-theme">Change
 											Password</button>
 								</div>
-								</div>
 							</form>
 						</div>
 					</div>
+				</div>
 					<!-- col-lg-12-->
 				</div>
 				<!-- /row -->
