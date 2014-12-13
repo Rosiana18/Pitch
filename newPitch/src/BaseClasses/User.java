@@ -1,6 +1,7 @@
 package BaseClasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
@@ -12,6 +13,7 @@ import com.googlecode.objectify.annotation.Subclass;
 	@Index String linkedIn;
 	@Index String confirmationKey;
 	@Index String picture;
+	@Index String aboutMe;
 	//@Index String conversation;
 	@Index ArrayList<Message> messages;
 	@Index ArrayList<Message> notifications;
@@ -119,6 +121,86 @@ import com.googlecode.objectify.annotation.Subclass;
 				pitches.remove(pitch);				
 			}
 		}
+	}
+	public void setValTags(HashMap<String,Integer> map){
+		this.valTagValues = map;
+	}
+	/*public ArrayList<Integer> getInterestTags()
+	{
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		if(science == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(engineering == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(writing == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(craft == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(fixing == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(visualDesign == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(conceptDesign == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(event == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(teaching == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(cause == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(diy == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(art == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		if(music == 0 ){
+			ret.add(0);
+		}else{
+			ret.add(1);
+		}
+		return ret;
+	}
+	*/
+	public void setAbout(String about){
+		aboutMe = about;
+	}
+	public String about(){
+		return this.aboutMe;
 	}
 
 }

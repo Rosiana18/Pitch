@@ -1,4 +1,5 @@
 <%@page import="BaseClasses.Message"%>
+<%@page import="BaseClasses.User"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <html lang="en">
@@ -239,87 +240,127 @@
 				<div class="row mt">
 					<div class="col-lg-12">
 						<div class="form-panel">
+							<%
+							String userName = (String) session.getAttribute("userName");
+							String userView = (String) request.getParameter("user");
+							Boolean update = false;
+							if(userView==null){
+								update = true;
+							}else{
+								if(userView.equals(userName)){
+									update = true;
+								}
+							}
+							User user = (BaseClasses.User)DB.DBManager.getInstance().getUserByID(userName);
+							if(!update){
+								user = (BaseClasses.User)DB.DBManager.getInstance().getUserByID(userView);
+							}
+							if(user.getImage() == null) {
+							%>
 							<h4 class="mb">
-								<i class="fa fa-angle-right"></i> Form Elements
+								<i class="fa fa-angle-right"></i> <%=user.getFirstName()%>'s Profile
 							</h4>
-							<%if(((BaseClasses.User) session.getAttribute("user")).getImage() == null) {%>
+							
 							<form class="form-horizontal style-form" method="get">
 								<div class="form-group">
 									<div class="col-sm-10">
 										<img alt="avatar" src="assets/img/ui-zac.jpg" />
+										<%if(update){%>
 										<input type="file" name="pic" accept="image/*" /> 
 										<input type="submit" />
+										<%}%>
 									</div>
 								</div>
 							</form>
-							<% }else {%>
+							<% 	
+							}else {
+							%>
 							<form class="form-horizontal style-form" method="get">
 								<div class="form-group">
 									<div class="col-sm-10">
 										<img alt="avatar" src="assets/img/ui-zac.jpg" />
+										<%if(update){%>
 										<input type="file" name="pic" accept="image/*" /> 
 										<input type="submit" />
+										<%}%>
 									</div>
 								</div>
 							</form>
-							<%} %>
+							<%
+							}
+							%>
+
 							<form class="form-horizontal style-form" action="/update" method="post">
 								<div class="form-group">
 									<label class="col-sm-2 col-sm-2 control-label">First Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="firstName" value="<%=((BaseClasses.User) session.getAttribute("user")).getFirstName()%>">
+										<%if(update){%>
+										<input type="text" class="form-control" name="firstName" value="<%=user.getFirstName()%>">
+										<%}else{%>
+										<p class="form-control-static"><%=user.getFirstName()%></p>
+										<%}%>
 									</div>
 									<label class="col-sm-2 col-sm-2 control-label">Last Name</label>
 									<div class="col-sm-10">
-										<input type="text" class="form-control" name="lastName" value="<%=((BaseClasses.User) session.getAttribute("user")).getLastName()%>">
+										<%if(update){%>
+										<input type="text" class="form-control" name="lastName" value="<%=user.getLastName()%>">
+										<%}else{%>
+										<p class="form-control-static"><%=user.getLastName()%></p>
+										<%}%>
 									</div>
 									<label class="col-lg-2 col-sm-2 control-label">Email</label>
 									<div class="col-lg-10">
-										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user")).getEmail()%></p>
+										<p class="form-control-static"><%=userName%></p>
 									</div>
+								</div>
+								
+								<!-- Description -->
+								<div class="form-group">
+								  <label class="col-sm-2 col-sm-2 control-label">About Me</label>
+								  <div class="col-sm-10">
+									<%if(update){%>
+									<textarea name="aboutMe" rows="10" style="width:80%"><%=user.about()%></textarea>
+									<%}else{%>
+									<p><%=user.about()%></p>
+									<%}%>
+								   </div>
+								</div>		
+								
+								<div class="form-group">
+									<label class="col-sm-2 col-sm-2 control-label"> Categories</label>
+									<div class="col-sm-10">       	
+									<%
+									for(String category: user.getCategoryTags()){
+									%>
+									  <%=category%>&nbsp;  
+									<%
+									}
+									%>
+								  </div>
 								</div>	
+								<%if(update){%>
 								<div class="form-group">
 									<div class="col-sm-10">
 										<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
+										<%
+										String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+												,"conceptDesign","event","teaching","cause","diy","art","music"};
+										for(String category: whatIsIts){
+											if(user.getCategoryTags().contains(category)){
+											%>
 										<div class="checkbox">
-										  <label><input type="checkbox" name="science" value="1">science</label>
+										  <label><input type="checkbox" name="<%=category%>" value="1" checked><%=category%></label>
 										</div>
+											<%
+											}else{
+											%>
 										<div class="checkbox">
-										  <label><input type="checkbox" name="engineering" value="1">engineering</label>										
+										  <label><input type="checkbox" name="<%=category%>" value="1"><%=category%></label>
 										</div>
-										<div class="checkbox"> 
-											<label><input type="checkbox" name="writing" value="1">writing</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="craft" value="1">craft</label>
-										</div>
-										<div class="checkbox">  
-										  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
-										</div>
-										<div class="checkbox">
-											  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="event" value="1">event</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="teaching" value="1">teaching</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="cause" value="1">cause</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="diy" value="1">DIY</label>
-										</div>
-										<div class="checkbox">
-											<label><input type="checkbox" name="art" value="1">art</label>
-										</div>
-										<div class="checkbox">
-										  <label><input type="checkbox" name="music" value="1">music</label>
-										</div>
+											<%
+											}
+										}
+										%>
 									</div>
 								</div>
 								<div class="form-group">
@@ -327,6 +368,7 @@
 										<button type="submit" class="btn btn-theme">Update Profile</button>
 									</div>
 								</div>
+								
 							</form>
 							<form class="form-horizontal style-form" action="/update" method="post">
 								<div class="form-group">
@@ -345,7 +387,15 @@
 									<button type="submit" class="btn btn-theme">Change
 											Password</button>
 								</div>
+								
 							</form>
+							<%}%>
+							
+								<div>
+									<button><a href="conversation.jsp?convID=<%=user.getEmail()%>">
+									Message Me!</a></button>
+								</div>
+
 						</div>
 					</div>
 				</div>
@@ -399,7 +449,7 @@
 		src="assets/js/bootstrap-daterangepicker/date.js"></script>
 	<script type="text/javascript"
 		src="assets/js/bootstrap-daterangepicker/daterangepicker.js"></script>
-
+
 	<script type="text/javascript"
 		src="assets/js/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
 
