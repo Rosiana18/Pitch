@@ -287,7 +287,7 @@
 								</form>
 								<div class="chatbox" style="overflow-y:scroll; height:400px;">
 								<%
-									User user = (User)session.getAttribute("user");
+									User user = DB.DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 								System.out.println(user.getMessages());
 								System.out.println(name);
 								
