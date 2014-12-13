@@ -178,15 +178,15 @@
 					<% 
 					String pitch = request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
+					String userName = session.getAttribute("userName");
 					int memNum;
 					if(currentPitch.getUserList() == null){
 						memNum =0;
 					}else{
 						memNum = currentPitch.getUserList().size();
 					}
-					User currentUser = (User)session.getAttribute("user");
 					//if viewer is a member/owner
-					if(memNum>0&&currentPitch.getUserList().contains(currentUser.getId())){
+					if(memNum>0&&currentPitch.getUserList().contains(userName)){
 						for(int j=0; j < memNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->
@@ -222,7 +222,7 @@
 					
 					<%	
 						}
-					}else if(currentPitch.getOwnerId().equals(currentUser.getId())){
+					}else if(currentPitch.getOwnerId().equals(userName)){
 						for(int j=0; j < memNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->
@@ -243,7 +243,9 @@
 								</div>
 								<button type="submit" class="profile-01 centered" style="width:100%">REMOVE MEMBER</button>
 								<div class="centered">
+									<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%>">
 									<h6><i class="fa fa-envelope"></i><br/><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%></h6>
+									</a>
 								</div>
 								<input type="hidden" name="pitch" value="<%=pitch%>" />
 								<input type="hidden" name="member" value="<%=member%>" />

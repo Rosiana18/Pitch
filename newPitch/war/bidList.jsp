@@ -182,10 +182,10 @@
 					}else{
 						bidNum = currentPitch.getBidderList().size();
 					}
-					User currentUser = (User)session.getAttribute("user");
+					String userName = (String) session.getAttribute("userName");
 					//if viewer is a member
-					if(bidNum>0&&(currentPitch.getUserList().contains(currentUser.getId())
-						||currentPitch.getOwnerId().equals(currentUser.getId()))){
+					if(bidNum>0&&(currentPitch.getUserList().contains(userName)
+						||currentPitch.getOwnerId().equals(userName))){
 						for(int j=0; j < bidNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->
