@@ -51,6 +51,19 @@
   </servlet-mapping>
   
   
+    <servlet>
+    <servlet-name>invitefriend</servlet-name>
+    <servlet-class>Servlets.InviteFriendServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>invitefriend</servlet-name>
+    <url-pattern>/InviteFriendServlet</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+  
   <!-- Default page to serve -->
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>
