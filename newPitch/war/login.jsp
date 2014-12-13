@@ -27,11 +27,12 @@
     <![endif]-->
     
     <%
-    if((String)session.getAttribute("userName")!=null)
+    if((String)session.getAttribute("userName")!=null&&(User)session.getAttribute("user")!=null)
     {
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("login.jsp");
 	}
     %>
+    
   </head>
 
   <body>
