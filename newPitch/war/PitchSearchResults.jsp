@@ -244,15 +244,6 @@
 							<div class="col-lg-12">
 								<! -- 1st ROW OF PANELS -->
 								<div class="row">
-									<div class="col-lg-4 col-md-4 col-sm-4 mb">
-										<div class="product-panel-2 pn">
-											<div class="badge badge-hot">Pinned</div>
-											<img src="assets/img/product.jpg" width="200" alt="">
-											<h5 class="mt">Make your dreams come true :D</h5>
-											<button class="btn btn-small btn-theme04" onclick="window.location.href='createPitch.jsp'">Create New
-												Pitch</button>
-										</div>
-									</div>
 									<! --/col-md-4 -->
 									<%
 										ArrayList<Ent> p = (ArrayList<Ent>)session.getAttribute("searchResults");
@@ -263,9 +254,9 @@
 										Pitch pitch = (Pitch)p2;
 									%>
 									<!-- TWITTER PANEL -->
-									<!-- 
+								 
 									<a href="pitch.jsp?pitch=<%=(pitch.getTitle())%>">
-									-->	
+									
 										<div class="col-lg-4 col-md-4 col-sm-4 mb">
 											<div class="content-panel pn">
 												<div id="blog-bg">
@@ -276,12 +267,14 @@
 												</div>
 											</div>
 										</div> <!-- /col-md-4-->
+									</a>
+											<%
+								}
+							%>
 								</div>
 								<! --/END 1ST ROW OF PANELS -->
 							</div>
-							<%
-								}
-							%>
+					
 						</div>
 					</section>
 					<! --/wrapper -->
