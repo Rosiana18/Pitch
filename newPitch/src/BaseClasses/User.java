@@ -38,6 +38,7 @@ import com.googlecode.objectify.annotation.Subclass;
 		pitches = new ArrayList<String>();
 		friends = new ArrayList<String>();
 		conversations = new ArrayList<Conversation>();
+		aboutMe = "";
 	}
 	public String getKey(){
 		return confirmationKey;
@@ -200,6 +201,9 @@ import com.googlecode.objectify.annotation.Subclass;
 		aboutMe = about;
 	}
 	public String about(){
+		if(aboutMe==null){
+			aboutMe="";
+		}
 		return this.aboutMe;
 	}
 

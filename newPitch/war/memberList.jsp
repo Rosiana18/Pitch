@@ -231,10 +231,11 @@
 						<!-- PROFILE 01 PANEL -->
 						<div class="col-lg-4 col-md-4 col-sm-4 mb">
 							<div class="content-panel pn">
+								<a href="profile.jsp?user=<%=member%>">
 								<div id="profile-01">
 									<h3><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></h3>
 									<h6>Sexy Foxy</h6>
-								</div>
+								</div></a>
 								<div class="profile-01 centered">
 									<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%>">
 									<p>MESSAGE ME</p></a>
@@ -268,10 +269,11 @@
 						<div class="col-lg-4 col-md-4 col-sm-4 mb">
 							<div class="content-panel pn">
 								<form action="/delete" method="post">
+								<a href="profile.jsp?user=<%=member%>">
 								<div id="profile-01">
 									<h3><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></h3>
 									<h6>Sexy Foxy</h6>
-								</div>
+								</div></a>
 								<button type="submit" class="profile-01 centered" style="width:100%">REMOVE MEMBER</button>
 								<div class="centered">
 									<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%>">
@@ -308,10 +310,11 @@
 						<div class="col-lg-4 col-md-4 col-sm-4 mb">
 							<div class="content-panel pn">
 								<div id="profile-02">
+								<a href="profile.jsp?user=<%=member%>">
 									<div class="user">
 										<img src="assets/img/friends/fr-06.jpg" class="img-circle" width="80">
 										<h4><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></h4>
-									</div>
+									</div></a>
 								</div>
 								<div class="pr2-social centered">
 									<a href="#"><i class="fa fa-twitter"></i></a>

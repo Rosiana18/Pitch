@@ -310,7 +310,7 @@
 									</div>
 									<label class="col-lg-2 col-sm-2 control-label">Email</label>
 									<div class="col-lg-10">
-										<p class="form-control-static"><%=userName%></p>
+										<p class="form-control-static"><%=user.getEmail()%></p>
 									</div>
 								</div>
 								
