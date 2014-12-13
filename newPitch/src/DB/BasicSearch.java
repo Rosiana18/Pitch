@@ -119,11 +119,17 @@ public class BasicSearch implements DBSearcher {
 		{
 			Integer val = valList.get(i);
 			String att = strList.get(i);
-			for(Pitch p : ofy().load().type(Pitch.class).list())
+			/*for(Pitch p : ofy().load().type(Pitch.class).list())
 			{
-				ret.add(p);
-			}
 			
+					ret.add(p);
+				
+			}*/
+		}
+		for(Pitch p : ofy().load().type(Pitch.class).list())
+		{
+		
+				ret.add(p);
 			
 		}
 		
@@ -164,8 +170,12 @@ public class BasicSearch implements DBSearcher {
 		{
 			for(String field : textFields)
 			{
-				s.addPoints( (s.getKeywords().get(field)/totalOccurances.get(field))
-						*keywordPointsScaling);
+				if(totalOccurances.get(field) != 0){
+					s.addPoints( (s.getKeywords().get(field)/totalOccurances.get(field))
+							*keywordPointsScaling);
+				}
+				
+			
 			}
 		}
 		return sortables;
@@ -178,18 +188,10 @@ public class BasicSearch implements DBSearcher {
 		for(Ent e : pitches)
 		{
 			SortableEnt sortable = new SortableEnt(e);
+			sortable.init(textFields);
 			sortables.add(sortable);
 			User owner = getUserByEmail( ((Pitch)e).getOwnerId() );
 			
-			for(String att : valTags)
-			{
-				double attValueDifference = Math.abs(u.valTagValues.get(att) - owner.valTagValues.get(att));
-				if(attValueDifference >= 3)
-				{
-					continue;
-				}
-				sortable.addPoints( (1/attValueDifference)*valPointsScaling);
-			}
 			
 			
 			/*for(String att : catTags)
@@ -212,7 +214,20 @@ public class BasicSearch implements DBSearcher {
 					continue;
 				}
 				sortable.addPoints( (1/attValueDifference)*personPointsScaling);
-			} */
+			} 
+			
+			*for(String att : valTags)
+			{
+				HashMap uhm = u.valTagValues;
+				HashMap ohm = owner.valTagValues;
+				double attValueDifference = Math.abs((Double)uhm.get(att) - (Double)ohm.get(att));
+				if(attValueDifference >= 3)
+				{
+					continue;
+				}
+				sortable.addPoints( (1/attValueDifference)*valPointsScaling);
+			}
+			*/
 			
 		}
 		sortables = (ArrayList<SortableEnt>) freeTextPoints(sortables, textFields );
