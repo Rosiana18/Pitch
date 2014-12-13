@@ -108,57 +108,33 @@ public class BasicSearch implements DBSearcher {
 		
 		// count how many entities get cut down for each filter in the search
 		// fill with nulls so that we can distinguish "haven't started" from "0"
-		ArrayList<Integer> count = new ArrayList<Integer>();
-		for(int j = 0; j<valList.size(); j++)
-		{
-			count.add(null);
-		}
+		ArrayList<Pitch> ret = new ArrayList<Pitch>();
+
 		
-		// differentiate between a search for a Pitch vs. User
-		if(strList.get(0).equals("science"))
-		{
-			type = Pitch.class;
-		}
-		if(strList.get(0).equals("realist"))
-		{
-			type = User.class;
-		}
-		if(type == null)
-		{
-			return null;
-		}
+
 		
 		// start querying 
-		LoadType<Ent> a = ofy().load().type(type);
-		Query<Ent> q = null;
+		//LoadType<Pitch> a = ofy().load().type(Pitch.class);
 		for(int i = 0; i < valList.size(); i++)
 		{
 			Integer val = valList.get(i);
 			String att = strList.get(i);
-			if(val == null)
+			/*for(Pitch p : ofy().load().type(Pitch.class).list())
 			{
-				continue;
-			}
-			if(q == null)
-			{
-				q = a.filter(att+" =", 1);
-				continue;
-			}
-			q = q.filter(att+" =", 1);
-			count.set(i, q.count());
 			
-			
+					ret.add(p);
+				
+			}*/
 		}
-		
-		
-		if( q == null)
+		for(Pitch p : ofy().load().type(Pitch.class).list())
 		{
-			return refineSearch(a.list(), u, 
-					projectLength, projectSize,  textFields);
+		
+				ret.add(p);
+			
 		}
 		
-		return refineSearch(q.list(), u, 
-				projectLength, projectSize,  textFields);
+		
+		return refineSearch(ret, u, projectLength, projectSize,  textFields);
 	}
 	
 	private List<SortableEnt> freeTextPoints(List<SortableEnt> sortables, String textFields[])
@@ -194,13 +170,17 @@ public class BasicSearch implements DBSearcher {
 		{
 			for(String field : textFields)
 			{
-				s.addPoints( (s.getKeywords().get(field)/totalOccurances.get(field))
-						*keywordPointsScaling);
+				if(totalOccurances.get(field) != 0){
+					s.addPoints( (s.getKeywords().get(field)/totalOccurances.get(field))
+							*keywordPointsScaling);
+				}
+				
+			
 			}
 		}
 		return sortables;
 	}
-	private List<Ent> refineSearch(List<Ent> pitches, User u, 			
+	private List<Ent> refineSearch(List<Pitch> pitches, User u, 			
 			int length, int size, String textFields[])
 	{
 		
@@ -208,9 +188,13 @@ public class BasicSearch implements DBSearcher {
 		for(Ent e : pitches)
 		{
 			SortableEnt sortable = new SortableEnt(e);
+			sortable.init(textFields);
 			sortables.add(sortable);
 			User owner = getUserByEmail( ((Pitch)e).getOwnerId() );
-			for(String att : catTags)
+			
+			
+			
+			/*for(String att : catTags)
 			{
 				//TODO catTagValues should be provided by the page, not from the User Ent
 				double attValueDifference = Math.abs(u.catTagValues.get(att) - owner.catTagValues.get(att));
@@ -221,16 +205,7 @@ public class BasicSearch implements DBSearcher {
 				sortable.addPoints( (1/attValueDifference)*catPointsScaling);
 			}
 			
-			for(String att : valTags)
-			{
-				double attValueDifference = Math.abs(u.valTagValues.get(att) - owner.valTagValues.get(att));
-				if(attValueDifference >= 3)
-				{
-					continue;
-				}
-				sortable.addPoints( (1/attValueDifference)*valPointsScaling);
-			}
-			
+
 			for(String att : personTags)
 			{
 				double attValueDifference = Math.abs(u.personTagValues.get(att) - owner.personTagValues.get(att));
@@ -239,7 +214,20 @@ public class BasicSearch implements DBSearcher {
 					continue;
 				}
 				sortable.addPoints( (1/attValueDifference)*personPointsScaling);
+			} 
+			
+			*for(String att : valTags)
+			{
+				HashMap uhm = u.valTagValues;
+				HashMap ohm = owner.valTagValues;
+				double attValueDifference = Math.abs((Double)uhm.get(att) - (Double)ohm.get(att));
+				if(attValueDifference >= 3)
+				{
+					continue;
+				}
+				sortable.addPoints( (1/attValueDifference)*valPointsScaling);
 			}
+			*/
 			
 		}
 		sortables = (ArrayList<SortableEnt>) freeTextPoints(sortables, textFields );
