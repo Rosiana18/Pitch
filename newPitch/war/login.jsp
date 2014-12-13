@@ -28,7 +28,6 @@
   </head>
 
   <body>
-
       <!-- **********************************************************************************************************************************************************
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
@@ -40,7 +39,18 @@
 		      	<form class="form-login" action="/login" method="post">
 		        <h2 class="form-login-heading">sign in now</h2>
 		        <div class="login-wrap">
-		            <input type="text" class="form-control" placeholder="Email" name="email" autofocus>
+		        	<%
+		            String email = request.getParameter("email");
+		            if(email!=null){
+		            %>
+		            	<input type="text" class="form-control" placeholder="<%=email%>" name="email" autofocus>
+		   	       	<%
+	  	            }else{
+		           	%>
+			            <input type="text" class="form-control" placeholder="Email" name="email" autofocus>
+		            <%
+		            }
+		            %>
 		            <br>
 		            <input type="password" class="form-control" placeholder="Password" name="password">
 		            <label class="checkbox">
@@ -69,10 +79,8 @@
 		                          <h4 class="modal-title">Forgot Password ?</h4>
 		                      </div>
 		                      <div class="modal-body">
-		                          <p>Enter your e-mail address below to reset your password.</p>
 		                          <input type="text" name="email" placeholder="Email" autocomplete="off" class="form-control placeholder-no-fix">
-		
-		                      </div>
+		                   	  </div>
 		                      <div class="modal-footer">
 		                          <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
 		                          <button class="btn btn-theme" type="button">Submit</button>

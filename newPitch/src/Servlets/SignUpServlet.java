@@ -80,8 +80,9 @@ public class SignUpServlet extends HttpServlet {
 		Date date = new Date();
 
 		// also check if email exist
-		if (emailExists()) {
-			resp.sendRedirect("retry.jsp" + "?error=" + "email");
+		if (emailExists(email)) {
+			resp.sendRedirect("login.jsp" + "?error=" +"account exist"+ "&email="+email);
+			return;
 		}
 
 		// non-linekdin login
@@ -116,9 +117,13 @@ public class SignUpServlet extends HttpServlet {
 		}
 	}
 
-	private boolean emailExists() {
-
-		return false;
+	private boolean emailExists(String email) {
+		User user = DBManager.getInstance().getUserByID(email);
+		if(user!=null){
+			return user.getEmail().equals(email);
+		}else{
+			return false;
+		}
 	}
 
 	private void sendConfirmation(String firstName, String lastName,
