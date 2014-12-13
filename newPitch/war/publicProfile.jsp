@@ -266,7 +266,7 @@
 						<%
 						}else{
 						%>
-						<p>
+						<p style="text-align:justify; padding-left:10%;">
 						<% 
 						out.print(((BaseClasses.User)session.getAttribute("user")).getDescription());
 						%>

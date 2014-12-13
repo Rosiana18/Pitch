@@ -61,6 +61,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession(true);
 		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		user.setName(firstName, lastName);
+		user.setDescription(mainDescription);
 		HashMap hm = user.valTagValues;
 		if(hm == null)
 		{
