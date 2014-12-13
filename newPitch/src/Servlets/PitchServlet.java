@@ -109,7 +109,7 @@ public class PitchServlet extends HttpServlet{
 		String pitch = req.getParameter("pitch");
 		Pitch currentPitch = DBManager.getInstance().getPitchByID(pitch);
 		// title
-		String mainTitle = req.getParameter("title");
+		String mainTitle = currentPitch.getTitle();
 		
 		// initial field of the description and title field
 		String mainDescription = req.getParameter("description");
@@ -126,6 +126,7 @@ public class PitchServlet extends HttpServlet{
 			int c = i+1;
 			String titleAdd = req.getParameter("prevTitle"+c);
 			String descriptionAdd = req.getParameter("prevDescription"+c);
+			if(descriptionAdd == null) break;
 			if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
 				_title.add(titleAdd);
 				_description.add(descriptionAdd);
@@ -140,9 +141,11 @@ public class PitchServlet extends HttpServlet{
 				int c = i+1;
 				String titleAdd = req.getParameter("title"+c);
 				String descriptionAdd = req.getParameter("description"+c);
-				if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
-					_title.add(titleAdd);
-					_description.add(descriptionAdd);
+				if(descriptionAdd!=null){
+					if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
+						_title.add(titleAdd);
+						_description.add(descriptionAdd);
+					}
 				}
 			}	
 		}
@@ -185,6 +188,6 @@ public class PitchServlet extends HttpServlet{
 		DBManager.getInstance().add(ownerUser);
 		
 		//redirect to myPitch
-		resp.sendRedirect("/mypitches.jsp");
+		resp.sendRedirect("/pitch.jsp?pitch="+pitch);
 	}
 }
