@@ -36,6 +36,11 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		String email = req.getParameter("email");
+		if(email.isEmpty()){
+			resp.sendRedirect("login.jsp?error=WE NEED YOUR EMAIL HERE");
+			return;
+		}
+		
 		String password = req.getParameter("password");
 		User user = (User)DBManager.getInstance().getUserByID(email);
 		if(user.getPassword().equals(password)){
@@ -46,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 			resp.sendRedirect("index.jsp");
 		}
 		else{
+			resp.sendRedirect("login.jsp?error=INCORRECT PASSWORD");
 		}
 	}
 }

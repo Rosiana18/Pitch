@@ -41,12 +41,17 @@
 		        <div class="login-wrap">
 		        	<%
 		            String email = request.getParameter("email");
-		            if(email!=null){
+		            String error = request.getParameter("error");
+		            if(email!=null&&error!=null){
 		            %>
-		            	<input type="text" class="form-control" placeholder="<%=email%>" name="email" autofocus>
+		            	<input type="text" class="form-control" value="<%=email%>" placeholder="<%=error%>" name="email" autofocus>
 		   	       	<%
-	  	            }else{
+	  	            }else if(error!=null){
 		           	%>
+		           		<input type="text" class="form-control" placeholder="<%=error%>" name="email" autofocus>
+		   	       	<%
+		   	       	}else{
+		   	       	%>
 			            <input type="text" class="form-control" placeholder="Email" name="email" autofocus>
 		            <%
 		            }
