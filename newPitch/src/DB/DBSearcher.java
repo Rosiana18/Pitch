@@ -17,7 +17,7 @@ interface DBSearcher {
 	List<Ent> filterBy(List<Integer> valList, List<String> strList, User u,
 			int projectLength, int projectSize, String textFields[]);
 	List search(Query q);
-	Ent getUserByEmail(String id);
+	User getUserByEmail(String id);
 	Pitch getPitchByID(String id);
 }
 

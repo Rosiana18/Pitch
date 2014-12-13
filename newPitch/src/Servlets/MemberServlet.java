@@ -26,8 +26,7 @@ public class MemberServlet extends HttpServlet{
 				
 		//get current user
 		HttpSession session = req.getSession(false);
-		session.getAttribute("user");
-		User currentUser = (User)session.getAttribute("user");
+		User currentUser = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		
 		//get member to be removed
 		String member = req.getParameter("member");

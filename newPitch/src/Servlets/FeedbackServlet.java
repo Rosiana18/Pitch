@@ -26,8 +26,7 @@ public class FeedbackServlet extends HttpServlet{
 		
 		// get user
 		HttpSession session = req.getSession(false);
-		session.getAttribute("user");
-		User currentUser = (User)session.getAttribute("user");
+		User currentUser = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		
 		if(!subject.isEmpty() && !body.isEmpty()){
 			//create new feedback

@@ -85,7 +85,7 @@ public class PitchServlet extends HttpServlet{
 		DBManager.getInstance().add(newPitch);
 		
 		// set user
-		User UserOnSession = (BaseClasses.User) session.getAttribute("user");
+		User UserOnSession = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		User UserOnDB = (BaseClasses.User) DBManager.getInstance().getUserByID(UserOnSession.getId());
 		UserOnDB.addPitch(newPitch.getId());
 		

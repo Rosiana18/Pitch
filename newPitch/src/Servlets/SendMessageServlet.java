@@ -41,7 +41,7 @@ public class SendMessageServlet extends HttpServlet {
 		String to = req.getParameter("to");
 		HttpSession session = req.getSession(false);
 		session.getAttribute("user");
-		User user = (User)session.getAttribute("user");
+		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		User toUser = (User)DBManager.getInstance().getUserByID(to); 
 		Message message = new Message(user.getId(),to,"",msg);
 		user.addMessage(message);	
