@@ -10,6 +10,12 @@
     <meta name="author" content="">
 	<link type="text/css" rel="stylesheet" href="bootstrap.css" />
 	<script src="bootstrap.js"></script>
+	<%
+    if((String)session.getAttribute("userName")==null||(BaseClasses.User)session.getAttribute("user")==null)
+    {
+		response.sendRedirect("login.jsp");
+	}
+    %>
 </head>
 <body>
 <!-- Button trigger modal -->

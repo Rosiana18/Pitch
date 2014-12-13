@@ -35,6 +35,13 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     
+    <%
+    if((String)session.getAttribute("userName")==null||(BaseClasses.User)session.getAttribute("user")==null)
+    {
+		response.sendRedirect("login.jsp");
+	}
+    %>
+    
 </head>
 
 <body>
