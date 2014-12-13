@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
-@Subclass (index=true)
-public class Pitch extends Ent implements Serializable{
+@Subclass public class Pitch extends Ent implements Serializable{
 	@Index String title;
 	@Index ArrayList<String> users;
 	@Index ArrayList<String> bidders;

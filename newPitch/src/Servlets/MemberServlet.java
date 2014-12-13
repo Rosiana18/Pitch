@@ -41,10 +41,10 @@ public class MemberServlet extends HttpServlet{
 			//send notification
 			Message message = new Message(currentUser.getId(), member, "Member removal", 
 					"You have been removed from "+pitch+ " pitch.");
-			removeUser.addMessage(message);			
+			removeUser.addNotification(message);			
 			Message note = new Message(currentUser.getId(), currentUser.getId(), "Member removal",
 					"You have removed "+ member + " from " +pitch+ " pitch.");
-			currentUser.addMessage(note);
+			currentUser.addNotification(note);
 		}
 
 		//******************set notification?**********************

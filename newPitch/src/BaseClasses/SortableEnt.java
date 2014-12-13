@@ -33,14 +33,6 @@ public class SortableEnt implements Comparable {
 		}
 	}
 	
-	public void init(String kwords[])
-	{
-		for(String s : kwords)
-		{
-			keywords.put(s, 0);
-		}
-		
-	}
 	public HashMap<String,Integer> getKeywords()
 	{
 		return keywords;

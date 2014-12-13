@@ -38,39 +38,38 @@ public class UpdateProfileServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		String valTags[] = {"structure","dynamicEnvironment","selfReliance","teamwork"
-				,"creativeApproach","reliability","impact","enjoyment"};
+		String firstName = req.getParameter("firstName");
+		String lastName = req.getParameter("lastName");
+		String redirect = "profile.jsp";
+		String aboutMe = req.getParameter("aboutMe");
+		if(firstName.isEmpty()||lastName.isEmpty()){
+			resp.sendRedirect(redirect +" ?error=missing");
+			return;
+		}
 		
+		HttpSession session = req.getSession(true);
+		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
+		user.setName(firstName, lastName);
+		user.setAbout(aboutMe);
+		HashMap<String,Integer> valTagValues = new HashMap<String,Integer>();
+		String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
+				,"conceptDesign","event","teaching","cause","diy","art","music"};
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		for(String a : valTags)
+		int counter=0;
+		for(String a : whatIsIts)
 		{
 			if(req.getParameter(a)==null){
 				ret.add(0);
 			}else{
 				ret.add(Integer.valueOf(req.getParameter(a)));
 			}
+			valTagValues.put(a, ret.get(counter));
+			counter++;
 		}
-		String firstName = req.getParameter("firstName");
-		String lastName = req.getParameter("lastName");
-		String mainDescription = req.getParameter("description");
-		String redirect = "profile.jsp";
-		if(firstName.isEmpty()||lastName.isEmpty()||mainDescription.isEmpty()){
-			redirect += "?error=missing";
-		}
-		System.out.println(ret.size());
-		HttpSession session = req.getSession(true);
-		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
-		user.setName(firstName, lastName);
-		user.setDescription(mainDescription);
-		HashMap hm = user.valTagValues;
-		if(hm == null)
-		{
-			hm = new HashMap<String,Integer>();
-		}
-		for(int i = 0; i < ret.size(); i++)
-		{
-			hm.put(valTags[i], ret.get(i));
-		}
+		
+		///how do i set the tag???
+		user.setCategoryTags(ret);
+		redirect += "?user=" + user.getId();
 		
 		DBManager.getInstance().add(user);
 		session.removeAttribute("user");

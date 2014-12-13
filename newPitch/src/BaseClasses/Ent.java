@@ -130,7 +130,24 @@ public class Ent
 	@Index int art=0;
 	@Index int music=0;
 	
-    
+    public void setCategoryTags(ArrayList<Integer> tags){
+    	if(tags.size()==13){
+	    	science = tags.get(0);
+	    	engineering=tags.get(1);
+	    	writing=tags.get(2);
+	    	craft=tags.get(3);
+	    	fixing=tags.get(4);
+	    	visualDesign=tags.get(5);
+	    	conceptDesign=tags.get(6);
+	    	event=tags.get(7);
+	    	teaching=tags.get(8);
+	    	cause=tags.get(9);
+	    	diy=tags.get(10);
+	    	art=tags.get(11);
+	    	music=tags.get(12);
+    	}
+    }
+	
 	Ent()
 	{
 		

@@ -2,7 +2,6 @@ package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -19,10 +18,6 @@ import DB.DBManager;
 import com.googlecode.objectify.ObjectifyService;
 
 public class DataLoader extends HttpServlet {
-	
-	String valTags[] = {"structure","dynamicEnvironment","selfReliance","teamwork"
-			,"creativeApproach","reliability","impact","enjoyment"};
-	
 	static final int PITCH_SIZE = 3;
 	static final int USER_SIZE = 10;
 	static final int MIN_FRIEND = 1;
@@ -79,8 +74,8 @@ public class DataLoader extends HttpServlet {
 		
 		for(int i=0;i<USER_SIZE;i++){
 			User localUser = RandomUser();
-			String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu mauris id ligula malesuada scelerisque. Maecenas ultrices scelerisque mi et finibus. In at massa ornare, accumsan purus vitae, ultricies nibh. Donec sapien urna, semper ut nulla ac, dignissim viverra metus. Nam lacus tortor, viverra in turpis in, commodo pulvinar orci. Nam porttitor orci id scelerisque feugiat. Integer id malesuada risus, sagittis sollicitudin elit. Curabitur commodo sem vitae tellus facilisis, nec tempor justo tempor. Nullam mollis neque in volutpat hendrerit. Pellentesque fringilla, tortor et pharetra sagittis, mauris erat suscipit sapien, non vehicula lorem sapien vel nulla. Vestibulum ut sapien sed est euismod euismod. Vestibulum viverra rhoncus posuere. Etiam ornare condimentum urna in vehicula. Donec maximus, eros id facilisis bibendum, diam turpis malesuada quam, id pharetra lectus nunc vitae quam. Aenean volutpat malesuada consequat. Proin rhoncus rutrum purus, quis pulvinar felis vulputate eu. Cras porta felis nec nibh imperdiet, id ullamcorper ipsum finibus. In in efficitur orci, at molestie mauris. Sed tempor tellus et pharetra placerat. Sed vehicula, nunc nec tempus condimentum, dolor libero fringilla turpis, quis sollicitudin ipsum urna sed ex. Etiam tempus luctus tellus, et euismod nisi. In blandit viverra mauris ut lobortis. Mauris mattis augue egestas, condimentum mauris nec, hendrerit nulla. Mauris condimentum magna ac dictum elementum. Etiam at vehicula turpis.";
-			localUser.setDescription(description);
+			String mainDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed neque ipsum. Maecenas luctus nisl eget metus commodo, eget bibendum quam convallis. Suspendisse fringilla lacinia mi vitae scelerisque. Vestibulum lobortis arcu condimentum ipsum ultrices, vitae dictum dolor placerat. Aenean iaculis nulla sapien, quis luctus augue scelerisque ut. Mauris tempor pulvinar tortor, eu aliquam elit sagittis vitae. Maecenas at aliquam magna, laoreet congue turpis. Pellentesque non lacus sit amet nulla vulputate rutrum id ac augue. Nunc hendrerit, odio ut hendrerit sodales, ex dui laoreet ligula, sit amet posuere tortor mauris eu arcu. Praesent nec placerat velit. Pellentesque ultrices massa sapien, eu vehicula tellus fermentum vitae. Vestibulum neque quam, rutrum et aliquam eget, auctor eget sapien. Quisque eu quam ac tortor mollis facilisis mollis vitae odio. Nulla maximus enim justo, nec molestie diam bibendum vitae. Nunc blandit molestie enim eu rhoncus. Donec arcu nulla, mollis cursus venenatis vel, imperdiet volutpat mi. Nulla et magna ut nisi mattis varius quis non enim. Vestibulum volutpat nibh libero, ac elementum ipsum pretium facilisis. Nunc ut luctus nunc, non volutpat neque. Quisque lacinia lorem orci, et semper turpis rutrum a. In hac habitasse platea dictumst. Vestibulum sodales diam ac nibh consequat, a tincidunt tortor convallis. Maecenas ante velit, accumsan non molestie vitae, gravida eget lorem. Proin est arcu, laoreet in condimentum eget, vulputate eu lacus. Proin tempus elit id massa fermentum dapibus. Nulla at consequat ex. Ut venenatis euismod nulla sed ultricies. Nulla id tempus felis. Sed accumsan, dui non cursus semper, purus lacus efficitur augue, quis condimentum velit libero in tellus. Nunc id venenatis dui, ut sodales lorem. Phasellus nulla nibh, laoreet et est vel, interdum hendrerit diam. Nulla sagittis ex ut tortor auctor, et aliquet nisi rutrum. Sed bibendum nec ex sed porttitor.";
+			localUser.setAbout(mainDescription);
 			users.add(localUser.getId());
 			DBManager.getInstance().add(localUser);
 		}
@@ -129,15 +124,7 @@ public class DataLoader extends HttpServlet {
 		while(DBManager.getInstance().getUserByID(email) != null){
 			email = first+"."+last+r.nextInt(1000)+"@pitch.com";
 		}
-		
-		User u = new User(email,first,last,password,"0");
-		u.valTagValues = new HashMap<String,Integer>();
-		
-		for(String s : valTags)
-		{
-			u.valTagValues.put(s,r.nextInt()%2);
-		}
-		return u;
+		return new User(email,first,last,password,"0");
 	}
 	private Pitch RandomPitch(User owner){
 		int randomNum = r.nextInt(descs.length-1);
