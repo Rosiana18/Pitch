@@ -10,7 +10,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>Pitch</title>
+<title>Check Email</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">

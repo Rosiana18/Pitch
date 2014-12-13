@@ -17,7 +17,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>Pitch</title>
+<title>Members</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -58,6 +58,7 @@
 			<a href="index.jsp" class="logo"><b>MY DASHBOARD</b></a>
 			<!--logo end-->
 			<div class="nav notify-row" id="top_menu">
+				
 				<!--  notification start -->
 				<ul class="nav top-menu">
 					<!-- settings start -->
@@ -68,7 +69,7 @@
 						<ul class="dropdown-menu extended tasks-bar">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">You have pending tasks</p>
+								<p class="green">You have <%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID((String)session.getAttribute("userName"))).getNotifications().size()%> notifications</p>
 							</li>
 							<li><a href="index.jsp#">
 									<div class="task-info">
@@ -84,36 +85,60 @@
 									</div>
 							</a></li>
 							<!-- settings end -->
+							
+							
 							<!-- inbox dropdown start-->
-							<li id="header_inbox_bar" class="dropdown"><a
-								data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-									<i class="fa fa-envelope-o"></i> <span class="badge bg-theme"><%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%></span>
-							</a>
-								<ul class="dropdown-menu extended inbox">
-									<div class="notify-arrow notify-arrow-green"></div>
-									<li>
-										<p class="green">
-											You have
-											<%=((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size()%>
-											new messages
-										</p>
-									</li>
+					<li id="header_inbox_bar" class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
+							<i class="fa fa-envelope-o"></i> 
+							<%
+							String name=(String) session.getAttribute("userName");
+							ArrayList<Message> notifications = ((BaseClasses.User) DB.DBManager.getInstance().getUserByID(name)).getNotifications();
+							%>
+							<span class="badge bg-theme">
+								<%=notifications.size()%>
+							</span>
+						</a>
+						<ul class="dropdown-menu extended inbox">
+							<div class="notify-arrow notify-arrow-green"></div>
+							<li>
+								<p class="green">
+									You have
 									<%
-										for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
+									if(notifications.size()==0){
 									%>
-									<li><a href="index.jsp#"> <span class="photo"><img
-												alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
-											class="subject"> <span class="from"><%=msg.getFrom()%></span>
-												<span class="time"><%=msg.getDate().toGMTString()%></span>
-										</span> <span class="message"> <%=msg.getBody()%>
-										</span>
-									</a></li>
+									no
 									<%
-										}
+									}else{
+									out.print(notifications.size());
+									}
 									%>
-									<li><a href="index.jsp#">See all messages</a></li>
-								</ul></li>
-							<!-- inbox dropdown end -->
+									new notifications
+								</p>
+							</li>
+							<%
+							if(notifications.size()>0){
+								for(Message notification: notifications){
+							%>
+							<li>
+								<a href="index.jsp#"> <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span> 
+									<span class="time"><%=notification.getDate().toGMTString()%></span> 
+									<span class="subject"> 
+										<span class="from"><%=notification.getFrom()%></span>
+									</span> 
+									<span class="message"> <%=notification.getBody()%></span>
+									<button type="button" class="btn btn-info btn-primary btn-xs" data-toggle="modal" data-target="#myModal">reply</button>
+									<button type="button" class="btn btn-warning btn-primary btn-xs">dismiss</button>
+								</a>
+							</li>
+							<%
+								}
+							}
+							%>
+							<li><a href="index.jsp#">See all notifications</a></li>
+						</ul>
+					</li>
+					<!-- inbox dropdown end -->
 						</ul> <!--  notification end -->
 			</div>
 			<div class="top-menu">
@@ -308,7 +333,7 @@
 		<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 <a href="bidList.jsp?pitch=<%=pitch%>" class="go-top"> <i
+				2014 <a href="memberList.jsp?pitch=<%=pitch%>" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>
