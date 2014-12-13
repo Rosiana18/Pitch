@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,11 +38,11 @@ public class UpdateProfileServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
-		String whatIsIts[] = {"science","engineering","writing","craft","fixing","visualDesign"
-				,"conceptDesign","event","teaching","cause","diy","art","music"};
+		String valTags[] = {"structure","dynamicEnvironment","selfReliance","teamwork"
+				,"creativeApproach","reliability","impact","enjoyment"};
 		
 		ArrayList<Integer> ret = new ArrayList<Integer>();
-		for(String a : whatIsIts)
+		for(String a : valTags)
 		{
 			if(req.getParameter(a)==null){
 				ret.add(0);
@@ -59,8 +60,14 @@ public class UpdateProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession(true);
 		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		user.setName(firstName, lastName);
-		for(Integer b: ret){
-			System.out.println(b);
+		HashMap hm = user.valTagValues;
+		if(hm == null)
+		{
+			hm = new HashMap<String,Integer>();
+		}
+		for(int i = 0; i < ret.size(); i++)
+		{
+			hm.put(valTags[i], ret.get(i));
 		}
 		
 		DBManager.getInstance().add(user);

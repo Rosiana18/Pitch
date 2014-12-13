@@ -1,6 +1,7 @@
 package BaseClasses;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
@@ -36,6 +37,8 @@ import com.googlecode.objectify.annotation.Subclass;
 		pitches = new ArrayList<String>();
 		friends = new ArrayList<String>();
 		conversations = new ArrayList<Conversation>();
+		
+		valTagValues = new HashMap<String,Integer>();
 	}
 	public String getKey(){
 		return confirmationKey;
