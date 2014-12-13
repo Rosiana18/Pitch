@@ -235,6 +235,10 @@
       *********************************************************************************************************************************************************** -->
 		<!--main content start-->
 		<section id="main-content">
+			<section class="wrapper">
+				<h3>
+					<i class="fa fa-angle-right"></i>   Today's Recommendations
+				</h3>
 			<! -- MODALS -->
 			<!-- Modal -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
@@ -264,9 +268,6 @@
 					<div class="col-lg-9 main-chart">
 						<div class="row mt">
 							<!-- SERVER STATUS PANELS -->
-							<h3>
-								<i class="fa fa-angle-right"></i>   TODAY'S RECOMMEDATIONS
-							</h3>
 							<div class="col-md-4 col-sm-4 mb">
 								<div class="white-panel pn donut-chart">
 									<div class="white-header">
