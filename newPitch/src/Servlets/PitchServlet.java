@@ -42,6 +42,10 @@ public class PitchServlet extends HttpServlet{
 		
 		// initial field of the description and title field
 		String mainDescription = req.getParameter("description");
+		if(mainTitle.isEmpty()||mainDescription.isEmpty()){
+			resp.sendRedirect("createPitch.jsp?error=Missing Content");
+			return;
+		}
 		_title.add("Main Description");
 		_description.add(mainDescription);
 		

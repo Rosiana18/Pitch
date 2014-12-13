@@ -42,13 +42,9 @@
 		        	<%
 		            String email = request.getParameter("email");
 		            String error = request.getParameter("error");
-		            if(email!=null&&error!=null){
+		            if(email!=null){
 		            %>
-		            	<input type="text" class="form-control" value="<%=email%>" placeholder="<%=error%>" name="email" autofocus>
-		   	       	<%
-	  	            }else if(error!=null){
-		           	%>
-		           		<input type="text" class="form-control" placeholder="<%=error%>" name="email" autofocus>
+		            	<input type="text" class="form-control" value="<%=email%>" placeholder="Email" name="email" autofocus>
 		   	       	<%
 		   	       	}else{
 		   	       	%>
@@ -110,7 +106,24 @@
     <script>
         $.backstretch("assets/img/login-bg.jpg", {speed: 500});
     </script>
-
+	
+	<%
+	if(error!=null){
+		if(error.equals("Incorrect Info")){
+		%>
+		<script>
+		alert("Incorrect Information. Please try again.");
+		</script>
+		<%
+		}else if(error.equals("Missing Email")){
+		%>
+		<script>
+		alert("Please Fill In Your Email.");
+		</script>
+		<%
+		}
+	}
+		%>
 
   </body>
 </html>
