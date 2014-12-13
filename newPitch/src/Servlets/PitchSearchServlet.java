@@ -7,15 +7,10 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-<<<<<<< HEAD
 import com.google.gwt.dev.cfg.Properties;
 import com.googlecode.objectify.annotation.Index;
-
 import BaseClasses.Ent;
 import BaseClasses.User;
-=======
->>>>>>> 80bca806eb63499b3b58994552ffe142d1966a59
 import DB.DBManager;
 
 public class PitchSearchServlet extends HttpServlet{
