@@ -237,9 +237,12 @@
 		<section id="main-content">
 			<section class="wrapper">
 				<h3>
-					<i class="fa fa-angle-right"></i>   <%=((BaseClasses.User) session.getAttribute("user"))
-					.getName()%>
-				</h3>
+					<div><i class="fa fa-angle-right"></i>   <%=((BaseClasses.User) session.getAttribute("user"))
+					.getName()%></div>
+					</h3>
+					<h5>
+					 <div>(<%=((BaseClasses.User) session.getAttribute("user")).getEmail()%>)</div>
+				</h5>
 
 				<a>	
 					<div class="col-lg-12" style="text-align:center">
