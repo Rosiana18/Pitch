@@ -276,6 +276,54 @@
 										<p class="form-control-static"><%=((BaseClasses.User) session.getAttribute("user"))
 					.getEmail()%></p>
 									</div>
+									
+									
+									<div class="col-lg-12">
+          <div class="form-panel">
+			<h4 class="mb"><i class="fa fa-angle-right"></i> My Attributes</h4>
+		    <div class="checkbox">
+			  <label><input type="checkbox" name="science" value="1">science</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="engineering" value="1">engineering</label>
+			</div>
+			<div class="checkbox">  
+			  <label><input type="checkbox" name="writing" value="1">writing</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="craft" value="1">craft</label>
+			</div>
+			<div class="checkbox">  
+			  <label><input type="checkbox" name="fixing" value="1">fixing</label>	
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="visualDesign" value="1">visual design</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="conceptDesign" value="1">concept design</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="event" value="1">event</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="teaching" value="1">teaching</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="cause" value="1">cause</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="diy" value="1">DIY</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="art" value="1">art</label>
+			</div>
+			<div class="checkbox">
+			  <label><input type="checkbox" name="music" value="1">music</label>
+			</div>
+		  </div>
+	  	</div>
+									
+									
 									<div class="col-lg-10">
 										<button type="submit" class="btn btn-theme">Update
 											Profile</button>
@@ -326,8 +374,8 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script class="include" type="text/javascript"
 		src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
-	<script src="assets/js/jquery.scrollTo.min.js"></script>
-	<script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="<c:url value="assets/js/jquery.scrollTo.min.js"/>"></script>
+<script src="<c:url value="assets/js/jquery.nicescroll.js"/>"></script>
 
 
 	<!--common script for all pages-->
