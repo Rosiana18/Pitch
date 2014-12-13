@@ -158,8 +158,6 @@
 					<li class="sub-menu"><a href="conversation.jsp"> <i
 							class="fa fa-cogs"></i> <span>Conversations</span>
 					</a></li>
-
-
 				</ul>
 				<!-- sidebar menu end-->
 			</div>
@@ -176,7 +174,7 @@
           	<div class="row mt">
           		<div class="col-lg-12">
 					<% 
-					String pitch = request.getParameter("pitch");
+					String pitch = (String) request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
 					int bidNum;
 					if(currentPitch.getBidderList() == null){
@@ -184,10 +182,10 @@
 					}else{
 						bidNum = currentPitch.getBidderList().size();
 					}
-					User currentUser = (User)session.getAttribute("user");
+					String userName = (String) session.getAttribute("userName");
 					//if viewer is a member
-					if(bidNum>0&&(currentPitch.getUserList().contains(currentUser.getId())
-						||currentPitch.getOwnerId().equals(currentUser.getId()))){
+					if(bidNum>0&&(currentPitch.getUserList().contains(userName)
+						||currentPitch.getOwnerId().equals(userName))){
 						for(int j=0; j < bidNum/3 + 1; j++){
 					%>
       				<!-- ROW OF PANELS -->
@@ -224,9 +222,7 @@
 								}
 							}
 						%>
-						
 					</div>
-					
 					<%	
 						}
 					}else{
@@ -264,13 +260,11 @@
 					<%
 						}
 					}
-					%>
-					
+					%>	
           		</div>
           	</div>
-			
-		</section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+		</section><!--/wrapper-->
+      </section><!--/MAIN CONTENT-->
 	
 		<!--footer start-->
 		<footer class="site-footer">

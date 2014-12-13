@@ -12,7 +12,6 @@ import BaseClasses.Ent;
 import BaseClasses.Pitch;
 import BaseClasses.User;
 import BaseClasses.Message;
-import DB.DBManager;
 
 import com.googlecode.objectify.ObjectifyService;
 

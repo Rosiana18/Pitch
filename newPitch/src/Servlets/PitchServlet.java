@@ -42,6 +42,10 @@ public class PitchServlet extends HttpServlet{
 		
 		// initial field of the description and title field
 		String mainDescription = req.getParameter("description");
+		if(mainTitle.isEmpty()||mainDescription.isEmpty()){
+			resp.sendRedirect("createPitch.jsp?error=Missing Content");
+			return;
+		}
 		_title.add("Main Description");
 		_description.add(mainDescription);
 		
@@ -63,7 +67,7 @@ public class PitchServlet extends HttpServlet{
 		
 		//owner
 		HttpSession session =req.getSession(false);
-		String owner =((BaseClasses.User) session.getAttribute("user")).getEmail();
+		String owner = DBManager.getInstance().getUserByID((String)session.getAttribute("userName")).getEmail();
 		
 		//tags
 		ArrayList<Integer> ret = new ArrayList<Integer>();
@@ -82,14 +86,15 @@ public class PitchServlet extends HttpServlet{
 		
 		// create the Pitch
 		Pitch newPitch = new Pitch(mainTitle, _title, _description, ret, owner, duration, size);
-		
-		// how do i allocate this to a user's pitch list or the database itself?
 		DBManager.getInstance().add(newPitch);
-		User theUser = (BaseClasses.User) session.getAttribute("user");
-		User anotherUser = (BaseClasses.User) DBManager.getInstance().getUserByID(theUser.getId());
 		
-		theUser.addPitch(newPitch.getId());
-		DBManager.getInstance().add(theUser);
+		// set user
+		User UserOnSession = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
+		User UserOnDB = (BaseClasses.User) DBManager.getInstance().getUserByID(UserOnSession.getId());
+		UserOnSession.addPitch(newPitch.getId());
+		
+		DBManager.getInstance().add(UserOnDB);
+		session.setAttribute("user", UserOnDB);
 		
 		//redirect to myPitch
 		resp.sendRedirect("/mypitches.jsp");

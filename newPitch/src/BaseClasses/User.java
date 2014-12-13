@@ -2,9 +2,6 @@ package BaseClasses;
 
 import java.util.ArrayList;
 
-import DB.DBManager;
-
-import com.google.gwt.dev.shell.Messages;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
@@ -68,6 +65,9 @@ import com.googlecode.objectify.annotation.Subclass;
 		messages.add(message);
 	}
 	public void addNotification(Message message){
+		if(notifications==null){
+			notifications = new ArrayList<Message>();
+		}
 		notifications.add(message);
 	}
 	public void addPitch(String id){
@@ -96,6 +96,14 @@ import com.googlecode.objectify.annotation.Subclass;
 	public void setName(String firstName2, String lastName2) {
 		this.firstName = firstName2;
 		this.lastName = lastName2;
+	}
+
+	public void removePitch(String pitch) {
+		if(pitches!=null){
+			if(pitches.contains(pitch)){
+				pitches.remove(pitch);				
+			}
+		}
 	}
 
 }

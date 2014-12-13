@@ -1,9 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
-import java.net.URL;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -25,9 +23,6 @@ import BaseClasses.Pitch;
 import BaseClasses.User;
 import DB.DBManager;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.googlecode.objectify.ObjectifyService;
@@ -85,8 +80,9 @@ public class SignUpServlet extends HttpServlet {
 		Date date = new Date();
 
 		// also check if email exist
-		if (emailExists()) {
-			resp.sendRedirect("retry.jsp" + "?error=" + "email");
+		if (emailExists(email)) {
+			resp.sendRedirect("login.jsp" + "?error=" +"account exist"+ "&email="+email);
+			return;
 		}
 
 		// non-linekdin login
@@ -121,9 +117,13 @@ public class SignUpServlet extends HttpServlet {
 		}
 	}
 
-	private boolean emailExists() {
-
-		return false;
+	private boolean emailExists(String email) {
+		User user = DBManager.getInstance().getUserByID(email);
+		if(user!=null){
+			return user.getEmail().equals(email);
+		}else{
+			return false;
+		}
 	}
 
 	private void sendConfirmation(String firstName, String lastName,

@@ -87,7 +87,7 @@ public class DBManager {
 		return searcher.filterBy(valList, strList, u, len, size, keyWords);
 	}
 	
-	public Ent getUserByID(String id){
+	public User getUserByID(String id){
 		return searcher.getUserByEmail(id);
 	}
 	

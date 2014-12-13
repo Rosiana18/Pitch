@@ -6,6 +6,7 @@ import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.Subclass;
 
 @Subclass public class Conversation extends Ent implements java.io.Serializable{
+	
 	@Index String entity1;
 	@Index String entity2;
 	@Index ArrayList<Message> messages;

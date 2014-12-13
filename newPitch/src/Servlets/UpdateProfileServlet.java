@@ -1,6 +1,7 @@
 package Servlets;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServlet;
@@ -14,7 +15,6 @@ import BaseClasses.User;
 import BaseClasses.Message;
 import DB.DBManager;
 
-import com.google.gwt.dev.ModuleTabPanel.Session;
 import com.googlecode.objectify.ObjectifyService;
 
 public class UpdateProfileServlet extends HttpServlet {
@@ -39,8 +39,7 @@ public class UpdateProfileServlet extends HttpServlet {
 		String firstName = req.getParameter("firstName");
 		String lastName = req.getParameter("lastName");
 		HttpSession session = req.getSession(true);
-		session.getAttribute("user");
-		User user = (User)session.getAttribute("user");
+		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		System.out.println(user.getName());
 		user.setName(firstName, lastName);
 		System.out.println(user.getName());

@@ -189,6 +189,7 @@
 					String pitch = request.getParameter("pitch");
 					Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
 					User currentUser = (User)session.getAttribute("user");
+					currentUser = (BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentUser.getEmail());
 					ArrayList<String> titles = currentPitch.getAllTitles();
 					ArrayList<String> descriptions = currentPitch.getAllDescriptions();
 					for( int i = 0; i < titles.size(); i++){ 
@@ -259,19 +260,36 @@
 					<div>
 					<input type="hidden" name="pitch" value="<%=pitch%>" />
 					<%
-					if(currentPitch.getUserList()!=null&&currentPitch.getBidderList()!=null){
-						if(!currentPitch.getOwnerId().equals(currentUser.getEmail())
-							&&!currentPitch.getUserList().contains(currentUser.getEmail())){
+					boolean check=true;
+					if(currentPitch.getOwnerId().equals(currentUser.getId())){
+					%>
+						<button type="submit" name="button" class="btn btn-round btn-success" value="update">Update</button>					
+					<%
+					}else{
+						if(currentPitch.getBidderList()!=null){
+							if(currentPitch.getBidderList().contains(currentUser.getId())){
 						%>
-						<button type="submit" name="button" class="btn btn-round btn-success" value="add">Bid</button>
+								<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
 						<%
-						}else if(currentPitch.getBidderList().contains(currentUser.getEmail())){
+							check = false;
+							}
+						}
+						if(currentPitch.getUserList()!=null&&check){
+							if(currentPitch.getUserList().contains(currentUser.getId())){
 						%>
-						<button type="submit" name="button" class="btn btn-round btn-success" value="remove">Unbid</button>
+								<button type="submit" name="button" class="btn btn-round btn-success" value="update">Update</button>
+						<%	
+							check = false;
+							}
+						}
+						if(check){
+						%>
+							<button type="submit" name="button" class="btn btn-round btn-success" value="add">Bid</button>
 						<%
 						}
 					}
 					%>
+			
 				</div>
 				</form>        		
 			</div>
@@ -306,11 +324,11 @@
       	  	  for(Message feedback: currentPitch.getFeedbacks()){
 	      	    %>
 	      		<div class="form-group">
-	       	  	  <label class="col-sm-2 col-sm-2 control-label"> <%=feedback.getSubject()%></label>
-	          	  <div class="col-sm-10">
-					<%=feedback.getFrom()%>, on&nbsp;<%=feedback.getDate()%>,
-					<%=feedback.getBody()%>
-	          	  </div>
+					<div class="col-sm-10">
+						<h4 class="mb"><strong><%=feedback.getSubject()%></strong></h4>
+						<p><%=feedback.getBody()%></p>
+						<p align="right"><i>-<%=feedback.getFrom()%>, on&nbsp;<%=feedback.getDate()%></i></p>
+					</div>
 	          	</div>
 	          	<%
           	  }
@@ -341,7 +359,19 @@
 				</div>
 				<div class="details">
 					<p>
-						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%></a><br />
+						<%
+						if(currentPitch.getUserList().contains(currentUser.getEmail())){
+						%>
+							<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getEmail()%>">
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%>
+							</a><br />
+						<%
+						}else{
+						%>
+							<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(currentPitch.getOwnerId())).getName()%></a><br />
+						<%
+						}
+						%>
 						<muted>Available</muted>
 					</p>
 				</div>
@@ -368,7 +398,20 @@
 				</div>
 				<div class="details">
 					<p>
-						<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%></a><br />
+						<%
+						if(currentPitch.getUserList().contains(currentUser.getEmail())||currentPitch.getOwnerId().equals(currentUser.getEmail())){
+						%>
+							<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getEmail()%>">
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%>
+							</a><br />
+						<%
+						}else{
+						%>
+							<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(member)).getName()%>
+							</a><br />
+						<%
+						}
+						%>
 						<muted>Available</muted>
 					</p>
 				</div>
@@ -387,12 +430,10 @@
 					</div>
 				</div>
 			<%
-			}
-			
+			}		
 			//*******END OF MEMBER LIST SECTION**********
 			
-			//**** BIDDER LIST SECTION ***********
-			
+			//**** BIDDER LIST SECTION ***********		
 			int bidNum;
 			if(currentPitch.getBidderList() == null){
 				bidNum =0;
@@ -414,8 +455,20 @@
 							width="35px" height="35px" align="">
 					</div>
 					<div class="details">
-						<p>
-							<a href="#"><%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%></a><br />
+							<%
+							if(currentPitch.getUserList().contains(currentUser.getEmail())||currentPitch.getOwnerId().equals(currentUser.getEmail())){
+							%>
+								<a href="conversation.jsp?convID=<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getEmail()%>">
+								<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%>
+								</a><br />
+							<%
+							}else{
+							%>
+								<%=((BaseClasses.User)DB.DBManager.getInstance().getUserByID(bidder)).getName()%>
+								</a><br />
+							<%
+							}
+							%>
 							<muted>Available</muted>
 						</p>
 					</div>

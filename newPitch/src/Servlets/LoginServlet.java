@@ -36,8 +36,17 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException {
 		String email = req.getParameter("email");
+		if(email.isEmpty()){
+			resp.sendRedirect("login.jsp?error=Missing Email");
+			return;
+		}
+		
 		String password = req.getParameter("password");
 		User user = (User)DBManager.getInstance().getUserByID(email);
+		if(user==null){
+			resp.sendRedirect("login.jsp?error=Incorrect Info");
+			return;
+		}
 		if(user.getPassword().equals(password)){
 			 HttpSession session = req.getSession();
 			 session.removeAttribute("user");
@@ -46,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 			resp.sendRedirect("index.jsp");
 		}
 		else{
+			resp.sendRedirect("login.jsp?error=Incorrect Info");
 		}
 	}
 }

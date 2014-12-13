@@ -312,11 +312,9 @@
 			</div>
       	
       		<!-- Submit Button -->
-	  		<div class="form-group">
-	  		  <div class="col-lg-12">
+	  		<div>
 	  		  <br>
-			 	<button type="submit" class="btn btn-theme">Submit</button>
-		  	  </div>
+			 <button type="submit" class="btn btn-theme">Submit</button> 
 		  	</div>
 		  	
 		 </form>		  	
@@ -361,6 +359,18 @@
 	<script src="assets/js/sparkline-chart.js"></script>
 	<script src="assets/js/zabuto_calendar.js"></script>
 
+	<%
+	String error = request.getParameter("error");
+	if(error!=null){
+		if(error.equals("Missing Content")){
+	%>
+	<script type="text/javascript">
+		alert("Missing Content");
+	</script>
+	<%
+		}
+	}
+	%>
 	<script type="application/javascript">
 		var i = 0;
 		var index = 0;

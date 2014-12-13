@@ -26,6 +26,10 @@ import static com.googlecode.objectify.ObjectifyService.ofy;
 
 
 public class Search extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7310019600421270738L;
 	static {
 		ObjectifyService.register(BaseClasses.Ent.class);
 	}
