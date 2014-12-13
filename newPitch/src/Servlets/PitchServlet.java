@@ -63,7 +63,7 @@ public class PitchServlet extends HttpServlet{
 		
 		//owner
 		HttpSession session =req.getSession(false);
-		String owner =((BaseClasses.User) session.getAttribute("user")).getEmail();
+		String owner = DBManager.getInstance().getUserByID((String)session.getAttribute("userName")).getEmail();
 		
 		//tags
 		ArrayList<Integer> ret = new ArrayList<Integer>();
@@ -87,7 +87,7 @@ public class PitchServlet extends HttpServlet{
 		// set user
 		User UserOnSession = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		User UserOnDB = (BaseClasses.User) DBManager.getInstance().getUserByID(UserOnSession.getId());
-		UserOnDB.addPitch(newPitch.getId());
+		UserOnSession.addPitch(newPitch.getId());
 		
 		DBManager.getInstance().add(UserOnDB);
 		session.setAttribute("user", UserOnDB);
