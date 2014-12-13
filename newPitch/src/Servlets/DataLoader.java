@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.logging.Logger;
 
@@ -18,6 +19,10 @@ import DB.DBManager;
 import com.googlecode.objectify.ObjectifyService;
 
 public class DataLoader extends HttpServlet {
+	
+	String valTags[] = {"structure","dynamicEnvironment","selfReliance","teamwork"
+			,"creativeApproach","reliability","impact","enjoyment"};
+	
 	static final int PITCH_SIZE = 3;
 	static final int USER_SIZE = 10;
 	static final int MIN_FRIEND = 1;
@@ -124,7 +129,15 @@ public class DataLoader extends HttpServlet {
 		while(DBManager.getInstance().getUserByID(email) != null){
 			email = first+"."+last+r.nextInt(1000)+"@pitch.com";
 		}
-		return new User(email,first,last,password,"0");
+		
+		User u = new User(email,first,last,password,"0");
+		u.valTagValues = new HashMap<String,Integer>();
+		
+		for(String s : valTags)
+		{
+			u.valTagValues.put(s,r.nextInt()%2);
+		}
+		return u;
 	}
 	private Pitch RandomPitch(User owner){
 		int randomNum = r.nextInt(descs.length-1);

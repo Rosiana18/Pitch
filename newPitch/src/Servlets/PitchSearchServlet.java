@@ -7,6 +7,7 @@ import javax.mail.Session;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gwt.dev.cfg.Properties;
 import com.googlecode.objectify.annotation.Index;
@@ -44,10 +45,11 @@ public class PitchSearchServlet extends HttpServlet{
 		String kw = req.getParameter("keyword");
 		String siz = req.getParameter("size");
 		String len = req.getParameter("length");
-		String u = req.getParameter("user");
+		HttpSession session = req.getSession(true);
+		User user = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		int size = Integer.valueOf(siz)/8;
 		int length = Integer.valueOf(len)/8;
-		ArrayList<Ent> results = (ArrayList<Ent>) dbm.filterBy(categoryTags, strList, null, 0 ,0 , kw.split(" "));
+		ArrayList<Ent> results = (ArrayList<Ent>) dbm.filterBy(categoryTags, strList, user, size ,length , kw.split(" "));
 		req.getSession().setAttribute("searchResults", results);
 		resp.sendRedirect("/PitchSearchResults.jsp");
 	}
