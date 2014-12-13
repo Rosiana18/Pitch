@@ -119,7 +119,7 @@ public class BasicSearch implements DBSearcher {
 		{
 			Integer val = valList.get(i);
 			String att = strList.get(i);
-			for(Pitch p : ofy().load().type(Pitch.class).filter(att, 1))
+			for(Pitch p : ofy().load().type(Pitch.class).list())
 			{
 				ret.add(p);
 			}
@@ -180,16 +180,6 @@ public class BasicSearch implements DBSearcher {
 			SortableEnt sortable = new SortableEnt(e);
 			sortables.add(sortable);
 			User owner = getUserByEmail( ((Pitch)e).getOwnerId() );
-			for(String att : catTags)
-			{
-				//TODO catTagValues should be provided by the page, not from the User Ent
-				double attValueDifference = Math.abs(u.catTagValues.get(att) - owner.catTagValues.get(att));
-				if(attValueDifference >= 3)
-				{
-					continue;
-				}
-				sortable.addPoints( (1/attValueDifference)*catPointsScaling);
-			}
 			
 			for(String att : valTags)
 			{
@@ -201,6 +191,19 @@ public class BasicSearch implements DBSearcher {
 				sortable.addPoints( (1/attValueDifference)*valPointsScaling);
 			}
 			
+			
+			/*for(String att : catTags)
+			{
+				//TODO catTagValues should be provided by the page, not from the User Ent
+				double attValueDifference = Math.abs(u.catTagValues.get(att) - owner.catTagValues.get(att));
+				if(attValueDifference >= 3)
+				{
+					continue;
+				}
+				sortable.addPoints( (1/attValueDifference)*catPointsScaling);
+			}
+			
+
 			for(String att : personTags)
 			{
 				double attValueDifference = Math.abs(u.personTagValues.get(att) - owner.personTagValues.get(att));
@@ -209,7 +212,7 @@ public class BasicSearch implements DBSearcher {
 					continue;
 				}
 				sortable.addPoints( (1/attValueDifference)*personPointsScaling);
-			}
+			} */
 			
 		}
 		sortables = (ArrayList<SortableEnt>) freeTextPoints(sortables, textFields );
