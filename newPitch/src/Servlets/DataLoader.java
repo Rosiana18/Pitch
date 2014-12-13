@@ -79,6 +79,8 @@ public class DataLoader extends HttpServlet {
 		
 		for(int i=0;i<USER_SIZE;i++){
 			User localUser = RandomUser();
+			String description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum eu mauris id ligula malesuada scelerisque. Maecenas ultrices scelerisque mi et finibus. In at massa ornare, accumsan purus vitae, ultricies nibh. Donec sapien urna, semper ut nulla ac, dignissim viverra metus. Nam lacus tortor, viverra in turpis in, commodo pulvinar orci. Nam porttitor orci id scelerisque feugiat. Integer id malesuada risus, sagittis sollicitudin elit. Curabitur commodo sem vitae tellus facilisis, nec tempor justo tempor. Nullam mollis neque in volutpat hendrerit. Pellentesque fringilla, tortor et pharetra sagittis, mauris erat suscipit sapien, non vehicula lorem sapien vel nulla. Vestibulum ut sapien sed est euismod euismod. Vestibulum viverra rhoncus posuere. Etiam ornare condimentum urna in vehicula. Donec maximus, eros id facilisis bibendum, diam turpis malesuada quam, id pharetra lectus nunc vitae quam. Aenean volutpat malesuada consequat. Proin rhoncus rutrum purus, quis pulvinar felis vulputate eu. Cras porta felis nec nibh imperdiet, id ullamcorper ipsum finibus. In in efficitur orci, at molestie mauris. Sed tempor tellus et pharetra placerat. Sed vehicula, nunc nec tempus condimentum, dolor libero fringilla turpis, quis sollicitudin ipsum urna sed ex. Etiam tempus luctus tellus, et euismod nisi. In blandit viverra mauris ut lobortis. Mauris mattis augue egestas, condimentum mauris nec, hendrerit nulla. Mauris condimentum magna ac dictum elementum. Etiam at vehicula turpis.";
+			localUser.setDescription(description);
 			users.add(localUser.getId());
 			DBManager.getInstance().add(localUser);
 		}
