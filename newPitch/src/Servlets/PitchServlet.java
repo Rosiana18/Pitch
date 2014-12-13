@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import BaseClasses.Message;
 import BaseClasses.Pitch;
 import BaseClasses.User;
 import DB.DBManager;
@@ -18,6 +19,7 @@ public class PitchServlet extends HttpServlet{
 			,"conceptDesign","event","teaching","cause","diy","art","music"};
 	
 	/*
+	 * Create PItch
 	 * DO POST METHOD INFO
 	 * SUCCESSFULL:
 	 * 		allocation of:
@@ -98,5 +100,94 @@ public class PitchServlet extends HttpServlet{
 		
 		//redirect to myPitch
 		resp.sendRedirect("/mypitches.jsp");
+	}
+	// update the pitch
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		ArrayList<String> _title = new ArrayList<String>();
+		ArrayList<String> _description = new ArrayList<String>();
+		String pitch = req.getParameter("pitch");
+		Pitch currentPitch = DBManager.getInstance().getPitchByID(pitch);
+		// title
+		String mainTitle = currentPitch.getTitle();
+		
+		// initial field of the description and title field
+		String mainDescription = req.getParameter("description");
+		if(mainTitle.isEmpty()||mainDescription.isEmpty()){
+			resp.sendRedirect("createPitch.jsp?error=Missing Content");
+			return;
+		}
+		_title.add("Main Description");
+		_description.add(mainDescription);
+		
+		//previous fields
+		int prevNum = currentPitch.getAllDescriptions().size();
+		for(int i = 0; i < prevNum; i++){
+			int c = i+1;
+			String titleAdd = req.getParameter("prevTitle"+c);
+			String descriptionAdd = req.getParameter("prevDescription"+c);
+			if(descriptionAdd == null) break;
+			if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
+				_title.add(titleAdd);
+				_description.add(descriptionAdd);
+			}
+		}
+		// extra fields
+		String number = req.getParameter("number");
+		int num = 0;
+		if(number != null){
+			num = (int) Integer.valueOf(number);
+			for(int i = 0; i < num; i++){
+				int c = i+1;
+				String titleAdd = req.getParameter("title"+c);
+				String descriptionAdd = req.getParameter("description"+c);
+				if(descriptionAdd!=null){
+					if((!titleAdd.isEmpty())&&(!descriptionAdd.isEmpty())){
+						_title.add(titleAdd);
+						_description.add(descriptionAdd);
+					}
+				}
+			}	
+		}
+		
+		//tags
+		ArrayList<Integer> ret = new ArrayList<Integer>();
+		for(String a : whatIsIts)
+		{
+			if(req.getParameter(a)==null){
+				ret.add(0);
+			}else{
+				ret.add(Integer.valueOf(req.getParameter(a)));
+			}
+		}
+		
+		//duration and size
+		int duration = Integer.valueOf(req.getParameter("length"));
+		int size = Integer.valueOf(req.getParameter("size"));
+		
+		//owner
+		HttpSession session =req.getSession(false);
+		User ownerUser = DBManager.getInstance().getUserByID(currentPitch.getOwnerId());
+		Message message = new Message((String)session.getAttribute("userName"), ownerUser.getEmail(),
+				"Update on " + pitch + " pitch.", "Your " + pitch + " pitch has been updated.");
+		DBManager.getInstance().add(ownerUser);
+		
+		// create the Pitch
+		Pitch newPitch = new Pitch(mainTitle, _title, _description, ret, ownerUser.getEmail(), duration, size);
+		DBManager.getInstance().add(newPitch);
+		
+		// set user
+		for(String specificUser: currentPitch.getUserList()){
+			User otherUser = (BaseClasses.User) DBManager.getInstance().getUserByID(specificUser);
+			message = new Message((String)session.getAttribute("userName"), otherUser.getEmail(),
+					"Update on " + pitch + " pitch.", "Your " + pitch + " pitch has been updated.");
+			
+			otherUser.addNotification(message);
+			DBManager.getInstance().add(otherUser);
+		}
+		DBManager.getInstance().add(ownerUser);
+		
+		//redirect to myPitch
+		resp.sendRedirect("/pitch.jsp?pitch="+pitch);
 	}
 }

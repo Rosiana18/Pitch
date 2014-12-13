@@ -38,7 +38,12 @@
 	
 	<link type="text/css" rel="stylesheet" href="bootstrap.css" />
 	<title>Sign Up</title>
-
+	<%
+    if((String)session.getAttribute("userName")!=null&&(BaseClasses.User)session.getAttribute("user")!=null)
+    {
+		response.sendRedirect("index.jsp");
+	}
+    %>
 </head>
 <body>
 <div id="fb-root"></div>

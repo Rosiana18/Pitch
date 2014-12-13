@@ -1,4 +1,5 @@
 <%@page import="BaseClasses.Message"%>
+<%@page import="BaseClasses.Pitch"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
@@ -11,7 +12,7 @@
 <meta name="keyword"
 	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-<title>New Pitch</title>
+<title>Update Pitch</title>
 
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -34,7 +35,7 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <%
+	<%
     if((String)session.getAttribute("userName")==null||(BaseClasses.User)session.getAttribute("user")==null)
     {
 		response.sendRedirect("login.jsp");
@@ -68,7 +69,7 @@
 						<ul class="dropdown-menu extended tasks-bar">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">You have pending tasks</p>
+								<p class="green">You have 4 pending tasks</p>
 							</li>
 							<li><a href="index.jsp#">
 									<div class="task-info">
@@ -128,50 +129,37 @@
 					<!-- inbox dropdown start-->
 					<li id="header_inbox_bar" class="dropdown"><a
 						data-toggle="dropdown" class="dropdown-toggle" href="index.jsp#">
-							<i class="fa fa-envelope-o"></i> <%
- 	if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
- %> <span class="badge bg-theme"> <%=((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()).size()%>
-						</span> <%
- 	}
- %>
+							<i class="fa fa-envelope-o"></i> <span class="badge bg-theme">5</span>
 					</a>
 						<ul class="dropdown-menu extended inbox">
 							<div class="notify-arrow notify-arrow-green"></div>
 							<li>
-								<p class="green">
-									You have
-									<%
-									if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) == null){
-								%>
-									no
-									<%
-									}else{
-									out.print(((java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()).size());
-																																																			}
-								%>
-									new messages
-								</p>
+								<p class="green">You have 5 new messages</p>
 							</li>
-							<%
-								if(((java.util.ArrayList<Message>)((BaseClasses.User) session.getAttribute("user")).getMessages()) != null){
-								for(Message msg: (java.util.ArrayList<Message>)((BaseClasses.User)session.getAttribute("user")).getMessages()){
-							%>
 							<li><a href="index.jsp#"> <span class="photo"><img
 										alt="avatar" src="assets/img/ui-zac.jpg"></span> <span
-									class="time"><%=msg.getDate().toGMTString()%></span> <span
-									class="subject"> <span class="from"><%=msg.getFrom()%></span>
-								</span> <span class="message"> <%=msg.getBody()%>
-								</span>
-									<button type="button" class="btn btn-info btn-primary btn-xs"
-										data-toggle="modal" data-target="#myModal">reply</button>
-									<button type="button"
-										class="btn btn-warning btn-primary btn-xs">dismiss</button>
-
+									class="subject"> <span class="from">Zac Snider</span> <span
+										class="time">Just now</span>
+								</span> <span class="message"> Hi mate, how is everything? </span>
 							</a></li>
-							<%
-								}
-																																										}
-							%>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-divya.jpg"></span> <span
+									class="subject"> <span class="from">Divya Manian</span>
+										<span class="time">40 mins.</span>
+								</span> <span class="message"> Hi, I need your help with this. </span>
+							</a></li>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-danro.jpg"></span> <span
+									class="subject"> <span class="from">Dan Rogers</span> <span
+										class="time">2 hrs.</span>
+								</span> <span class="message"> Love your new Dashboard. </span>
+							</a></li>
+							<li><a href="index.jsp#"> <span class="photo"><img
+										alt="avatar" src="assets/img/ui-sherman.jpg"></span> <span
+									class="subject"> <span class="from">Dj Sherman</span> <span
+										class="time">4 hrs.</span>
+								</span> <span class="message"> Please, answer asap. </span>
+							</a></li>
 							<li><a href="index.jsp#">See all messages</a></li>
 						</ul></li>
 					<!-- inbox dropdown end -->
@@ -183,7 +171,6 @@
 					<li><a class="logout" href="/logout">Logout</a></li>
 				</ul>
 			</div>
-
 		</header>
 		<!--header end-->
 
@@ -201,16 +188,14 @@
 							class="img-circle" width="60"></a>
 					</p>
 					<h5 class="centered">
-						<%=((BaseClasses.User) session.getAttribute("user"))
-					.getName()%></h5>
-
+						<%=((BaseClasses.User) session.getAttribute("user")).getName()%></h5>
 					<li class="mt"><a href="index.jsp"> <i
 							class="fa fa-dashboard"></i> <span>Dashboard</span>
 					</a></li>
 					<li class="sub-menu"><a href="mypitches.jsp"> <i
 							class="fa fa-book"></i> <span>My Pitches</span>
 					</a></li>
-					<li class="sub-menu"><a class="active" href="createPitch.jsp"> <i
+					<li class="sub-menu"><a href="createPitch.jsp"> <i
 							class="fa fa-book"></i> <span>Create a Pitch</span>
 					</a></li>
 					<li class="sub-menu"><a href="profile.jsp">
@@ -235,29 +220,34 @@
      <!--main content start-->
    	<section id="main-content">
       <section class="wrapper">
-      <h3><i class="fa fa-angle-right"></i> Create Pitch</h3>
+      <h3><i class="fa fa-angle-right"></i> Update Your Pitch</h3>
 
       <!-- Create Form -->
       <div class="row mt">
       	<div class="col-lg-12">
       	  <div class="form-panel">
-      	  <form id="form" class="form-horizontal style-form" action="/pitch" method="post">
+      	  <form id="form" class="form-horizontal style-form" action="/pitch" method="get">
       
-        	<h4 class="mb"><i class="fa fa-angle-right"></i> Form</h4>
-         	
+        	<h4 class="mb"><i class="fa fa-angle-right"></i> Update Form</h4>
+         	<%
+			String pitchName = (String) request.getParameter("pitch");
+			String user = (String) session.getAttribute("userName");
+			Pitch pitch = (BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitchName);
+			%>
+			<input type="hidden" name="pitch" value="<%=pitchName%>" />
          	<!-- Title -->
          	<div class="form-group">
-          	  <label class="col-sm-2 col-sm-2 control-label">Title</label>
+          	  <label class="col-sm-2 col-sm-2 control-label"> Title</label>
               <div class="col-sm-10">
-            	<textarea name="title" rows="1" style="width:80%"></textarea>
+            	<%=pitch.getTitle()%>
               </div>
           	</div>
           	
           	<!-- Description -->
             <div class="form-group">
-              <label class="col-sm-2 col-sm-2 control-label">Description</label>
+              <label class="col-sm-2 col-sm-2 control-label"> Description</label>
               <div class="col-sm-10">
-              	<textarea name="description" rows="10" style="width:80%"></textarea>
+              	<textarea name="description" rows="10" style="width:80%"><%=pitch.getAllDescriptions().get(0)%></textarea>
                </div>
          	</div>
 			
@@ -267,15 +257,50 @@
 		  	  	<input type="button" class="btn btn-success" value="Add More Fields" onclick="addRow()"/>
     		  </div>
     		</div>
-    		<div id="content"></div>
+			<div id="content">
+			<%
+			int fieldCount = pitch.getAllDescriptions().size();
+			for(int i = 1; i < fieldCount; i++){
+			%>
+			<div id="prevDiv<%=i%>">
+			<div class="form-group">
+			   	<label class="col-sm-2 control-label col-lg-2">Field Name</label>
+				<div class="col-sm-10">
+		           	<textarea name="prevTitle<%=i%>" rows="1" style="width:80%"><%=pitch.getAllTitles().get(i)%></textarea>
+				</div>
+	         </div>
+	         <div class="form-group">
+	            <label class="col-sm-2 control-label col-lg-2">Field Description</label>
+	            <div class="col-sm-10">
+					<textarea name="prevDescription<%=i%>" rows="5" style="width:80%"><%=pitch.getAllDescriptions().get(i)%></textarea>
+	            </div>
+			</div>
+			<input type="button" class="btn btn-danger" value="X" onclick="removeRow(this)">
+			</div>
+			<%
+			}
+			%>
+			</div>
     		<div id="dynamic"></div>
 		 
 		 	<!-- Pitch Duration -->
 	  		<div class="form-group">
 			  <div class="col-sm-10">
 				<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Duration</h4>
-			    <input type="range" name="length" min="0" max="40" value="10" onChange="pitchLength(this.value)"/>
-			  	<p id="pitchLength">week(s)</p>
+			    <input type="range" name="length" min="0" max="40" value="<%=pitch.getDuration()%>" onChange="pitchLength(this.value)"/>
+			  	<p id="pitchLength">
+				<%
+				int value = pitch.getDuration();
+				if(value<=8 ){
+				%>day(s)
+				<%}else if(value>8&&value<=16){%>week(s)
+				<%}else if(value>16&&value<=24){%>month(s)
+				<%}else if(value>24&&value<=32){%>1 year
+				<%}else if(value>32){%>year(s)
+				<%
+				}
+				%>
+				</p>
 			  </div>
            	</div>
       	
@@ -283,15 +308,24 @@
 	  		<div class="form-group">
 	  		  <div class="col-sm-10">
 	  			<h4 class="mb"><i class="fa fa-angle-right"></i> Pitch Size</h4>
-				<input type="range" name="size" min="0" max="40" value="10" onChange="teamSize(this.value)"/>
-			  	<p id="pitchSize">3-5 members</p>
+				<input type="range" name="size" min="0" max="40" value="<%=pitch.getSize()%>" onChange="teamSize(this.value)"/>
+			  	<p id="pitchSize">
+				<%
+				value=pitch.getSize();
+				if(value<=8){%>1-2 members
+				<%}else if(value>8&&value<=16){%>3-5 members
+				<%}else if(value>16&&value<=24){%>5-10 members
+				<%}else if(value>24&&value<=32){%>10-20 members
+				<%}else if(value>32){%>>20 members / organization
+				<%} %>
+				</p>
 			  </div>
           	</div>
           	    		
 			<!-- Tags/Categories -->
 			<div class="form-group">
 			  <div class="col-sm-10">
-				<h4 class="mb"><i class="fa fa-angle-right"></i> Select Tags</h4>
+				<h4 class="mb"><i class="fa fa-angle-right"></i> Apply New Tags</h4>
 			    <div class="checkbox">
 				  <label><input type="checkbox" name="science" value="1">science</label>
 				</div>
@@ -349,7 +383,7 @@
 	<!--footer start-->
 		<footer class="site-footer">
 			<div class="text-center">
-				2014 - Project Pitch <a href="createPitch.jsp#" class="go-top"> <i
+				2014 - Project Pitch <a href="updatePitch.jsp#" class="go-top"> <i
 					class="fa fa-angle-up"></i>
 				</a>
 			</div>

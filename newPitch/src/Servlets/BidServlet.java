@@ -26,12 +26,8 @@ public class BidServlet extends HttpServlet {
 		String pitch = req.getParameter("pitch");
 		Pitch currentPitch = ((BaseClasses.Pitch)DB.DBManager.getInstance().getPitchByID(pitch));
 		
-		//get selected member
-		String member = req.getParameter("member");
-		
 		//get current user
 		HttpSession session = req.getSession(false);
-		session.getAttribute("user");
 		User currentUser = DBManager.getInstance().getUserByID((String)session.getAttribute("userName"));
 		
 		//type of request
@@ -71,9 +67,9 @@ public class BidServlet extends HttpServlet {
 			}
 		// update the pitch page - redirection
 		}else if(button.equals("update")){
-			resp.sendRedirect("updatePitch.jsp?pitch="+pitch+"?userId="+currentUser.getId());
+			resp.sendRedirect("updatePitch.jsp?pitch="+pitch);
+			return;
 		}
-		System.out.println(DBManager.getInstance().getPitchByID(pitch).getBidderList().get(0));
 		resp.sendRedirect("pitch.jsp?pitch="+pitch);
 	}
 	
